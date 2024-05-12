@@ -1,8 +1,5 @@
 # amoshuangyc
 
-<!-- [![amoshuangyc](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fatcoder%2Fjson%2Famoshuangyc)](https://atcoder.jp/users/amoshuangyc)
-[![amoshuangyc](https://img.shields.io/endpoint?url=https%3A%2F%2Fatcoder-badges.now.sh%2Fapi%2Fcodeforces%2Fjson%2Famoshuangyc)](https://codeforces.com/profile/amoshuangyc) -->
-
 [![](./assets/atcoder_badge.svg)](https://atcoder.jp/users/amoshuangyc)
 [![](./assets/codeforces_badge.svg)](https://codeforces.com/profile/amoshuangyc)
 
