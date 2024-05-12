@@ -29,10 +29,11 @@
     - [Ternary Search](./algorithms/ternary_search.md)
     - [CombTool](./algorithms/combtool.md)
     - [Linear Congruence & CRT](./algorithms/linear_congruence_crt.md)
-    - [Sieve of Eratosthenes](./algorithms/linear_congruence_crt.md)
+    - [Sieve of Eratosthenes](./algorithms/sieve_of_eratosthenes.md)
 
 - [Techniques](./techniques/readme.md)
     - [Ceil/Floor Division](./techniques/ceil_floor_div.md)
+    - [Double Sum/Pairwise Problem]()
     - [Square Number](./techniques/square_number.md)
     - [Multiples in Range](./techniques/multiples_in_range.md)
     - [2 Sets](./techniques/2_sets.md)
