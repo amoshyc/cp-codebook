@@ -6,11 +6,12 @@
 
 **Sweep Line**:
 
-[{ sum_(i=0)^(N-1) sum_(j = i + 1)^(N-1) f(A_i, A_j) = sum_(i=0)^(N-1) sum_(j = 0)^(i-1) f(A_i, A_j) }]
+[{ sum_(i=0)^(N-1) sum_(j = i + 1)^(N-1) f(A_i, A_j) = sum_(j=0)^(N-1) sum_(i = 0)^(j-1) f(A_i, A_j) }]
 
-我們常常從左掃到右，在計算 [{A_j}] 的答案時，同時維護 [{A[0..j]}] 的統計值。例如：
+我們讓 [{j}] 從左掃到右，在計算 [{A_j}] 的答案時，同時維護 [{A[0..j]}] 的統計值。例如：
 
-[{ f(A_i, A_j) = max(A_j - A_i, 0) }] : <https://atcoder.jp/contests/abc351/submissions/52882061>
+* [{ f(A_i, A_j) = A_i * 10^("num_digit"(A_j)) }] : <https://atcoder.jp/contests/abc353/submissions/53432676>
+* [{ f(A_i, A_j) = max(A_j - A_i, 0) }] : <https://atcoder.jp/contests/abc351/submissions/52882061>
 
 ---
 
@@ -20,12 +21,10 @@
 
 [{ 2 ( sum_(i=0)^(N-1) sum_(j = i + 1)^(N-1) f(A_i, A_j) ) + (sum_(i=0)^(N-1) f(A_i, A_i)) = sum_(i=0)^(N-1) sum_(j = 0)^(N-1) f(A_i, A_j) }]
 
-這個式子暗示了我們將 [{ A }] 任意進行重排，不會影響答案的計算。
+這個式子暗示了我們將 [{ A }] 任意進行重排，不會影響答案的計算。所以許多時候我們可以將 [{A}] 由小排到大來讓 [{f}] 比較好計算。例如：
 
-所以許多時候我們可以將 [{A}] 由小排到大來讓 [{f}] 比較好計算。例如：
-
-[{ f(A_i, A_j) = (A_i + A_j) % m }] : <https://atcoder.jp/contests/abc353/submissions/53405039>
-[{ f(A_i, A_j) = |A_j - A_i| }] : <https://atcoder.jp/contests/abc351/submissions/52883662>
+* [{ f(A_i, A_j) = (A_i + A_j) % m }] : <https://atcoder.jp/contests/abc353/submissions/53405039>
+* [{ f(A_i, A_j) = |A_j - A_i| }] : <https://atcoder.jp/contests/abc351/submissions/52883662>
 
 
 ## 2 Sequences
