@@ -1,10 +1,11 @@
 import requests
+from lxml import etree
+from pybadges import badge
+from bisect import bisect_right
 
-rating = 1499
 
-atcoder_logo_url = 'https://img.atcoder.jp/assets/atcoder.png'
-atcoder_pivots = [399, 799, 1199, 1599, 1999, 2399, 2799, 10**10]
-atcoder_colors = [
+ATCODER_PIVOTS = [400, 800, 1200, 1600, 2000, 2400, 2800, 10**10]
+ATCODER_COLORS = [
     "#808000",  # gray
     "#804000",  # brown
     "#008000",  # green
@@ -15,3 +16,62 @@ atcoder_colors = [
     "#FF0000",  # red
 ]
 
+CODEFORCES_PIVOTS = [1200, 1400, 1600, 1900, 2200, 2400, 10**10]
+CODEFORCES_COLORS = [
+    "#808080",  # gray,
+    "#008000",  # green
+    "#03A89E",  # cyan,
+    "#0000FF",  # blue
+    "#AA00AA",  # violet
+    "#FF8C00",  # orange
+    "#FF0000",  # red
+]
+
+
+def get_atcoder_data(user_id: str):
+    link = f"https://atcoder.jp/users/{user_id}"
+    html = requests.get(link).content.decode()
+    tree = etree.HTML(html)
+    elem = tree.xpath("//table[@class='dl-table mt-2']/tr/td/span")[0]
+    rating = int(elem.text)
+    color = ATCODER_COLORS[bisect_right(ATCODER_PIVOTS, rating)]
+    return rating, color
+
+
+def get_codeforces_data(user_id: str):
+    link = f"https://codeforces.com/profile/{user_id}"
+    html = requests.get(link).content
+    tree = etree.HTML(html)
+    elem = tree.xpath("//div[@class='info']/ul/li/span")[0]
+    rating = int(elem.text)
+    color = ATCODER_COLORS[bisect_right(ATCODER_PIVOTS, rating)]
+    return rating, color
+
+
+codeforces_rating, codeforces_color = get_codeforces_data("amoshuangyc")
+with open("./src/assets/codeforces_badge.svg", "w") as f:
+    f.write(
+        badge(
+            logo="./src/assets/codeforces.svg",
+            embed_logo=True,
+            left_text="Codeforces",
+            left_color="#303030",
+            right_text=str(codeforces_rating),
+            right_color=codeforces_color,
+        )
+    )
+print(f"Codeforces badge updated. New rating = {codeforces_rating}.")
+
+atcoder_rating, atcoder_color = get_atcoder_data("amoshuangyc")
+with open("./src/assets/atcoder_badge.svg", "w") as f:
+    f.write(
+        badge(
+            logo="./src/assets/atcoder.svg",
+            embed_logo=True,
+            left_text="AtCoder",
+            left_color="#303030",
+            right_text=str(atcoder_rating),
+            right_color=atcoder_color,
+        )
+    )
+print(f"AtCoder badge updated. New rating = {atcoder_rating}.")
