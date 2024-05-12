@@ -1,5 +1,7 @@
 # Codebook
 
+- [amoshuangyc](./amoshuangyc.md)
+
 - [Data Structures](./datastructures/readme.md)
     - [Prefix Sum](./datastructures/prefix_sum.md)
     - [Disjoin Set](./datastructures/dsu.md)
