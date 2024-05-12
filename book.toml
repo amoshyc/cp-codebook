@@ -11,10 +11,12 @@ build-dir = "docs"
 [output.html]
 default-theme = "light"
 mathjax-support = true
+preferred-dark-theme = "coal"
+git-repository-url = "https://github.com/amoshyc/cp-codebook"
 
-[output.html.print]
-enable = true     # include support for printable output
-page-break = true # insert page-break after each chapter
+[output.html.fold]
+enable = true # whether or not to enable section folding
+level = 0     # the depth to start folding
 
 [output.html.playground]
 editable = false # allows editing the source code

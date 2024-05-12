@@ -47,4 +47,4 @@ fn r90cw<T: Default + Clone>(arr: &Vec<Vec<T>>) -> Vec<Vec<T>> {
 }
 ```
 
-[https://atcoder.jp/contests/abc293/submissions/39650552](https://atcoder.jp/contests/abc293/submissions/39650552)
+<https://atcoder.jp/contests/abc293/submissions/39650552>

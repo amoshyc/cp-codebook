@@ -28,4 +28,4 @@ impl<T: Copy> SparseTable<T> {
 }
 ```
 
-https://atcoder.jp/contests/abc254/submissions/41799326
+<https://atcoder.jp/contests/abc254/submissions/41799326>

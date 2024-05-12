@@ -78,5 +78,5 @@ impl<T: SegTrait> SegTree<T> {
 }
 ```
 
-[https://atcoder.jp/contests/abc283/submissions/46191119](https://atcoder.jp/contests/abc283/submissions/46191119)
+<https://atcoder.jp/contests/abc283/submissions/46191119>
 

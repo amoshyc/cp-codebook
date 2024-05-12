@@ -1,7 +1,5 @@
 # Codebook
 
-[Introduction](./introduction.md)
-
 - [Data Structures](./datastructures/readme.md)
     - [Prefix Sum](./datastructures/prefix_sum.md)
     - [Disjoin Set](./datastructures/dsu.md)
@@ -12,12 +10,38 @@
     - [Sparse Table](./datastructures/sparse_table.md)
     - [Treap](./datastructures/treap.md)
     - [Matrix](./datastructures/matrix.md)
+    - [Prefix2D](./datastructures/prefix2d.md)
 
 - [Algorithms](./algorithms/readme.md)
     - [Powmod](./algorithms/powmod.md)
+    - [Permutation](./algorithms/permutation.md)
+    - [PolyHash](./algorithms/polyhash.md)
+    - [PolyHash2](./algorithms/polyhash2.md)
+    - [Dijkstra](./algorithms/dijkstra.md)
+    - [SPFA](./algorithms/spfa.md)
+    - [Topological Sort](./algorithms/topological_sort.md)
+    - [Tarjan SCC](./algorithms/tarjan_scc.md)
+    - [2-SAT](./algorithms/2-sat.md)
+    - [Diameter, Radius, Eccentricity](./algorithms/ecc.md)
+    - [LCA](./algorithms/lca.md)
+    - [Ternary Search](./algorithms/ternary_search.md)
+    - [CombTool](./algorithms/combtool.md)
+    - [Linear Congruence & CRT](./algorithms/linear_congruence_crt.md)
+    - [Sieve of Eratosthenes](./algorithms/linear_congruence_crt.md)
 
-# Techniques
+- [Techniques](./techniques/readme.md)
+    - [Ceil/Floor Division](./techniques/ceil_floor_div.md)
+    - [Square Number](./techniques/square_number.md)
+    - [Multiples in Range](./techniques/multiples_in_range.md)
+    - [2 Sets](./techniques/2_sets.md)
+    - [Longest Common Prefix](./techniques/longest_common_prefix.md)
+    - [Coordinate Compression](./techniques/coordinate_compression.md)
+    - [Functional Graph](./techniques/functional_graph.md)
+    - [Maximum Match Subsequence](./techniques/max_match_subseq.md)
+    - [Merge 2 Sorted Array](./techniques/merged.md)
 
-# Miscellaneous
-
-# Problems
+- [Miscellaneous](./miscellaneous/readme.md)
+    - [Rust Basic](./miscellaneous/rust_basic.md)
+    - [Cartesian Product](./miscellaneous/cartesian_product.md)
+    - [Ordered Float](./miscellaneous/ordered_float.md)
+    - [Default Hasing](./miscellaneous/default_hashing.md)

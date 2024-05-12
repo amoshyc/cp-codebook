@@ -115,4 +115,4 @@ impl<T: std::cmp::PartialOrd + std::fmt::Debug + Clone> Treap<T> {
 }
 ```
 
-https://atcoder.jp/contests/abc231/submissions/43081575
+<https://atcoder.jp/contests/abc231/submissions/43081575>

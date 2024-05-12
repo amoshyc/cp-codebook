@@ -1,0 +1,290 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2-SAT - Codebook</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                asciimath2jax: {
+                    delimiters: [['[{','}]']]
+                },
+                tex2jax: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']],
+                }
+            });
+        </script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "coal" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item "><a href="../datastructures/index.html"><strong aria-hidden="true">1.</strong> Data Structures</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../datastructures/prefix_sum.html"><strong aria-hidden="true">1.1.</strong> Prefix Sum</a></li><li class="chapter-item "><a href="../datastructures/dsu.html"><strong aria-hidden="true">1.2.</strong> Disjoin Set</a></li><li class="chapter-item "><a href="../datastructures/bit.html"><strong aria-hidden="true">1.3.</strong> BIT</a></li><li class="chapter-item "><a href="../datastructures/mint.html"><strong aria-hidden="true">1.4.</strong> Mint</a></li><li class="chapter-item "><a href="../datastructures/segtree.html"><strong aria-hidden="true">1.5.</strong> SegTree</a></li><li class="chapter-item "><a href="../datastructures/lazysegtree.html"><strong aria-hidden="true">1.6.</strong> LazySegTree</a></li><li class="chapter-item "><a href="../datastructures/sparse_table.html"><strong aria-hidden="true">1.7.</strong> Sparse Table</a></li><li class="chapter-item "><a href="../datastructures/treap.html"><strong aria-hidden="true">1.8.</strong> Treap</a></li><li class="chapter-item "><a href="../datastructures/matrix.html"><strong aria-hidden="true">1.9.</strong> Matrix</a></li><li class="chapter-item "><a href="../datastructures/prefix2d.html"><strong aria-hidden="true">1.10.</strong> Prefix2D</a></li></ol></li><li class="chapter-item expanded "><a href="../algorithms/index.html"><strong aria-hidden="true">2.</strong> Algorithms</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../algorithms/powmod.html"><strong aria-hidden="true">2.1.</strong> Powmod</a></li><li class="chapter-item "><a href="../algorithms/permutation.html"><strong aria-hidden="true">2.2.</strong> Permutation</a></li><li class="chapter-item "><a href="../algorithms/polyhash.html"><strong aria-hidden="true">2.3.</strong> PolyHash</a></li><li class="chapter-item "><a href="../algorithms/polyhash2.html"><strong aria-hidden="true">2.4.</strong> PolyHash2</a></li><li class="chapter-item "><a href="../algorithms/dijkstra.html"><strong aria-hidden="true">2.5.</strong> Dijkstra</a></li><li class="chapter-item "><a href="../algorithms/spfa.html"><strong aria-hidden="true">2.6.</strong> SPFA</a></li><li class="chapter-item "><a href="../algorithms/topological_sort.html"><strong aria-hidden="true">2.7.</strong> Topological Sort</a></li><li class="chapter-item "><a href="../algorithms/tarjan_scc.html"><strong aria-hidden="true">2.8.</strong> Tarjan SCC</a></li><li class="chapter-item expanded "><a href="../algorithms/2-sat.html" class="active"><strong aria-hidden="true">2.9.</strong> 2-SAT</a></li><li class="chapter-item "><a href="../algorithms/ecc.html"><strong aria-hidden="true">2.10.</strong> Diameter, Radius, Eccentricity</a></li><li class="chapter-item "><a href="../algorithms/lca.html"><strong aria-hidden="true">2.11.</strong> LCA</a></li><li class="chapter-item "><a href="../algorithms/ternary_search.html"><strong aria-hidden="true">2.12.</strong> Ternary Search</a></li><li class="chapter-item "><a href="../algorithms/combtool.html"><strong aria-hidden="true">2.13.</strong> CombTool</a></li><li class="chapter-item "><a href="../algorithms/linear_congruence_crt.html"><strong aria-hidden="true">2.14.</strong> Linear Congruence & CRT</a></li><li class="chapter-item "><a href="../algorithms/linear_congruence_crt.html"><strong aria-hidden="true">2.15.</strong> Sieve of Eratosthenes</a></li></ol></li><li class="chapter-item "><a href="../techniques/index.html"><strong aria-hidden="true">3.</strong> Techniques</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../techniques/ceil_floor_div.html"><strong aria-hidden="true">3.1.</strong> Ceil/Floor Division</a></li><li class="chapter-item "><a href="../techniques/square_number.html"><strong aria-hidden="true">3.2.</strong> Square Number</a></li><li class="chapter-item "><a href="../techniques/multiples_in_range.html"><strong aria-hidden="true">3.3.</strong> Multiples in Range</a></li><li class="chapter-item "><a href="../techniques/2_sets.html"><strong aria-hidden="true">3.4.</strong> 2 Sets</a></li><li class="chapter-item "><a href="../techniques/longest_common_prefix.html"><strong aria-hidden="true">3.5.</strong> Longest Common Prefix</a></li><li class="chapter-item "><a href="../techniques/coordinate_compression.html"><strong aria-hidden="true">3.6.</strong> Coordinate Compression</a></li><li class="chapter-item "><a href="../techniques/functional_graph.html"><strong aria-hidden="true">3.7.</strong> Functional Graph</a></li><li class="chapter-item "><a href="../techniques/max_match_subseq.html"><strong aria-hidden="true">3.8.</strong> Maximum Match Subsequence</a></li><li class="chapter-item "><a href="../techniques/merged.html"><strong aria-hidden="true">3.9.</strong> Merge 2 Sorted Array</a></li></ol></li><li class="chapter-item "><a href="../miscellaneous/index.html"><strong aria-hidden="true">4.</strong> Miscellaneous</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../miscellaneous/rust_basic.html"><strong aria-hidden="true">4.1.</strong> Rust Basic</a></li><li class="chapter-item "><a href="../miscellaneous/cartesian_product.html"><strong aria-hidden="true">4.2.</strong> Cartesian Product</a></li><li class="chapter-item "><a href="../miscellaneous/ordered_float.html"><strong aria-hidden="true">4.3.</strong> Ordered Float</a></li><li class="chapter-item "><a href="../miscellaneous/default_hashing.html"><strong aria-hidden="true">4.4.</strong> Default Hasing</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Codebook</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/amoshyc/cp-codebook" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="2-sat"><a class="header" href="#2-sat">2-SAT</a></h1>
+<pre><code>(p or q) =&gt; add edge (~p =&gt; q), (~q =&gt; p)
+
+(p) = (p or p)
+(p xor q) = (~p or ~q) and (p or q)
+At least 1 of (p, q) is true: (p or q)
+At least 2 of (p, q) is true: (p and q)
+At least 1 of (p, q, r) is true: (p or q or r) =&gt; Not a CNF.
+At least 2 of (p, q, r) is true: (p or q) and (q or r) and (p or r)
+At least 3 of (p, q, r) is true: (p and q and r)
+
+After tarjan scc,
+    * No solution if any p has belong[p] = belong[~p].
+    * p is true if belong[p] &lt; belong[~p], i.e., topo(p) &gt; topo(~p).
+
+If we get a truth table, we can construct the CNF.
+p q   eval
+- -    F
+- +    T
++ -    F
++ +    T
+We ban all the entries that are F. The DNF of banned entries is
+    (~p and ~q) or (p and ~q)
+Negate the DNF and we get CNF of the T entries:
+    (p or q) and (~p or q)
+</code></pre>
+<pre><code class="language-rust">let mut add_clause = |p: usize, q: usize| {
+    adj[p ^ 1].push(q);
+    adj[q ^ 1].push(p);
+};
+
+// Check contraction
+let ok = (0..n).all(|i| belong[2 * i] != belong[2 * i ^ 1]);
+
+// Solution
+for i in 0..n {
+    let pos_i = 2 * i;
+    if belong[pos_i] &lt; belong[pos_i ^ 1] {
+        // i is positive
+    } else {
+        // i is negative
+    }
+}</code></pre>
+<ul>
+<li><a href="https://atcoder.jp/contests/practice2/submissions/53310836">https://atcoder.jp/contests/practice2/submissions/53310836</a></li>
+<li><a href="https://codeforces.com/contest/1971/submission/260608172">https://codeforces.com/contest/1971/submission/260608172</a></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../algorithms/tarjan_scc.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../algorithms/ecc.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../algorithms/tarjan_scc.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../algorithms/ecc.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
