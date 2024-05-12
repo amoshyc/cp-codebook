@@ -44,7 +44,7 @@ def get_codeforces_data(user_id: str):
     tree = etree.HTML(html)
     elem = tree.xpath("//div[@class='info']/ul/li/span")[0]
     rating = int(elem.text)
-    color = ATCODER_COLORS[bisect_right(ATCODER_PIVOTS, rating)]
+    color = CODEFORCES_COLORS[bisect_right(CODEFORCES_PIVOTS, rating)]
     return rating, color
 
 
