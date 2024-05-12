@@ -19,9 +19,13 @@
 
 如果 [{f}] 滿足**交換律**，即 [{f(A_i, A_j) = f(A_j, A_i)}]，則有以下性質。
 
-[{ 2 ( sum_(i=0)^(N-1) sum_(j = i + 1)^(N-1) f(A_i, A_j) ) + (sum_(i=0)^(N-1) f(A_i, A_i)) = sum_(i=0)^(N-1) sum_(j = 0)^(N-1) f(A_i, A_j) }]
+上三角矩陣（不含對角線）是整個矩陣扣除對角線再除二。
 
-這個式子暗示了我們將 [{ A }] 任意進行重排，不會影響答案的計算。所以許多時候我們可以將 [{A}] 由小排到大來讓 inner summation 比較好計算。例如：
+[{ sum_(i=0)^(N-1) sum_(j = i + 1)^(N-1) f(A_i, A_j) = (sum_(i=0)^(N-1) sum_(j = 0)^(N-1) f(A_i, A_j) - (sum_(i=0)^(N-1) f(A_i, A_i))) / 2 }]
+
+注意到等式右側與 [{A}] 的順序無關。這暗示了我們將 [{ A }] 任意進行重排，不會影響答案的計算。
+
+所以許多時候我們可以將 [{A}] 由小排到大來讓 inner summation 比較好計算。例如：
 
 * [{ f(A_i, A_j) = (A_i + A_j) % m }] : <https://atcoder.jp/contests/abc353/submissions/53405039>
 * [{ f(A_i, A_j) = |A_j - A_i| }] : <https://atcoder.jp/contests/abc351/submissions/52883662>
