@@ -219,7 +219,7 @@ fn join&lt;T: ToString&gt;(arr: &amp;[T], sep: &amp;str) -&gt; String {
         .collect::&lt;Vec&lt;String&gt;&gt;()
         .join(sep)
 }</code></pre>
-<h1 id="inspect-4-neighbors"><a class="header" href="#inspect-4-neighbors">Inspect 4 Neighbors</a></h1>
+<h2 id="inspect-4-neighbors"><a class="header" href="#inspect-4-neighbors">Inspect 4 Neighbors</a></h2>
 <pre><code class="language-rust">for (dr, dc) in [(1, 0), (!0, 0), (0, 1), (0, !0)] {
     let nr = r.wrapping_add(dr);
     let nc = c.wrapping_add(dc);

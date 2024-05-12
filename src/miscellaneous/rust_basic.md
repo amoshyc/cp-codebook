@@ -36,7 +36,7 @@ fn join<T: ToString>(arr: &[T], sep: &str) -> String {
 }
 ```
 
-# Inspect 4 Neighbors
+## Inspect 4 Neighbors
 
 ```rust
 for (dr, dc) in [(1, 0), (!0, 0), (0, 1), (0, !0)] {
