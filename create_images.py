@@ -18,9 +18,9 @@ ATCODER_COLORS = [
 
 CODEFORCES_PIVOTS = [1200, 1400, 1600, 1900, 2200, 2400, 10**10]
 CODEFORCES_COLORS = [
-    "#808080",  # gray,
+    "#808080",  # gray
     "#008000",  # green
-    "#03A89E",  # cyan,
+    "#03A89E",  # cyan
     "#0000FF",  # blue
     "#AA00AA",  # violet
     "#FF8C00",  # orange
