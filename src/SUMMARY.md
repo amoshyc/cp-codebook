@@ -33,7 +33,7 @@
 
 - [Techniques](./techniques/readme.md)
     - [Ceil/Floor Division](./techniques/ceil_floor_div.md)
-    - [Double Sum/Pairwise Problem]()
+    - [Double Sum/Pairwise Problem](./techniques/pairwise.md)
     - [Square Number](./techniques/square_number.md)
     - [Multiples in Range](./techniques/multiples_in_range.md)
     - [2 Sets](./techniques/2_sets.md)
