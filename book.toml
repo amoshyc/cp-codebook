@@ -1,0 +1,22 @@
+[book]
+authors = ["amoshyc"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Codebook"
+
+[build]
+build-dir = "docs"
+
+[output.html]
+default-theme = "light"
+mathjax-support = true
+
+[output.html.print]
+enable = true     # include support for printable output
+page-break = true # insert page-break after each chapter
+
+[output.html.playground]
+editable = false # allows editing the source code
+copyable = true  # include the copy button for copying code snippets
+runnable = false # displays a run button for rust code

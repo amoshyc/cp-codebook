@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>LazySegTree - Codebook</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                asciimath2jax: {
+                    delimiters: [['[{','}]']]
+                },
+                tex2jax: {
+                    inlineMath: [['$', '$']],
+                    displayMath: [['$$', '$$']],
+                }
+            });
+        </script>
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../introduction.html">Introduction</a></li><li class="chapter-item expanded "><a href="../datastructures/index.html"><strong aria-hidden="true">1.</strong> Data Structures</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../datastructures/prefix_sum.html"><strong aria-hidden="true">1.1.</strong> Prefix Sum</a></li><li class="chapter-item expanded "><a href="../datastructures/dsu.html"><strong aria-hidden="true">1.2.</strong> Disjoin Set</a></li><li class="chapter-item expanded "><a href="../datastructures/bit.html"><strong aria-hidden="true">1.3.</strong> BIT</a></li><li class="chapter-item expanded "><a href="../datastructures/mint.html"><strong aria-hidden="true">1.4.</strong> Mint</a></li><li class="chapter-item expanded "><a href="../datastructures/segtree.html"><strong aria-hidden="true">1.5.</strong> SegTree</a></li><li class="chapter-item expanded "><a href="../datastructures/lazysegtree.html" class="active"><strong aria-hidden="true">1.6.</strong> LazySegTree</a></li><li class="chapter-item expanded "><a href="../datastructures/sparse_table.html"><strong aria-hidden="true">1.7.</strong> Sparse Table</a></li><li class="chapter-item expanded "><a href="../datastructures/treap.html"><strong aria-hidden="true">1.8.</strong> Treap</a></li><li class="chapter-item expanded "><a href="../datastructures/matrix.html"><strong aria-hidden="true">1.9.</strong> Matrix</a></li></ol></li><li class="chapter-item expanded "><a href="../algorithms/index.html"><strong aria-hidden="true">2.</strong> Algorithms</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../algorithms/powmod.html"><strong aria-hidden="true">2.1.</strong> Powmod</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Techniques</li><li class="chapter-item expanded affix "><li class="part-title">Miscellaneous</li><li class="chapter-item expanded affix "><li class="part-title">Problems</li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Codebook</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="lazysegtree"><a class="header" href="#lazysegtree">LazySegTree</a></h1>
+<pre><code class="language-rust noplayground">struct Node;
+impl SegTrait for Node {
+    type S = u64;
+    type F = (u64, u64);
+    fn default_data() -&gt; Self::S {
+        0
+    }
+    fn default_lazy() -&gt; Self::F {
+        (1, 0)
+    }
+    fn op(a: Self::S, b: Self::S) -&gt; Self::S {
+        (a + b) % M
+    }
+    fn apply_lazy(lazy: Self::F, data: Self::S, l: usize, r: usize) -&gt; Self::S {
+        let (b, c) = lazy;
+        let mut res = b * data % M;
+        res += c * ((r - l) as u64) % M;
+        res % M
+    }
+    fn merge_lazy(parent: Self::F, child: Self::F) -&gt; Self::F {
+        let (b1, c1) = parent;
+        let (b2, c2) = child;
+        let b = b1 * b2 % M;
+        let c = (b1 * c2 % M + c1) % M;
+        (b, c)
+    }
+}
+
+trait SegTrait {
+    type S: Clone + PartialEq + std::fmt::Debug;
+    type F: Clone + PartialEq + std::fmt::Debug;
+    fn default_data() -&gt; Self::S;
+    fn default_lazy() -&gt; Self::F;
+    fn op(a: Self::S, b: Self::S) -&gt; Self::S;
+    fn apply_lazy(lazy: Self::F, data: Self::S, l: usize, r: usize) -&gt; Self::S;
+    fn merge_lazy(parent: Self::F, child: Self::F) -&gt; Self::F;
+}
+
+struct SegTree&lt;T: SegTrait&gt; {
+    nn: usize,
+    data: Vec&lt;T::S&gt;,
+    lazy: Vec&lt;T::F&gt;,
+}
+
+impl&lt;T: SegTrait&gt; SegTree&lt;T&gt; {
+    fn new(n: usize) -&gt; Self {
+        let nn = n.next_power_of_two();
+        let data = vec![T::default_data(); 2 * nn];
+        let lazy = vec![T::default_lazy(); 2 * nn];
+        Self { nn, data, lazy }
+    }
+
+    fn from_vec(arr: &amp;Vec&lt;T::S&gt;) -&gt; Self {
+        let nn = arr.len().next_power_of_two();
+        let mut data = vec![T::default_data(); 2 * nn];
+        let lazy = vec![T::default_lazy(); 2 * nn];
+        let s = nn - 1;
+        let t = s + arr.len();
+        data[s..t].clone_from_slice(arr);
+        for u in (0..s).rev() {
+            data[u] = T::op(data[2 * u + 1].clone(), data[2 * u + 2].clone());
+        }
+        Self { nn, data, lazy }
+    }
+
+    fn push(&amp;mut self, u: usize, l: usize, r: usize) {
+        if self.lazy[u] != T::default_lazy() {
+            let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
+            self.data[lch] = T::apply_lazy(self.lazy[u].clone(), self.data[lch].clone(), l, m);
+            self.data[rch] = T::apply_lazy(self.lazy[u].clone(), self.data[rch].clone(), m, r);
+            self.lazy[lch] = T::merge_lazy(self.lazy[u].clone(), self.lazy[lch].clone());
+            self.lazy[rch] = T::merge_lazy(self.lazy[u].clone(), self.lazy[rch].clone());
+            self.lazy[u] = T::default_lazy();
+        }
+    }
+
+    fn query(&amp;mut self, a: usize, b: usize, u: usize, l: usize, r: usize) -&gt; T::S {
+        // l..r has no intersection with a..b
+        if l &gt;= b || r &lt;= a {
+            return T::default_data();
+        }
+        // l..r is inside a..b
+        if l &gt;= a &amp;&amp; r &lt;= b {
+            return self.data[u].clone();
+        }
+        // partially intersect
+        let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
+        self.push(u, l, r);
+        T::op(self.query(a, b, lch, l, m), self.query(a, b, rch, m, r))
+    }
+
+    fn modify(&amp;mut self, a: usize, b: usize, x: T::F, u: usize, l: usize, r: usize) {
+        // l..r has no intersection with a..b
+        if l &gt;= b || r &lt;= a {
+            return;
+        }
+        // l..r is inside a..b
+        if l &gt;= a &amp;&amp; r &lt;= b {
+            self.data[u] = T::apply_lazy(x.clone(), self.data[u].clone(), l, r);
+            self.lazy[u] = T::merge_lazy(x.clone(), self.lazy[u].clone());
+            return;
+        }
+        // partially intersect
+        let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
+        self.push(u, l, r);
+        self.modify(a, b, x.clone(), lch, l, m);
+        self.modify(a, b, x.clone(), rch, m, r);
+        self.data[u] = T::op(self.data[lch].clone(), self.data[rch].clone());
+    }
+
+    fn find_first_of&lt;P: Copy + Fn(T::S) -&gt; bool&gt;(
+        &amp;mut self,
+        f: P,
+        a: usize,
+        b: usize,
+        u: usize,
+        l: usize,
+        r: usize,
+    ) -&gt; Option&lt;usize&gt; {
+        if l &gt;= b || r &lt;= a || f(self.data[u].clone()) {
+            return None;
+        }
+        if r - l == 1 {
+            return Some(l);
+        }
+        let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
+        self.push(u, l, r);
+        if let Some(idx) = self.find_first_of(f, a, b, lch, l, m) {
+            return Some(idx);
+        }
+        if let Some(idx) = self.find_first_of(f, a, b, rch, m, r) {
+            return Some(idx);
+        }
+        None
+    }
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/practice2/submissions/49674983">https://atcoder.jp/contests/practice2/submissions/49674983</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../datastructures/segtree.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../datastructures/sparse_table.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../datastructures/segtree.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../datastructures/sparse_table.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
