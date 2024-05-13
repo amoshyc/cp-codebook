@@ -1,4 +1,4 @@
-## Permutation
+# Permutation
 
 ```rust
 loop {

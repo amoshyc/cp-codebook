@@ -9,6 +9,6 @@ I reread the problem, drew many lines on paper, pondered for a moment, and scann
 
 * Created using [mdbook](https://github.com/rust-lang/mdBook).
 * Syntax highlighting theme is [Github](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css) with modified background.
-* Add a custom.css to apply `overflow-x: scroll` to code block.
+* Add a custom.css to apply `overflow-x: auto` to code block.
 * Customize the mathjax to allow writing in [AsciiMath](https://asciimath.org/).
 * Rating badges are created in prior using this [script](https://github.com/amoshyc/cp-codebook/blob/main/create_images.py).
