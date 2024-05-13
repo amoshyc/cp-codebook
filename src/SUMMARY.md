@@ -41,7 +41,7 @@
     - [Coordinate Compression](./techniques/coordinate_compression.md)
     - [Functional Graph](./techniques/functional_graph.md)
     - [Maximum Match Subsequence](./techniques/max_match_subseq.md)
-    - [Merge 2 Sorted Array](./techniques/merged.md)
+    - [Merge 2 Sorted Array](./techniques/merge.md)
 
 - [Miscellaneous](./miscellaneous/readme.md)
     - [Rust Basic](./miscellaneous/rust_basic.md)

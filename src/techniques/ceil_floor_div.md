@@ -1,5 +1,24 @@
 # Ceil/Floor Division
 
+利用 `a.div_euclid(b)`：
+
+```rust
+// a.div_euclid(b) is the same as floor(a/b)
+fn floor_div(a: i64, b: i64) -> i64 {
+    a.div_euclid(b)
+}
+
+// Add 1 to floor(a/b) if needed
+fn ceil_div(a: i64, b: i64) -> i64 {
+    a.div_euclid(b) + if a.rem_euclid(b) != 0 { 1 } else { 0 }
+}
+```
+
+<https://atcoder.jp/contests/abc334/submissions/48817195>
+
+---
+
+
 ```rust
 // a/b rounds toward zero, therefore
 // when a > 0, we right shift a,
@@ -31,19 +50,3 @@ fn floor_div(mut a: i64, mut b: i64) -> i64 {
 ```
 
 <https://atcoder.jp/contests/abc334/submissions/48817234>
-
-另解，利用 `a.div_euclid(b)`：
-
-```rust
-// a.div_euclid(b) is the same as floor(a/b)
-fn floor_div(a: i64, b: i64) -> i64 {
-    a.div_euclid(b)
-}
-
-// Add 1 to floor(a/b) if needed to get ceil(a/b)
-fn ceil_div(a: i64, b: i64) -> i64 {
-    a.div_euclid(b) + if a.rem_euclid(b) != 0 { 1 } else { 0 }
-}
-```
-
-<https://atcoder.jp/contests/abc334/submissions/48817195>

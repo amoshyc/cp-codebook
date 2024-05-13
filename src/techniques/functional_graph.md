@@ -1,7 +1,5 @@
 # Functional Graph
 
-## Finding Cycle in Functional Graph
-
 ```rust
 let mut vis = vec![false; n];
 vis[0] = true;
