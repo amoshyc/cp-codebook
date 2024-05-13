@@ -35,7 +35,6 @@
     - [Ceil/Floor Division](./techniques/ceil_floor_div.md)
     - [Double Sum/Pairwise Problem](./techniques/pairwise.md)
     - [Square Number](./techniques/square_number.md)
-    - [Multiples in Range](./techniques/multiples_in_range.md)
     - [2 Sets](./techniques/2_sets.md)
     - [Longest Common Prefix](./techniques/longest_common_prefix.md)
     - [Coordinate Compression](./techniques/coordinate_compression.md)
