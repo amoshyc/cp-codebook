@@ -31,7 +31,7 @@ let mut add_clause = |p: usize, q: usize| {
     adj[q ^ 1].push(p);
 };
 
-// Check contraction
+// Check contradiction
 let ok = (0..n).all(|i| belong[2 * i] != belong[2 * i ^ 1]);
 
 // Solution
@@ -45,5 +45,5 @@ for i in 0..n {
 }
 ```
 
-* <https://atcoder.jp/contests/practice2/submissions/53310836>
+* <https://atcoder.jp/contests/practice2/submissions/53484489>
 * <https://codeforces.com/contest/1971/submission/260608172>
