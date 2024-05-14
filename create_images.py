@@ -2,7 +2,9 @@ import requests
 from lxml import etree
 from pybadges import badge
 from bisect import bisect_right
+from pathlib import Path
 
+ASSERT_DIR = Path("./src/assets/")
 
 ATCODER_PIVOTS = [400, 800, 1200, 1600, 2000, 2400, 2800, 10**10]
 ATCODER_COLORS = [
@@ -49,10 +51,10 @@ def get_codeforces_data(user_id: str):
 
 
 codeforces_rating, codeforces_color = get_codeforces_data("amoshuangyc")
-with open("./src/assets/codeforces_badge.svg", "w") as f:
+with open(ASSERT_DIR / "codeforces_badge.svg", "w") as f:
     f.write(
         badge(
-            logo="./src/assets/codeforces.svg",
+            logo=str(ASSERT_DIR / "codeforces_logo.svg"),
             embed_logo=True,
             left_text="Codeforces",
             left_color="#303030",
@@ -60,13 +62,13 @@ with open("./src/assets/codeforces_badge.svg", "w") as f:
             right_color=codeforces_color,
         )
     )
-print(f"Codeforces badge updated. New rating = {codeforces_rating}.")
+print(f"Codeforces badge generated. Rating = {codeforces_rating}.")
 
 atcoder_rating, atcoder_color = get_atcoder_data("amoshuangyc")
-with open("./src/assets/atcoder_badge.svg", "w") as f:
+with open(ASSERT_DIR / "atcoder_badge.svg", "w") as f:
     f.write(
         badge(
-            logo="./src/assets/atcoder.svg",
+            logo=str(ASSERT_DIR / "atcoder_logo.svg"),
             embed_logo=True,
             left_text="AtCoder",
             left_color="#303030",
@@ -74,4 +76,30 @@ with open("./src/assets/atcoder_badge.svg", "w") as f:
             right_color=atcoder_color,
         )
     )
-print(f"AtCoder badge updated. New rating = {atcoder_rating}.")
+print(f"AtCoder badge generated. Rating = {atcoder_rating}.")
+
+
+with open(ASSERT_DIR / "rust_version_badge.svg", "w") as f:
+    f.write(
+        badge(
+            logo=str(ASSERT_DIR / "rust_logo.svg"),
+            embed_logo=True,
+            left_text="Rust",
+            left_color="#303030",
+            right_text="1.70+",
+        )
+    )
+print("Rust version badge generated.")
+
+with open(ASSERT_DIR / "license_badge.svg", "w") as f:
+    f.write(
+        badge(
+            embed_logo=True,
+            left_text="License",
+            left_color="#303030",
+            right_text="Apache-2.0",
+            right_color="#A4A62B",
+        )
+    )
+
+print("License badge generated.")
