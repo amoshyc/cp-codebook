@@ -1,4 +1,6 @@
-# Ceil/Floor Division
+# Floor and Ceiling
+
+## Floor Division and Ceiling Division
 
 利用 `a.div_euclid(b)`：
 
@@ -50,3 +52,10 @@ fn floor_div(mut a: i64, mut b: i64) -> i64 {
 ```
 
 <https://atcoder.jp/contests/abc334/submissions/48817234>
+
+
+## Number of digits
+
+Number of digits in base [{b}] of a positive integer [{k}]
+
+[{"number of digits" = floor(log_b k) + 1 = ceil(log_b(k + 1))}]

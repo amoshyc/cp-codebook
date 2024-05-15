@@ -1,4 +1,7 @@
-# Maximum Match for Subsequence
+# Subsequence
+
+
+**Maximum Match**
 
 ```rust
 // Find the maximum length of prefix of t contained as a subsequence of s
@@ -13,6 +16,6 @@ fn max_match(s: &Vec<char>, t: &Vec<char>) -> usize {
 }
 ```
 
-Sequence `[*a, *b]` contains `t` as subsequence if and only if `max_match(a, t) + max_match(rev(b), rev(t)) >= t.len()`.
+Sequence [{"concat"(A, B)}] contains [{T}] as subsequence if and only if [{"max_match"(A, T) + "max_match"("rev"(B), "rev"(T)) >= |T| }]
 
 <https://atcoder.jp/contests/abc324/submissions/46616960>
