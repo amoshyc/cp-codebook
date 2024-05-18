@@ -3,7 +3,6 @@ from lxml import etree
 from pybadges import badge
 from bisect import bisect_right
 from pathlib import Path
-from subprocess import check_output
 from datetime import datetime
 
 ASSERT_DIR = Path("./src/assets/")

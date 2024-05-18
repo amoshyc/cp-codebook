@@ -44,4 +44,5 @@ for c in 0..26 {
 ```
 
 <https://atcoder.jp/contests/abc157/submissions/53570845>
+
 <https://atcoder.jp/contests/abc157/submissions/53571346>
