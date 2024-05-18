@@ -41,5 +41,12 @@ impl DSU {
     fn same(&mut self, u: usize, v: usize) -> bool {
         self.root(u) == self.root(v)
     }
+
+    fn size(&mut self, u: usize) -> usize {
+        let r = self.root(u);
+        self.siz[r]
+    }
 }
 ```
+
+<https://atcoder.jp/contests/abc157/submissions/53570231>
