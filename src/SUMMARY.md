@@ -38,6 +38,7 @@
     - [Pairwise Problem](./techniques/pairwise.md)
     - [Substring](./techniques/substring.md)
     - [Subsequence](./techniques/subsequence.md)
+    - [Number of Unique Elements](./techniques/num_uniques.md)
     - [2 Sets](./techniques/2_sets.md)
     - [Longest Common Prefix](./techniques/longest_common_prefix.md)
     - [Coordinate Compression](./techniques/coordinate_compression.md)
