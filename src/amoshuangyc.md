@@ -2,6 +2,7 @@
 
 [![](./assets/atcoder_badge.svg)](https://atcoder.jp/users/amoshuangyc)
 [![](./assets/codeforces_badge.svg)](https://codeforces.com/profile/amoshuangyc)
+[![](./assets/last_update_time.svg)](https://github.com/amoshyc/cp-codebook/)
 [![](./assets/rust_version_badge.svg)](https://www.rust-lang.org/)
 [![](./assets/license_badge.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 

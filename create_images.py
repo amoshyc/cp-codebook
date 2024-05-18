@@ -3,6 +3,8 @@ from lxml import etree
 from pybadges import badge
 from bisect import bisect_right
 from pathlib import Path
+from subprocess import check_output
+from datetime import datetime
 
 ASSERT_DIR = Path("./src/assets/")
 
@@ -78,6 +80,18 @@ with open(ASSERT_DIR / "atcoder_badge.svg", "w") as f:
     )
 print(f"AtCoder badge generated. Rating = {atcoder_rating}.")
 
+last_update_time = f'{datetime.now():%Y/%m/%d}'
+with open(ASSERT_DIR / "last_update_time.svg", "w") as f:
+    f.write(
+        badge(
+            embed_logo=True,
+            left_text="Last Updated",
+            left_color="#303030",
+            right_text=last_update_time,
+            right_color="#B08F0E",
+        )
+    )
+print(f"Update Time based generated. Time = {last_update_time}.")
 
 with open(ASSERT_DIR / "rust_version_badge.svg", "w") as f:
     f.write(
