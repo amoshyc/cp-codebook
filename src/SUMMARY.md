@@ -30,6 +30,7 @@
     - [CombTool](./algorithms/combtool.md)
     - [Linear Congruence & CRT](./algorithms/linear_congruence_crt.md)
     - [Sieve of Eratosthenes](./algorithms/sieve_of_eratosthenes.md)
+    - [Longest Increasing Subsequence](./algorithms/longest_increasing_subsequence.md)
 
 - [Techniques](./techniques/readme.md)
     - [Floor and Ceiling](./techniques/floor_ceil.md)

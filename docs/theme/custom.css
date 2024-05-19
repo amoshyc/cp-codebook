@@ -1,3 +1,7 @@
 code.hljs {
     overflow-x: auto;
 }
+
+p {
+    white-space: pre-wrap;
+}

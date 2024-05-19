@@ -1,47 +1,44 @@
 # Number of Unique Elements
 
+## Small Charset
 
-## Count in Substring
+> Given a string `S[0..N]` consisting of lowercase English letters and `Q` queries, the query may
+>    (1) change the character at `S[i]` or 
+>    (2) ask the number of unique elements in `S[l..=r]`.
 
-> Given a string S[0..N] consisting of lowercase English letters and Q queries, the query may
->    (1) change the character at S[i] or 
->    (2) ask the number of unique elements in S[l..=r].
-
-**Exploit the Small Charset**
-
-By storing the inverse positions of each kind of char in BTreeSet:
+By storing the inverse positions of each kind of char in BTreeSet, or the one hot encoding of each kind in BIT:
 
 ```rust
 // query 1
-inv[s[i]].remove(&i);
+inv[s[i]].remove(&i); // bits[s[i]].add(i, -1);
 s[i] = c;
-inv[s[i]].insert(i);
+inv[s[i]].insert(i);  // bits[s[i]].add(i, 1);
 
 // query 2
+let mut ans = 0;
 for c in 0..26 {
-    if let Some(p) = inv[c].range(l..).next() {
+    if let Some(p) = inv[c].range(l..).next() { // bits[c].sum(l, r + 1) > 0
         if *p <= r {
             ans += 1;
         }
     }
 }
 ```
+<https://atcoder.jp/contests/abc157/submissions/53570845>
+<https://atcoder.jp/contests/abc157/submissions/53571346>
 
-By storing the one hot encoding of each kind of char in BIT:
 
-```rust
-// query 1
-bits[s[i]].add(i, -1);
-s[i] = c;
-bits[s[i]].add(i, 1);
+## No Modificaiton
 
-// query 2
-for c in 0..26 {
-    if bits[c].sum(l, r + 1) > 0 {
-        ans += 1;
-    }
-}
+> Given a sequence `A[0..N] `consisting of `i32` integers and `Q` queries. 
+> The query asks the number of unique elements in `A[l..=r]`.
+
+Since there are no modification, we can sort the queries.
+
+```
+f[i] = 1 if arr[i] is the rightmost position of arr[i] else 0.
 ```
 
-* <https://atcoder.jp/contests/abc157/submissions/53570845>
-* <https://atcoder.jp/contests/abc157/submissions/53571346>
+Inspect the queries from left to right (via right boundry) and maintain the `f` of previous queries in a BIT. Then for query `(l, r)`, the answer is `sum(f[l..=r]) = BIT.sum(l..=r)`.
+
+<https://atcoder.jp/contests/abc174/submissions/53667278>

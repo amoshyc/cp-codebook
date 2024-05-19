@@ -41,5 +41,5 @@ for i, new_x in arr.iter().enumerate() {
 }
 ```
 
-* <https://atcoder.jp/contests/abc312/submissions/44105261>
-* <https://atcoder.jp/contests/abc314/submissions/44556667>
+<https://atcoder.jp/contests/abc312/submissions/44105261>
+<https://atcoder.jp/contests/abc314/submissions/44556667>

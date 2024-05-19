@@ -82,6 +82,6 @@ hst = (hs * hasher.powr[s.len()] % p + ht) % p;
 
 ## Reference
 
-Rev: https://atcoder.jp/contests/abc284/submissions/50879999
-Palindrome: https://leetcode.com/submissions/detail/850611043/
-Concatenate: https://atcoder.jp/contests/abc312/submissions/44107852
+Rev: <https://atcoder.jp/contests/abc284/submissions/50879999>
+Palindrome: <https://leetcode.com/submissions/detail/850611043/>
+Concatenate: <https://atcoder.jp/contests/abc312/submissions/44107852>
