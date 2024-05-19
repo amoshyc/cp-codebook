@@ -189,9 +189,11 @@
                         <h1 id="number-of-unique-elements"><a class="header" href="#number-of-unique-elements">Number of Unique Elements</a></h1>
 <h2 id="small-charset"><a class="header" href="#small-charset">Small Charset</a></h2>
 <blockquote>
-<p>Given a string <code>S[0..N]</code> consisting of lowercase English letters and <code>Q</code> queries, the query may
-(1) change the character at <code>S[i]</code> or
-(2) ask the number of unique elements in <code>S[l..=r]</code>.</p>
+<p>Given a string <code>S[0..N]</code> consisting of lowercase English letters and <code>Q</code> queries, the query may</p>
+<ol>
+<li>change the character at <code>S[i]</code> or</li>
+<li>ask the number of unique elements in <code>S[l..=r]</code>.</li>
+</ol>
 </blockquote>
 <p>By storing the inverse positions of each kind of char in BTreeSet, or the one hot encoding of each kind in BIT:</p>
 <pre><code class="language-rust">// query 1
@@ -239,11 +241,11 @@ The query asks the number of unique elements in <code>A[l..=r]</code>.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../techniques/subsequence.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../techniques/subsequence.html" class="nav-chapters mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../techniques/2_sets.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../techniques/2_sets.html" class="nav-chapters mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

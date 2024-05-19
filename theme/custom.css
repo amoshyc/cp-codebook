@@ -14,3 +14,15 @@ blockquote {
     border-block-start: unset;
     border-block-end: unset;
 }
+
+/* Force to use the navbar at the bottom */
+
+/* nav at the side */
+nav.nav-wide-wrapper {
+    display: none;
+}
+
+/* nav at the bottom */
+nav.nav-wrapper {
+    display: block;
+}

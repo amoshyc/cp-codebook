@@ -3,8 +3,8 @@
 ## Small Charset
 
 > Given a string `S[0..N]` consisting of lowercase English letters and `Q` queries, the query may
->    (1) change the character at `S[i]` or 
->    (2) ask the number of unique elements in `S[l..=r]`.
+>    1. change the character at `S[i]` or 
+>    2. ask the number of unique elements in `S[l..=r]`.
 
 By storing the inverse positions of each kind of char in BTreeSet, or the one hot encoding of each kind in BIT:
 

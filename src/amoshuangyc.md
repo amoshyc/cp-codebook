@@ -14,3 +14,4 @@ I reread the problem, drew many lines on paper, pondered for a moment, and scann
     - Apply `overflow-x: auto` to code block.
     - Apply `white-space: pre-wrap` to `p` to allow easy line break.
     - Customize the style of `blockquote`.
+    - Force to use the `nav` at the bottom.
