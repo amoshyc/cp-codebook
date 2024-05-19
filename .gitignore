@@ -1,2 +1,6 @@
 book
 venv
+
+# Added by cargo
+
+/target

@@ -44,6 +44,7 @@
     - [Coordinate Compression](./techniques/coordinate_compression.md)
     - [Functional Graph](./techniques/functional_graph.md)
     - [Merge 2 Sorted Array](./techniques/merge.md)
+    - [2D Poset](./techniques/2d_poset.md)
 
 - [Miscellaneous](./miscellaneous/readme.md)
     - [Rust Basic](./miscellaneous/rust_basic.md)

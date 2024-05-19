@@ -50,6 +50,19 @@ def get_codeforces_data(user_id: str):
     color = CODEFORCES_COLORS[bisect_right(CODEFORCES_PIVOTS, rating)]
     return rating, color
 
+atcoder_rating, atcoder_color = get_atcoder_data("amoshuangyc")
+with open(ASSERT_DIR / "atcoder_badge.svg", "w") as f:
+    f.write(
+        badge(
+            logo=str(ASSERT_DIR / "atcoder_logo.svg"),
+            embed_logo=True,
+            left_text="AtCoder",
+            left_color="#303030",
+            right_text=str(atcoder_rating),
+            right_color=atcoder_color,
+        )
+    )
+print(f"AtCoder badge generated. Rating = {atcoder_rating}.")
 
 codeforces_rating, codeforces_color = get_codeforces_data("amoshuangyc")
 with open(ASSERT_DIR / "codeforces_badge.svg", "w") as f:
@@ -64,20 +77,6 @@ with open(ASSERT_DIR / "codeforces_badge.svg", "w") as f:
         )
     )
 print(f"Codeforces badge generated. Rating = {codeforces_rating}.")
-
-atcoder_rating, atcoder_color = get_atcoder_data("amoshuangyc")
-with open(ASSERT_DIR / "atcoder_badge.svg", "w") as f:
-    f.write(
-        badge(
-            logo=str(ASSERT_DIR / "atcoder_logo.svg"),
-            embed_logo=True,
-            left_text="AtCoder",
-            left_color="#303030",
-            right_text=str(atcoder_rating),
-            right_color=atcoder_color,
-        )
-    )
-print(f"AtCoder badge generated. Rating = {atcoder_rating}.")
 
 last_update_time = f'{datetime.now():%Y/%m/%d}'
 with open(ASSERT_DIR / "last_update_time.svg", "w") as f:
