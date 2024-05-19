@@ -13,3 +13,4 @@ I reread the problem, drew many lines on paper, pondered for a moment, and scann
 * Add a [custom.css](https://github.com/amoshyc/cp-codebook/blob/main/theme/custom.css)
     - Apply `overflow-x: auto` to code block.
     - Apply `white-space: pre-wrap` to `p` to allow easy line break.
+    - Customize the style of `blockquote`.

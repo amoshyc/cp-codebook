@@ -5,3 +5,12 @@ code.hljs {
 p {
     white-space: pre-wrap;
 }
+
+blockquote {
+    background-color: transparent;
+    border-left-color: #349fd3;
+    border-left-style: solid;
+    border-left-width: 2.5px;
+    border-block-start: unset;
+    border-block-end: unset;
+}
