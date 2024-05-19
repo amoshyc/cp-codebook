@@ -49,7 +49,9 @@
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "coal" : "light";
+            // Modified by me
+            // var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "coal" : "light";
+            var default_theme = "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
@@ -195,12 +197,14 @@
 <li>Syntax highlighting theme is <a href="https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css">Github</a> with modified background.</li>
 <li>Customize the mathjax to allow writing in <a href="https://asciimath.org/">AsciiMath</a>.</li>
 <li>Rating badges are created in prior using this <a href="https://github.com/amoshyc/cp-codebook/blob/main/create_images.py">script</a>.</li>
-<li>Add a <a href="https://github.com/amoshyc/cp-codebook/blob/main/theme/custom.css">custom.css</a>
+<li>Best viewed in Firefox. If you are using others, suggest to enable overlay-scrollbars.</li>
+<li>Add a <a href="https://github.com/amoshyc/cp-codebook/blob/main/theme/custom.css">custom.css</a> and modify <a href="https://github.com/amoshyc/cp-codebook/blob/main/theme/index.hbs">index.hbs</a>.
 <ul>
 <li>Apply <code>overflow-x: auto</code> to code block.</li>
 <li>Apply <code>white-space: pre-wrap</code> to <code>p</code> to allow easy line break.</li>
 <li>Customize the style of <code>blockquote</code>.</li>
 <li>Force to use the <code>nav</code> at the bottom.</li>
+<li>Force to use light theme by default regardless the <code>prefers-color-scheme</code> css media.</li>
 </ul>
 </li>
 </ul>
