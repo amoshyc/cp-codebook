@@ -46,6 +46,7 @@
     - [Functional Graph](./techniques/functional_graph.md)
     - [Merge 2 Sorted Array](./techniques/merge.md)
     - [2D Poset](./techniques/2d_poset.md)
+    - [Digit DP](./techniques/digit_dp.md)
 
 - [Miscellaneous](./miscellaneous/readme.md)
     - [Rust Basic](./miscellaneous/rust_basic.md)
