@@ -20,7 +20,7 @@ $$
 \end{array}
 $$
 
-其中每一位 $i$ 都滿足（$m_i$ 是第 $i$ 位的上界）：
+其中每一位 $i$ 都滿足（$m_i$ 是第 $i$ 數字的上限再加一，若是在 $A$ 進制中，常常是 $\frac{A_{i+1}}{A_i}$）：
 
 $$
 \begin{align}
@@ -40,13 +40,67 @@ for i in range(N):
     for c in range(2):
         for r in range(m[i]):
             val = c + x[i] + r
-            y = val % mx[i]
+            y = val % m[i]
             if r == 0 or y == 0:
-                new_c = val // mx[i]
+                new_c = val // m[i]
                 dp[i + 1][new_c] += dp[i][c]
 ```
 
 概念上就是如此，不過這題只有這樣會 TLE，還需做額外的優化，在此不展開。
+
+## [Valid payments](https://atcoder.jp/contests/abc182/tasks/abc182_f)
+
+在 $A$ 進制中，給定一個數 $V$，請找出一個數 $r$，最小化「組出 $r$ 與組出 $(V + r)$ 所需要的硬幣總數」。
+
+c is carry, r is change, p is pay, v is price.
+
+```
+    c3  c2  c1   0
+    v3  v2  v1  v0
++)  r3  r2  r1  r0
+------------------
+    p3  p2  p1  p0
+```
+
+```rust
+c[i + 1] = floor_div(c[i] + v[i] + r[i], m[i])
+p[i] = (c[i] + v[i] + r[i]) mod m[i]
+m[i] = A[i + 1] / A[i]
+```
+
+```rust
+dp[i, c] = minimum number of coins needed to fill r[0..i] and p[0..i] and c[i] = c
+dp[0, 0] = 0
+answer = dp[N, 0]
+for i in 0..n:
+    for c[i] in 0..2:
+        for r[i] in 0..m[i]:
+            dp[i + 1, c[i + 1]].chmin(dp[i, c] + r[i] + p[i])
+```
+
+```
+There are limited (c[i], r[i]) pairs.
+c[i + 1] = floor_div(c[i] + v[i] + r[i], m[i])
+         = 0 if c[i] + v[i] + r[i] < m[i] else 1
+         = 0 if r[i] < m[i] - v[i] - c[i] else 1
+That is,
+for all r[i] < m[i] - v[i] - c[i], they all maps to dp[i + 1, 0]
+for all r[i] >= m[i] - v[i] - c[i], they all maps to dp[i + 1, 1]
+```
+
+```
+For r[i] < m[i] - v[i] - c[i], we have c[i] + v[i] + r[i] < m[i], so
+    dp[i + 1, 0].chmin(dp[i, c] + r[i] + p[i])
+    dp[i + 1, 0].chmin(dp[i, c] + c[i] + v[i] + 2 * r[i])
+Minimum occurs when r[i] = 0 (r[i] >= 0)
+For r[i] >= m[i] - v[i] - c[i], we have c[i] + v[i] + r[i] >= m[i], so
+    dp[i + 1, 1].chmin(dp[i, c] + r[i] + p[i])
+    dp[i + 1, 1].chmin(dp[i, c] + c[i] + v[i] + 2 * r[i] - m[i])
+Minimum occurs when r[i] = m[i] - v[i] - c[i] (r[i] >= 0)
+```
+
+<https://atcoder.jp/contests/abc231/submissions/53732555>
+
 
 ## [Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s)
 
