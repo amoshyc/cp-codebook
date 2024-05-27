@@ -16,32 +16,35 @@ fn ceil_div(a: i64, b: i64) -> i64 {
 
 <https://atcoder.jp/contests/abc334/submissions/48817195>
 
-Another method:
+if we need to implement euclidean division ourself:
 
 ```rust
-// a/b (b > 0) rounds toward zero, therefore
-// when a >= 0, we right shift a if needed
-// when a < 0, a/b is what we want
-fn ceil_div(mut a: i64, mut b: i64) -> i64 {
-    assert!(b != 0);
+// euclidean_div is the same as floor_div
+// a/b (b > 0) rounds toward zero.
+// when a < 0, we left shift the value if needed.
+// when a >= 0, a/b is what we want.
+fn euclidean_div(mut a: i64, mut b: i64) -> (i64, i64) {
     if b < 0 {
         a = -a;
-        b = -b;
+        b = -a;
     }
-    if a >= 0 {
-        (a + b - 1) / b
-    } else {
-        a / b
-    }
+    let q = if a < 0 { (a - (b - 1)) / b } else { a / b };
+    let r = a - b * q;
+    (q, r)
 }
 
 fn floor_div(a: i64, b: i64) -> i64 {
-    let c = ceil_div(a, b);
-    c - if a % b != 0 { 1 } else { 0 }
+    let (q, r) = euclidean_div(a, b);
+    q
+}
+
+fn ceil_div(a: i64, b: i64) -> i64 {
+    let (q, r) = euclidean_div(a, b);
+    q + if a % b != 0 { 1 } else { 0 }
 }
 ```
 
-<https://atcoder.jp/contests/abc334/submissions/53955716>
+<https://atcoder.jp/contests/abc334/submissions/53956080>
 
 
 ## Number of digits
