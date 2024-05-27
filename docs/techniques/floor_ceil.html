@@ -190,7 +190,6 @@
                     <main>
                         <h1 id="floor-and-ceiling"><a class="header" href="#floor-and-ceiling">Floor and Ceiling</a></h1>
 <h2 id="floor-division-and-ceiling-division"><a class="header" href="#floor-division-and-ceiling-division">Floor Division and Ceiling Division</a></h2>
-<p>利用 <code>a.div_euclid(b)</code>：</p>
 <pre><code class="language-rust">// a.div_euclid(b) is the same as floor(a/b)
 fn floor_div(a: i64, b: i64) -&gt; i64 {
     a.div_euclid(b)
@@ -201,14 +200,16 @@ fn ceil_div(a: i64, b: i64) -&gt; i64 {
     a.div_euclid(b) + if a.rem_euclid(b) != 0 { 1 } else { 0 }
 }</code></pre>
 <p><a href="https://atcoder.jp/contests/abc334/submissions/48817195">https://atcoder.jp/contests/abc334/submissions/48817195</a></p>
-<hr />
-<pre><code class="language-rust">// a/b rounds toward zero, therefore
-// when a &gt; 0, we right shift a,
+<p>Another method:</p>
+<pre><code class="language-rust">// a/b (b &gt; 0) rounds toward zero, therefore
+// when a &gt;= 0, we right shift a if needed
 // when a &lt; 0, a/b is what we want
 fn ceil_div(mut a: i64, mut b: i64) -&gt; i64 {
     assert!(b != 0);
-    a *= b.signum();
-    b = b.abs();
+    if b &lt; 0 {
+        a = -a;
+        b = -b;
+    }
     if a &gt;= 0 {
         (a + b - 1) / b
     } else {
@@ -216,20 +217,11 @@ fn ceil_div(mut a: i64, mut b: i64) -&gt; i64 {
     }
 }
 
-// a/b rounds toward zero, therefore
-// when a &gt; 0, a/b is what we want
-// when a &lt; 0, we left shift a.
-fn floor_div(mut a: i64, mut b: i64) -&gt; i64 {
-    assert!(b != 0);
-    a *= b.signum();
-    b = b.abs();
-    if a &gt;= 0 {
-        a / b
-    } else {
-        (a - (b - 1)) / b
-    }
+fn floor_div(a: i64, b: i64) -&gt; i64 {
+    let c = ceil_div(a, b);
+    c - if a % b != 0 { 1 } else { 0 }
 }</code></pre>
-<p><a href="https://atcoder.jp/contests/abc334/submissions/48817234">https://atcoder.jp/contests/abc334/submissions/48817234</a></p>
+<p><a href="https://atcoder.jp/contests/abc334/submissions/53955716">https://atcoder.jp/contests/abc334/submissions/53955716</a></p>
 <h2 id="number-of-digits"><a class="header" href="#number-of-digits">Number of digits</a></h2>
 <p>Number of digits in base [{b}] of a positive integer [{k}]</p>
 <p>[{"number of digits" = floor(log_b k) + 1 = ceil(log_b(k + 1))}]</p>
