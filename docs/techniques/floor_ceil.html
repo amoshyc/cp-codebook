@@ -199,20 +199,22 @@ fn floor_div(a: i64, b: i64) -&gt; i64 {
 fn ceil_div(a: i64, b: i64) -&gt; i64 {
     a.div_euclid(b) + if a.rem_euclid(b) != 0 { 1 } else { 0 }
 }</code></pre>
-<p><a href="https://atcoder.jp/contests/abc334/submissions/48817195">https://atcoder.jp/contests/abc334/submissions/48817195</a></p>
 <p>if we need to implement euclidean division ourself:</p>
-<pre><code class="language-rust">// euclidean_div is the same as floor_div
+<pre><code class="language-rust">// euclidean_div is the same as floor_div.
+// The remainder is always &gt;= 0.
 // a/b (b &gt; 0) rounds toward zero.
 // when a &lt; 0, we left shift the value if needed.
 // when a &gt;= 0, a/b is what we want.
 fn euclidean_div(mut a: i64, mut b: i64) -&gt; (i64, i64) {
     if b &lt; 0 {
         a = -a;
-        b = -a;
+        b = -b;
     }
-    let q = if a &lt; 0 { (a - (b - 1)) / b } else { a / b };
-    let r = a - b * q;
-    (q, r)
+    let mut q = a / b;
+    if q &lt; 0 &amp;&amp; a % b != 0 {
+        q -= 1;
+    }
+    (q, a - b * q)
 }
 
 fn floor_div(a: i64, b: i64) -&gt; i64 {
@@ -224,7 +226,8 @@ fn ceil_div(a: i64, b: i64) -&gt; i64 {
     let (q, r) = euclidean_div(a, b);
     q + if a % b != 0 { 1 } else { 0 }
 }</code></pre>
-<p><a href="https://atcoder.jp/contests/abc334/submissions/53956080">https://atcoder.jp/contests/abc334/submissions/53956080</a></p>
+<p><a href="https://atcoder.jp/contests/abc334/submissions/48817195">https://atcoder.jp/contests/abc334/submissions/48817195</a>
+<a href="https://atcoder.jp/contests/abc334/submissions/53956286">https://atcoder.jp/contests/abc334/submissions/53956286</a></p>
 <h2 id="number-of-digits"><a class="header" href="#number-of-digits">Number of digits</a></h2>
 <p>Number of digits in base [{b}] of a positive integer [{k}]</p>
 <p>[{"number of digits" = floor(log_b k) + 1 = ceil(log_b(k + 1))}]</p>
