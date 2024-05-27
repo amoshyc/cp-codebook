@@ -37,6 +37,7 @@
     - [Square Number](./techniques/square_number.md)
     - [Multiples](./techniques/multiples.md)
     - [Pairwise Problem](./techniques/pairwise.md)
+    - [Interval](./techniques/interval.md)
     - [Substring](./techniques/substring.md)
     - [Subsequence](./techniques/subsequence.md)
     - [Number of Unique Elements](./techniques/num_uniques.md)

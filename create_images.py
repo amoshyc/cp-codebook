@@ -89,7 +89,7 @@ with open(ASSERT_DIR / "last_update_time.svg", "w") as f:
             right_color="#B08F0E",
         )
     )
-print(f"Update Time based generated. Time = {last_update_time}.")
+print(f"Update Time badge generated. Time = {last_update_time}.")
 
 with open(ASSERT_DIR / "rust_version_badge.svg", "w") as f:
     f.write(
