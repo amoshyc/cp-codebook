@@ -41,12 +41,12 @@ fn floor_div(a: i64, b: i64) -> i64 {
 
 fn ceil_div(a: i64, b: i64) -> i64 {
     let (q, r) = euclidean_div(a, b);
-    q + if a % b != 0 { 1 } else { 0 }
+    q + if r != 0 { 1 } else { 0 }
 }
 ```
 
 <https://atcoder.jp/contests/abc334/submissions/48817195>
-<https://atcoder.jp/contests/abc334/submissions/53956286>
+<https://atcoder.jp/contests/abc334/submissions/53956374>
 
 
 ## Number of digits
