@@ -13,6 +13,7 @@ blockquote {
     border-left-width: 2.5px;
     border-block-start: unset;
     border-block-end: unset;
+    font-weight: bold;
 }
 
 /* Force to use the navbar at the bottom */
