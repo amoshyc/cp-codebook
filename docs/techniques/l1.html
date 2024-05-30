@@ -219,8 +219,8 @@ Since L1 distance is commutative, we can sort the sequence.</p>
 <blockquote>
 <p>Given N points, find the maximum L1 distance between any pair of points.</p>
 </blockquote>
-<p>Map points from [{(x, y)}] to [{(u, v)}] where [{u = x + y, v = x - y}].
-Usually, [{(u, v)}] can be solved independently.</p>
+<p>Map the points from [{(x, y)}] to [{(u, v)}] where [{u = x + y, v = x - y}].
+[{(u, v)}] can be solved independently.</p>
 <p>$$
 \begin{align*}
 &amp;\max_{0 \le i,j \lt N} |x_i - x_j| + | y_i - y_j| \\
@@ -251,7 +251,7 @@ $$</p>
 <blockquote>
 <p>Given N points, for each point, find the distance to its closest neighboring point.</p>
 </blockquote>
-<p>For a point [{(x, y)]}, if we only inpsect its upper-right points:</p>
+<p>For a point [{(x, y)}], if we only inpsect its upper-right points:</p>
 <p>[{ min_(x_i &gt;= x, y_i &gt;= y) (x_i - x + y_i - y) = (min_(x_i &gt;= x, y_i &gt;= y) (x_i + y_i)) - (x + y)}]</p>
 <p>It is similar to the 2D Poset Problem which can be solved using sweep line and SegTree.
 For upper-left, lower-left, lower-right, we can simply flip the points (along x-axis or y-axis) and run the algorithm again.</p>
@@ -261,10 +261,10 @@ For upper-left, lower-left, lower-right, we can simply flip the points (along x-
 Distance is defined as the minimum number of moves:
 [{(x, y) -&gt; (x + 1, y + 1), (x + 1, y - 1), (x - 1, y + 1), (x - 1, y - 1)}]</p>
 </blockquote>
-<p>Map all the points from [{(x, y)}] to [{(u, v)}] where [{u = x + y, v = x - y}].
+<p>Map the points from [{(x, y)}] to [{(u, v)}] where [{u = x + y, v = x - y}].
 A move in [{(x, y)}] is [{2}] unit of distance in [{(u, v)}] and [{u, v}] is independent of each other.
 This indicates that we can classify points into 2 groups via parity.
-For each group, the problem reduce to 1D L1 distance problem.</p>
+For each group, the problem reduce to a pairwise L1 distance problem.</p>
 <p><a href="https://atcoder.jp/contests/abc351/submissions/52883662">https://atcoder.jp/contests/abc351/submissions/52883662</a></p>
 
                     </main>
