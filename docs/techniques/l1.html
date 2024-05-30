@@ -253,10 +253,10 @@ $$</p>
 <blockquote>
 <p>Given N points, for each point, find the distance to its closest neighboring point.</p>
 </blockquote>
-<p>For a point [{(x, y)}], if we only inpsect its upper-right points:</p>
+<p>For a point [{(x, y)}], if we want only the answer to its top-right points:</p>
 <p>[{ min_(x_i &gt;= x, y_i &gt;= y) (x_i - x + y_i - y) = (min_(x_i &gt;= x, y_i &gt;= y) (x_i + y_i)) - (x + y)}]</p>
 <p>It is similar to the 2D Poset Problem which can be solved using sweep line and SegTree.
-For upper-left, lower-left, lower-right, we can simply flip the points (along x-axis or y-axis) and run the algorithm again.</p>
+For top-left, bottom-right and bottom-left, we can simply flip the points (along x-axis or y-axis) and run the algorithm again.</p>
 <p><a href="https://atcoder.jp/contests/abc283/submissions/46191119">https://atcoder.jp/contests/abc283/submissions/46191119</a></p>
 <blockquote>
 <p>Given N points, find the total distance of all pair of points.
