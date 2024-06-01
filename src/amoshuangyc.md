@@ -1,6 +1,6 @@
 # amoshuangyc
 
-[![](./assets/atcoder_badge.svg)](https://atcoder.jp/users/amoshuangyc) [![](./assets/codeforces_badge.svg)](https://codeforces.com/profile/amoshuangyc) [![](./assets/last_update_time.svg)](https://github.com/amoshyc/cp-codebook/) [![](./assets/rust_version_badge.svg)](https://www.rust-lang.org/) [![](./assets/license_badge.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![](./assets/atcoder_badge.svg)](https://atcoder.jp/users/amoshuangyc) [![](./assets/last_update_time.svg)](https://github.com/amoshyc/cp-codebook/) [![](./assets/rust_version_badge.svg)](https://www.rust-lang.org/) [![](./assets/license_badge.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 I reread the problem, drew many lines on paper, pondered for a moment, and scanned my codebook again... Ah! I can't solve this problem.
 

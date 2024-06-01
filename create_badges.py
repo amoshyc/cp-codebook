@@ -64,19 +64,19 @@ with open(ASSERT_DIR / "atcoder_badge.svg", "w") as f:
     )
 print(f"AtCoder badge generated. Rating = {atcoder_rating}.")
 
-codeforces_rating, codeforces_color = get_codeforces_data("amoshuangyc")
-with open(ASSERT_DIR / "codeforces_badge.svg", "w") as f:
-    f.write(
-        badge(
-            logo=str(ASSERT_DIR / "codeforces_logo.svg"),
-            embed_logo=True,
-            left_text="Codeforces",
-            left_color="#303030",
-            right_text=str(codeforces_rating),
-            right_color=codeforces_color,
-        )
-    )
-print(f"Codeforces badge generated. Rating = {codeforces_rating}.")
+# codeforces_rating, codeforces_color = get_codeforces_data("amoshuangyc")
+# with open(ASSERT_DIR / "codeforces_badge.svg", "w") as f:
+#     f.write(
+#         badge(
+#             logo=str(ASSERT_DIR / "codeforces_logo.svg"),
+#             embed_logo=True,
+#             left_text="Codeforces",
+#             left_color="#303030",
+#             right_text=str(codeforces_rating),
+#             right_color=codeforces_color,
+#         )
+#     )
+# print(f"Codeforces badge generated. Rating = {codeforces_rating}.")
 
 last_update_time = f'{datetime.now():%Y/%m/%d}'
 with open(ASSERT_DIR / "last_update_time.svg", "w") as f:
