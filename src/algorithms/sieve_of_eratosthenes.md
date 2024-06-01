@@ -6,7 +6,7 @@ struct SieveOfEratosthenes {
 }
 
 impl SieveOfEratosthenes {
-    fn new(max_val: usize) -> SieveOfEratosthenes {
+    fn new(max_val: usize) -> Self {
         let mut is_prime = vec![true; max_val + 1];
         let mut primes = vec![];
         for i in 2..=max_val {
@@ -17,7 +17,7 @@ impl SieveOfEratosthenes {
                 }
             }
         }
-        SieveOfEratosthenes { primes }
+        Self { primes }
     }
 
     fn factorize(&self, mut x: u64) -> Vec<(u64, u64)> {
@@ -42,33 +42,38 @@ impl SieveOfEratosthenes {
         res
     }
 }
-
-// x = p^a q^b r^c
-
-// Number of factors of x:
-//    d(x) = (a + 1)(b + 1)(c + 1)
-
-// Sum of factors of x = ABC where
-//    A = (p^(a + 1) - 1) / (p - 1)
-//    B = (q^(b + 1) - 1) / (q - 1)
-//    C = (r^(c + 1) - 1) / (r - 1)
-
-// Product of factors of x:
-//    x^(d(x) / 2)
-// Note that d(x) / 2 may not be integer
-// Take the factors of 36 as example:
-// 1  2  3  4  6
-// 36 18 12 9
-// There are d(x) / 2 pairs which have product 36
 ```
 
-<https://atcoder.jp/contests/abc280/submissions/54072054>
+<https://atcoder.jp/contests/abc280/submissions/54072369>
+
+
+# Number/Sum/Product of Factors
+
+Assume [{x = p^a q^b r^c}], then
+
+| name | formula |
+|-|-|
+|**Number** of factors of [{x}] | [{(a + 1)(b + 1)(c + 1)}] |
+|**Sum** of factors of [{x}] | [{(p^(a + 1) - 1) / (p - 1) * (q^(b + 1) - 1) / (q - 1) * (r^(c + 1) - 1) / (r - 1)}] |
+|**Product** of factors of [{x}] | [{  x^( 1/2 * "number of factors" ) = x^( 1/2 * ((a+1)(b+1)(c+1))) }] |
+
+Take the factors of 36 as example:
+```
+1  2  3  4  6
+36 18 12 9
+```
+There are [{"number of factors" / 2 = 4.5}] pairs that have product 36.
+
 <https://atcoder.jp/contests/arc167/submissions/46642235>
+
+
+## Number of Primes Under `x`
 
 power of 10:
 
 | x | Number of primes < x |
 |---------|---------|
+| 10^2 | 25 |
 | 10^3 | 168 |
 | 10^4 | 1,229 |
 | 10^5 | 9,592 |
@@ -84,6 +89,7 @@ power of 2:
 
 | x | Number of primes < x |
 |---------|---------|
+| 2^8 | 54 |
 | 2^10 | 172 |
 | 2^16 | 6,542 |
 | 2^20 | 82,025 |
@@ -103,3 +109,5 @@ for i in 2..=n {
     }
 }
 ```
+
+<https://atcoder.jp/contests/typical90/submissions/54072242>

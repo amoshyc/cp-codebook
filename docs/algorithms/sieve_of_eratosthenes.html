@@ -194,7 +194,7 @@
 }
 
 impl SieveOfEratosthenes {
-    fn new(max_val: usize) -&gt; SieveOfEratosthenes {
+    fn new(max_val: usize) -&gt; Self {
         let mut is_prime = vec![true; max_val + 1];
         let mut primes = vec![];
         for i in 2..=max_val {
@@ -205,7 +205,7 @@ impl SieveOfEratosthenes {
                 }
             }
         }
-        SieveOfEratosthenes { primes }
+        Self { primes }
     }
 
     fn factorize(&amp;self, mut x: u64) -&gt; Vec&lt;(u64, u64)&gt; {
@@ -229,29 +229,26 @@ impl SieveOfEratosthenes {
         }
         res
     }
-}
-
-// x = p^a q^b r^c
-
-// Number of factors of x:
-//    d(x) = (a + 1)(b + 1)(c + 1)
-
-// Sum of factors of x = ABC where
-//    A = (p^(a + 1) - 1) / (p - 1)
-//    B = (q^(b + 1) - 1) / (q - 1)
-//    C = (r^(c + 1) - 1) / (r - 1)
-
-// Product of factors of x:
-//    x^(d(x) / 2)
-// Note that d(x) / 2 may not be integer
-// Take the factors of 36 as example:
-// 1  2  3  4  6
-// 36 18 12 9
-// There are d(x) / 2 pairs which have product 36</code></pre>
-<p><a href="https://atcoder.jp/contests/abc280/submissions/54072054">https://atcoder.jp/contests/abc280/submissions/54072054</a>
-<a href="https://atcoder.jp/contests/arc167/submissions/46642235">https://atcoder.jp/contests/arc167/submissions/46642235</a></p>
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/abc280/submissions/54072369">https://atcoder.jp/contests/abc280/submissions/54072369</a></p>
+<h1 id="numbersumproduct-of-factors"><a class="header" href="#numbersumproduct-of-factors">Number/Sum/Product of Factors</a></h1>
+<p>Assume [{x = p^a q^b r^c}], then</p>
+<div class="table-wrapper"><table><thead><tr><th>name</th><th>formula</th></tr></thead><tbody>
+<tr><td><strong>Number</strong> of factors of [{x}]</td><td>[{(a + 1)(b + 1)(c + 1)}]</td></tr>
+<tr><td><strong>Sum</strong> of factors of [{x}]</td><td>[{(p^(a + 1) - 1) / (p - 1) * (q^(b + 1) - 1) / (q - 1) * (r^(c + 1) - 1) / (r - 1)}]</td></tr>
+<tr><td><strong>Product</strong> of factors of [{x}]</td><td>[{  x^( 1/2 * "number of factors" ) = x^( 1/2 * ((a+1)(b+1)(c+1))) }]</td></tr>
+</tbody></table>
+</div>
+<p>Take the factors of 36 as example:</p>
+<pre><code>1  2  3  4  6
+36 18 12 9
+</code></pre>
+<p>There are [{"number of factors" / 2 = 4.5}] pairs that have product 36.</p>
+<p><a href="https://atcoder.jp/contests/arc167/submissions/46642235">https://atcoder.jp/contests/arc167/submissions/46642235</a></p>
+<h2 id="number-of-primes-under-x"><a class="header" href="#number-of-primes-under-x">Number of Primes Under <code>x</code></a></h2>
 <p>power of 10:</p>
 <div class="table-wrapper"><table><thead><tr><th>x</th><th>Number of primes &lt; x</th></tr></thead><tbody>
+<tr><td>10^2</td><td>25</td></tr>
 <tr><td>10^3</td><td>168</td></tr>
 <tr><td>10^4</td><td>1,229</td></tr>
 <tr><td>10^5</td><td>9,592</td></tr>
@@ -266,6 +263,7 @@ impl SieveOfEratosthenes {
 </div>
 <p>power of 2:</p>
 <div class="table-wrapper"><table><thead><tr><th>x</th><th>Number of primes &lt; x</th></tr></thead><tbody>
+<tr><td>2^8</td><td>54</td></tr>
 <tr><td>2^10</td><td>172</td></tr>
 <tr><td>2^16</td><td>6,542</td></tr>
 <tr><td>2^20</td><td>82,025</td></tr>
@@ -282,6 +280,7 @@ for i in 2..=n {
         }
     }
 }</code></pre>
+<p><a href="https://atcoder.jp/contests/typical90/submissions/54072242">https://atcoder.jp/contests/typical90/submissions/54072242</a></p>
 
                     </main>
 
