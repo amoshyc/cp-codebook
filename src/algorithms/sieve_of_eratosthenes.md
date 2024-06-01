@@ -6,13 +6,13 @@ struct SieveOfEratosthenes {
 }
 
 impl SieveOfEratosthenes {
-    fn new(max_val: usize) -> Self {
-        let mut is_prime = vec![true; max_val + 1];
+    fn new(v: usize) -> Self {
+        let mut is_prime = vec![true; v + 1];
         let mut primes = vec![];
-        for i in 2..=max_val {
+        for i in 2..=v {
             if is_prime[i] {
                 primes.push(i as u64);
-                for j in ((i * i)..=max_val).step_by(i) {
+                for j in ((i * i)..=v).step_by(i) {
                     is_prime[j] = false;
                 }
             }
