@@ -194,20 +194,18 @@
 }
 
 impl SieveOfEratosthenes {
-    fn new(max_val: usize) -&gt; Self {
+    fn new(max_val: usize) -&gt; SieveOfEratosthenes {
         let mut is_prime = vec![true; max_val + 1];
         let mut primes = vec![];
         for i in 2..=max_val {
             if is_prime[i] {
                 primes.push(i as u64);
-                let mut j = i * i;
-                while j &lt;= max_val {
+                for j in ((i * i)..=max_val).step_by(i) {
                     is_prime[j] = false;
-                    j += i;
                 }
             }
         }
-        Self { primes }
+        SieveOfEratosthenes { primes }
     }
 
     fn factorize(&amp;self, mut x: u64) -&gt; Vec&lt;(u64, u64)&gt; {
@@ -250,8 +248,30 @@ impl SieveOfEratosthenes {
 // 1  2  3  4  6
 // 36 18 12 9
 // There are d(x) / 2 pairs which have product 36</code></pre>
-<p><a href="https://atcoder.jp/contests/arc167/submissions/46642235">https://atcoder.jp/contests/arc167/submissions/46642235</a></p>
-
+<p><a href="https://atcoder.jp/contests/abc280/submissions/54072054">https://atcoder.jp/contests/abc280/submissions/54072054</a>
+<a href="https://atcoder.jp/contests/arc167/submissions/46642235">https://atcoder.jp/contests/arc167/submissions/46642235</a></p>
+<p>power of 10:</p>
+<div class="table-wrapper"><table><thead><tr><th>x</th><th>Number of primes &lt; x</th></tr></thead><tbody>
+<tr><td>10^3</td><td>168</td></tr>
+<tr><td>10^4</td><td>1,229</td></tr>
+<tr><td>10^5</td><td>9,592</td></tr>
+<tr><td>10^6</td><td>78,498</td></tr>
+<tr><td>10^7</td><td>664,579</td></tr>
+<tr><td>10^8</td><td>5,7614,55</td></tr>
+<tr><td>10^9</td><td>508,475,34</td></tr>
+<tr><td>10^10</td><td>455,052,511</td></tr>
+<tr><td>10^11</td><td>4,118,054,813</td></tr>
+<tr><td>10^12</td><td>37,607,912,018</td></tr>
+</tbody></table>
+</div>
+<p>power of 2:</p>
+<div class="table-wrapper"><table><thead><tr><th>x</th><th>Number of primes &lt; x</th></tr></thead><tbody>
+<tr><td>2^10</td><td>172</td></tr>
+<tr><td>2^16</td><td>6,542</td></tr>
+<tr><td>2^20</td><td>82,025</td></tr>
+<tr><td>2^32</td><td>41,203,088,796</td></tr>
+</tbody></table>
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

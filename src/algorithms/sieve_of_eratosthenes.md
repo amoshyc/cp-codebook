@@ -6,20 +6,18 @@ struct SieveOfEratosthenes {
 }
 
 impl SieveOfEratosthenes {
-    fn new(max_val: usize) -> Self {
+    fn new(max_val: usize) -> SieveOfEratosthenes {
         let mut is_prime = vec![true; max_val + 1];
         let mut primes = vec![];
         for i in 2..=max_val {
             if is_prime[i] {
                 primes.push(i as u64);
-                let mut j = i * i;
-                while j <= max_val {
+                for j in ((i * i)..=max_val).step_by(i) {
                     is_prime[j] = false;
-                    j += i;
                 }
             }
         }
-        Self { primes }
+        SieveOfEratosthenes { primes }
     }
 
     fn factorize(&self, mut x: u64) -> Vec<(u64, u64)> {
@@ -64,4 +62,29 @@ impl SieveOfEratosthenes {
 // There are d(x) / 2 pairs which have product 36
 ```
 
+<https://atcoder.jp/contests/abc280/submissions/54072054>
 <https://atcoder.jp/contests/arc167/submissions/46642235>
+
+power of 10:
+
+| x | Number of primes < x |
+|---------|---------|
+| 10^3 | 168 |
+| 10^4 | 1,229 |
+| 10^5 | 9,592 |
+| 10^6 | 78,498 |
+| 10^7 | 664,579 |
+| 10^8 | 5,7614,55 |
+| 10^9 | 508,475,34 |
+| 10^10 | 455,052,511 |
+| 10^11 | 4,118,054,813 |
+| 10^12 | 37,607,912,018 |
+
+power of 2:
+
+| x | Number of primes < x |
+|---------|---------|
+| 2^10 | 172 |
+| 2^16 | 6,542 |
+| 2^20 | 82,025 |
+| 2^32 | 41,203,088,796 |
