@@ -43,3 +43,18 @@ where
     res
 }
 ```
+
+## Diff2D
+
+To add a rectange `r1..=r2, c1..=c2` in difference array:
+
+```rust
+diff[r1][c1] += 1;
+diff[r1][c2 + 1] -= 1;
+diff[r2 + 1][c1] -= 1;
+diff[r2 + 1][c2 + 1] += 1;
+```
+
+The original array can be recovered using `build_2d(&diff)`.
+
+<https://atcoder.jp/contests/typical90/submissions/54070660>
