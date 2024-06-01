@@ -88,3 +88,18 @@ power of 2:
 | 2^16 | 6,542 |
 | 2^20 | 82,025 |
 | 2^32 | 41,203,088,796 |
+
+
+## Number of Prime Factors
+
+```rust
+// cnt[i] = number of prime factors of i
+let mut cnt = vec![0; n + 1];
+for i in 2..=n {
+    if cnt[i] == 0 {
+        for j in (i..=n).step_by(i) {
+            cnt[j] += 1;
+        }
+    }
+}
+```
