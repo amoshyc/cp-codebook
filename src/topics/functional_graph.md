@@ -7,7 +7,6 @@
 * The graph consists of multiple cycles.
 * Each connected componenet is a cycle.
 * A permutation is a permutation graph.
-* The remainders of [{x, f(x), f(f(x)), ...}] under [{m}] is a permutation graph due to pigeonholing.
 
 <https://atcoder.jp/contests/abc175/tasks/abc175_d>
 <https://atcoder.jp/contests/abc256/tasks/abc256_e>
@@ -19,6 +18,7 @@
 * From any vertex, if you keep following the edge, you'll end in a cycle (or a self-loop).
 * Each connected component consists of multiple trees rooting on a circle (or a self-loop).
 * A permutation graph is a functional graph.
+* The remainders of [{x, f(x), f(f(x)), ...}] under [{m}] is a functional graph due to pigeonholing.
 
 Use [Tarjan SCC](../algorithms/tarjan_scc.html) to find the scc. Cycles in functional graph has 2 forms:
 1. A cycle with length >= 2.

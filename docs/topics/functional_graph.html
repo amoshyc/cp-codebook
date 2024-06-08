@@ -196,7 +196,6 @@
 <li>The graph consists of multiple cycles.</li>
 <li>Each connected componenet is a cycle.</li>
 <li>A permutation is a permutation graph.</li>
-<li>The remainders of [{x, f(x), f(f(x)), ...}] under [{m}] is a permutation graph due to pigeonholing.</li>
 </ul>
 <p><a href="https://atcoder.jp/contests/abc175/tasks/abc175_d">https://atcoder.jp/contests/abc175/tasks/abc175_d</a>
 <a href="https://atcoder.jp/contests/abc256/tasks/abc256_e">https://atcoder.jp/contests/abc256/tasks/abc256_e</a></p>
@@ -206,6 +205,7 @@
 <li>From any vertex, if you keep following the edge, you'll end in a cycle (or a self-loop).</li>
 <li>Each connected component consists of multiple trees rooting on a circle (or a self-loop).</li>
 <li>A permutation graph is a functional graph.</li>
+<li>The remainders of [{x, f(x), f(f(x)), ...}] under [{m}] is a functional graph due to pigeonholing.</li>
 </ul>
 <p>Use <a href="../algorithms/tarjan_scc.html">Tarjan SCC</a> to find the scc. Cycles in functional graph has 2 forms:</p>
 <ol>
