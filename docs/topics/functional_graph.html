@@ -209,10 +209,9 @@
 </ul>
 <p>Use <a href="../algorithms/tarjan_scc.html">Tarjan SCC</a> to find the scc. Cycles in functional graph has 2 forms:</p>
 <ol>
-<li>A cycle with length &gt;= 2.</li>
-<li>Self-loop.</li>
+<li>A scc with length &gt;= 2.</li>
+<li>A self-loop.</li>
 </ol>
-<p>To inspect the connected component, we can perform BFS from the cycles using <strong>inversed</strong> edges.</p>
 <pre><code class="language-rust">let (num_scc, belong) = tarjan_scc(&amp;adj);
 let mut scc = vec![vec![]; num_scc];
 for u in 0..n {
@@ -224,6 +223,7 @@ for i in 0..num_scc {
         // scc[i] is a cycle
     }
 }</code></pre>
+<p>To inspect the connected component, we can perform BFS from the cycles using <strong>inversed</strong> edges.</p>
 <p><a href="https://atcoder.jp/contests/abc179/tasks/abc179_e">https://atcoder.jp/contests/abc179/tasks/abc179_e</a>
 <a href="https://atcoder.jp/contests/abc311/submissions/54385687">https://atcoder.jp/contests/abc311/submissions/54385687</a>
 <a href="https://atcoder.jp/contests/abc357/submissions/54387589">https://atcoder.jp/contests/abc357/submissions/54387589</a></p>

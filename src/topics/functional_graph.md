@@ -21,10 +21,8 @@
 * The remainders of [{x, f(x), f(f(x)), ...}] under [{m}] is a functional graph due to pigeonholing.
 
 Use [Tarjan SCC](../algorithms/tarjan_scc.html) to find the scc. Cycles in functional graph has 2 forms:
-1. A cycle with length >= 2.
-2. Self-loop.
-
-To inspect the connected component, we can perform BFS from the cycles using **inversed** edges.
+1. A scc with length >= 2.
+2. A self-loop.
 
 ```rust
 let (num_scc, belong) = tarjan_scc(&adj);
@@ -39,6 +37,8 @@ for i in 0..num_scc {
     }
 }
 ```
+
+To inspect the connected component, we can perform BFS from the cycles using **inversed** edges.
 
 <https://atcoder.jp/contests/abc179/tasks/abc179_e>
 <https://atcoder.jp/contests/abc311/submissions/54385687>
