@@ -64,4 +64,13 @@ fn tarjan_dfs(u: usize, data: &mut TarjanSCC, adj: &Vec<Vec<usize>>) {
 }
 ```
 
+To reconstruct the scc:
+
+```rust
+let mut scc = vec![vec![]; num_scc];
+for u in 0..n {
+    scc[belong[u]].push(u);
+}
+```
+
 <https://atcoder.jp/contests/practice2/submissions/53308987>
