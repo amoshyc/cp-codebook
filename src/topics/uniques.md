@@ -1,6 +1,6 @@
-# Number of Unique Elements
+# Unique Elements
 
-## Small Charset
+## Number of Unique Elements with Small Charset
 
 > Given a string `S[0..N]` consisting of lowercase English letters and `Q` queries, the query may
 >    1. change the character at `S[i]` or 
@@ -28,7 +28,7 @@ for c in 0..26 {
 <https://atcoder.jp/contests/abc157/submissions/53571346>
 
 
-## No Modificaiton
+## Number of Unique Elements with No Modificaiton
 
 > Given a sequence `A[0..N] `consisting of `i32` integers and `Q` queries. 
 > The query asks the number of unique elements in `A[l..=r]`.
@@ -42,3 +42,31 @@ f[i] = 1 if arr[i] is the rightmost position of arr[i] else 0.
 Inspect the queries from left to right (via right boundry) and maintain the `f` of previous queries in a BIT. Then for query `(l, r)`, the answer is `sum(f[l..=r]) = BIT.sum(l..=r)`.
 
 <https://atcoder.jp/contests/abc174/submissions/53667278>
+
+
+## Longest Substring with <= K unique elements
+
+> Give na sequence `A[0..N]` consisting of `i32` integers.
+> Find the length of the longest substring with <= `K` unique elements.
+
+Use two pointers and HashMap to find ans[i] = length of the longest substring starting from i with <= K unique elements.
+
+```rust
+let mut i = 0;
+let mut j = 0;
+for i in 0..n {
+    while j < n && cnt.len() + if cnt.contains_key(&arr[j]) { 0 } else { 1 } <= k {
+        *cnt.entry(arr[j]).or_insert(0) += 1;
+        j += 1;
+    }
+    
+    ans = ans.max(j - i);
+
+    *cnt.entry(arr[i]).or_insert(0) -= 1;
+    if cnt[&arr[i]] == 0 {
+        cnt.remove_entry(&arr[i]);
+    }
+}
+```
+
+<https://atcoder.jp/contests/typical90/submissions/54315188>
