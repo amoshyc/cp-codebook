@@ -11,7 +11,6 @@
     - [LazySegTree](./datastructures/lazysegtree.md)
     - [Sparse Table](./datastructures/sparse_table.md)
     - [Treap](./datastructures/treap.md)
-    - [Matrix](./datastructures/matrix.md)
     - [Prefix2D](./datastructures/prefix2d.md)
 
 - [Algorithms](./algorithms/readme.md)
@@ -45,7 +44,7 @@
     - [Unique Elements](./topics/num_uniques.md)
     - [2 Sets](./topics/2_sets.md)
     - [Longest Common Prefix](./topics/longest_common_prefix.md)
-    - [Permutation & Functional Graph](./topics/functional_graph.md)
+    - [Functional Graph](./topics/functional_graph.md)
     - [2D Poset](./topics/2d_poset.md)
     - [Digit DP](./topics/digit_dp.md)
     - [L1 Distance](./topics/l1.md)
