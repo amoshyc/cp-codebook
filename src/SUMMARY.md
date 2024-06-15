@@ -31,6 +31,7 @@
     - [Sieve of Eratosthenes](./algorithms/sieve_of_eratosthenes.md)
     - [Longest Increasing Subsequence](./algorithms/longest_increasing_subsequence.md)
     - [Rerooting](./algorithms/rerooting.md)
+    - [Greedy](./algorithms/greedy.md)
 
 - [Topics](./topics/readme.md)
     - [Floor and Ceiling](./topics/floor_ceil.md)
