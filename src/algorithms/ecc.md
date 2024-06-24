@@ -1,4 +1,4 @@
-# Diameter, Radius, Eccentricity
+# Eccentricity
 
 
 Eccentricity(u)

@@ -1,4 +1,4 @@
-# Longest Increasing Subsequence
+# LIS
 
 
 ```rust
