@@ -189,12 +189,12 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="segmentrectcube-overlapping"><a class="header" href="#segmentrectcube-overlapping">Segment/Rect/Cube Overlapping</a></h1>
-<p>The overlapping of segment <code>l1..=r1</code> and segment <code>l2..=r2</code> is</p>
+<p>The overlapping segment of segment <code>l1..=r1</code> and segment <code>l2..=r2</code> is</p>
 <pre><code class="language-rust">let l: i64 = l1.max(l2);
 let r: i64 = r1.min(r2);
 let w = (r1.min(r2) - l1.max(l2)).max(0);</code></pre>
-<p>When the segments does not overlap, the result segment is <strong>invalid</strong>.
-Don't use unsigned types for such operattion, use <code>i64</code>.</p>
+<p>When the segments do not overlap, the result segment is <strong>invalid</strong>.
+Don't use unsigned types for such operation, use <code>i64</code>.</p>
 <p>Cube: <a href="https://atcoder.jp/contests/abc361/submissions/55258977">https://atcoder.jp/contests/abc361/submissions/55258977</a></p>
 
                     </main>
