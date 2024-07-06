@@ -57,3 +57,4 @@
     - [Ordered Float](./miscellaneous/ordered_float.md)
     - [Default Hasing](./miscellaneous/default_hashing.md)
     - [Merge 2 Sorted Array](./miscellaneous/merge.md)
+    - [Segment/Rect/Cube Overlapping](./miscellaneous/seg_overlap.md)
