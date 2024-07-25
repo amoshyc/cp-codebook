@@ -194,7 +194,7 @@
 </blockquote>
 <p>It can be solved greedily. When inspecting <code>x[i]</code> from left to right, set <code>x[i]</code> to its maximum if the total is still less that <code>X</code>. Otherwise, set it to 0.</p>
 <blockquote>
-<p>Given N constraints <code>L[i] &lt;= y[i] &lt;= R[i]</code>, find a solution of <code>y</code>s that satisfies [{ sum_i x_i = Y }]. Output "No" if no solution exists.</p>
+<p>Given N constraints <code>L[i] &lt;= y[i] &lt;= R[i]</code>, find a solution of <code>y</code>s that satisfies [{ sum_i y_i = Y }]. Output "No" if no solution exists.</p>
 </blockquote>
 <p>The possible lowerbound is sum(L) and upperbound is sum(R). If x is not inside this range, there is no solution. To find <code>x</code>, we can transform it into previous problem by setting <code>x[i] = y[i] - L[i]</code> and <code>X = Y - sum(L)</code>.</p>
 <pre><code class="language-rust">let sum_l = l.iter().sum::&lt;i64&gt;();

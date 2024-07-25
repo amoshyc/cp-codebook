@@ -44,8 +44,15 @@ fn combinations<T: Copy>(arr: &[T], r: usize) -> impl std::iter::Iterator<Item =
 }
 ```
 
+Note that `next_permutation` do **not** produce all `N!` permutations if there are multiple same numbers in `arr`. To retrieve all permutations in such cases, perform `next_permutation` on indices instead of values.
+
+
 Ref:
 * [next_permutation](https://leetcode.com/problems/next-permutation/solution/)
+* [next_permutation](https://atcoder.jp/contests/abc363/editorial/10493)
 * [next_combination](https://leetcode.cn/problems/iterator-for-combination/solutions/101723/zi-mu-zu-he-die-dai-qi-by-leetcode-solution/)
 
 <https://atcoder.jp/contests/abc328/submissions/47509695>
+<https://atcoder.jp/contests/abc363/submissions/55819341>
+
+(Python): <https://atcoder.jp/contests/abc363/submissions/55943673>
