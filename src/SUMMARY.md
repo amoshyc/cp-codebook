@@ -50,6 +50,8 @@
     - [Subsequence](./topics/subsequence.md)
     - [Substring](./topics/substring.md)
     - [Unique Elements](./topics/num_uniques.md)
+    - [Palindrome](./topics/palindrome.md)
+    - [Sum to X](./topics/sum_to_x.md)
 
 - [Miscellaneous](./miscellaneous/readme.md)
     - [Rust Basic](./miscellaneous/rust_basic.md)
