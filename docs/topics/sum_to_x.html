@@ -196,7 +196,7 @@
 <blockquote>
 <p>Given N constraints <code>L[i] &lt;= y[i] &lt;= R[i]</code>, find a solution of <code>y</code>s that satisfies [{ sum_i y_i = Y }]. Output "No" if no solution exists.</p>
 </blockquote>
-<p>The possible lowerbound is sum(L) and upperbound is sum(R). If x is not inside this range, there is no solution. To find <code>x</code>, we can transform it into previous problem by setting <code>x[i] = y[i] - L[i]</code> and <code>X = Y - sum(L)</code>.</p>
+<p>The possible lowerbound is sum(L) and upperbound is sum(R). If x is not inside this range, there is no solution. To find <code>y</code>, we can transform it into previous problem by setting <code>x[i] = y[i] - L[i]</code> and <code>X = Y - sum(L)</code>.</p>
 <pre><code class="language-rust">let sum_l = l.iter().sum::&lt;i64&gt;();
 let sum_r = r.iter().sum::&lt;i64&gt;();
 if target_y &lt; sum_l || target_y &gt; sum_r {
