@@ -1,5 +1,9 @@
 # Pairwise/Substring Problem
 
+* Pairwise 問題，不允許對角線上的項 [{ sum_(i < j) f(A_i, A_j) }] 是比較好算的；
+* Substring 問題，允許對角線 [{ sum_(i <= j) f(A[i..=j]) }] 是比較好算的。
+* 若不是的話，可以先算完再扣掉或加回去。
+
 ## Sweep Line
 
 > 給定長度為 `N` 的序列 `A`，請求出 [{ sum_(i=0)^(N-1) sum_(j = i + 1)^(N-1) f(A_i, A_j) }]。
@@ -22,16 +26,27 @@
 
 [{ sum_(i=0)^(N-1) sum_(j = i + 1)^(N-1) f(A_i, A_j) = (sum_(i=0)^(N-1) sum_(j = 0)^(N-1) f(A_i, A_j) - (sum_(i=0)^(N-1) f(A_i, A_i))) / 2 }]
 
-注意到等式右側與 [{A}] 的順序無關。這暗示了我們將 [{ A }] 任意進行重排，不會影響答案的計算。
-所以許多時候我們可以將 [{A}] 由小排到大來讓 inner summation 比較好計算。例如：
+注意到等式右側與 `A` 的順序無關。這暗示了我們將 [{ A }] 任意進行重排，不會影響答案的計算。
+所以許多時候我們可以將 `A` 由小排到大來讓 inner summation 比較好計算。例如：
 
 * [{ f(A_i, A_j) = (A_i + A_j) % m }] : [ABC353C](https://atcoder.jp/contests/abc353/submissions/53405039)
 * [{ f(A_i, A_j) = |A_j - A_i| }] : [ABC351E](https://atcoder.jp/contests/abc351/submissions/52883662)
 
 
-## Exploit the Prefix Sum
+## Prefix Sum
 
-> 給定長度為 [{N}] 的序列 [{A}]，有多少個 pair [{ (l, r) }] 滿足 [{ "sum"(A[l..r]) % k = 0 }]？
+> 給定長度為 `N` 的序列 `A`，有多少個 pair `(l, r)` 滿足 `l <= r` 且 [{ "sum"(A[l..=r]) = X }]？ [CSES 1661](https://cses.fi/problemset/result/10075967/)
+
+```
+sum(arr[l..=j]) = x 
+<-> pref[j] - (pref[l - 1] if l >= 1 else 0) = x
+<-> pref[j] - x = (pref[l - 1] if l >= 1 else 0)
+```
+
+Case1: For each `pref[j]`, find the number of `pref[j] - x`.
+Case2: `pref[x]`
+
+> 給定長度為 `N` 的序列 `A`，有多少個 pair `(l, r)` 滿足 `l <= r` 且 [{ "sum"(A[l..=r]) % k = 0 }]？ [ABC164D](https://atcoder.jp/contests/abc164/submissions/53505764)
 
 ```
 sum(A[l..r]) % k = 0 <-> Case 1 or Case 2
@@ -39,9 +54,8 @@ sum(A[l..r]) % k = 0 <-> Case 1 or Case 2
     Case 2: sum(A[0..r]) = 0 (mod k)
 => Count the number of each remainder r of all prefixes
 ```
-<https://atcoder.jp/contests/abc164/submissions/53505764>
 
-> 給定長度為 [{N}] 的 binary string [{S}]，有多少個 pair [{ (l, r) }] 滿足 `S[l..=r]` 中 0 的個數 = 1 的個數？
+> 給定長度為 `N` 的 binary string [{S}]，考慮所有的 `i <= j`，總共有多少個 pair `(l, r)` 滿足 `(i <= l <= r <= j)` 且 `S[l..=r]` 中 0 的個數 = 1 的個數？ [CF1996E](https://codeforces.com/contest/1996/submission/272930021)
 
 ```rust
 // s[x..=y] is valid <-> p[y] = p[x - 1] or p[y] = 0
@@ -56,23 +70,43 @@ for i in 0..n {
 
 for (_, v) in pos.iter() {
     // v = [..., x, ..., y, ...]
-    // -> p[x] = p[y]
-    // -> s[x + 1..=y] is valid
+    // -> contribute (n - 1 - y + 1) * (x + 2) to answer
 }
 ```
 
-<https://codeforces.com/contest/1996/submission/272930021>
+> 給定長度為 `N` 的序列 `A`，求出所以長度在 `a` 與 `b` 之間的 substring，最大的 sum，即 [{ max_(l <= r, a <= r - l + 1 <= b) "sum"(A[l..=r]) }] [CSES1644](https://cses.fi/problemset/result/10075694/)
+
+```rust
+max_(a <= r - l + 1 <= b) sum(A[l..=r])
+= max_(a <= r - l + 1 <= b) pref[r] - (pref[l - 1] if l >= 1 else 0)
+= max_(a + l - 1 <= r <= b + l - 1) pref[r] - (pref[l - 1] if l >= 1 else 0)
+l = 0 -> a - 1 <= r <= b - 1
+l = 1 -> a + 0 <= r <= b + 0
+l = 2 -> a + 1 <= r <= b + 1
+=> r forms sliding window of length b - a + 1
+=> finding maximum of pref[r] can be done using monotonic deque
+```
 
 ## DP
 
-> 給定長度為 [{N}] 的序列 [{A}]，求出 [{ max_(l < r) "sum"(A[l..r]) }]
+> 給定長度為 `N` 的序列 `A`，求出 [{ max_(l <= r) "sum"(A[l..=r]) }]。[CSES1643](https://cses.fi/problemset/result/5770681/)
 
 ```
-dp[i] = maximum substring ending at A[i].
+dp[i] = the maximum sum of the substring ending at A[i].
 dp[0] = A[0]
 dp[i] = max(A[i], dp[i - 1] + A[i])
 ```
 
+> 給定 0/1 組成的序列 `A`，問有多少個 substring `A[i..=j], (i < j)` 的 XOR 是 1。[ABC365E](https://atcoder.jp/contests/abc365/submissions/56361454)
+
+Substring 問題可以先求 `(i <= j)` 再扣掉。
+
+```rust
+dp[i, 0/1] = number of substring ending at i that has overall xor 0/1
+answer = sum(dp[i][1] for i in 0..n) - sum(A[i])
+dp[0][arr[0]] = 1
+dp[i, j] = dp[i - 1][j ^ A[i]] + (1 if A[i] == j else 0)
+```
 
 ## 2 Sequences
 

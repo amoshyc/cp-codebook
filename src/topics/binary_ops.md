@@ -32,3 +32,9 @@ index : 4 3 2 1 0
    * [{2 ^ i..2 ^ (i + 1)}] is [{1}]
 
 <https://atcoder.jp/contests/abc356/submissions/54154574>
+
+
+## XOR
+
+* XOR is not distributive over addition.
+* XOR is bit independent. [ABC365E](https://atcoder.jp/contests/abc365/submissions/56361454)
