@@ -1,7 +1,7 @@
 # Pairwise/Substring Problem
 
-* Pairwise 問題，不允許對角線上的項 [{ sum_(i < j) f(A_i, A_j) }] 是比較好算的；
-* Substring 問題，允許對角線 [{ sum_(i <= j) f(A[i..=j]) }] 是比較好算的。
+* Pairwise 問題，不允許對角線上的項，如 [{ sum_(i < j) f(A_i, A_j) }] 是比較好算的。
+* Substring 問題，允許對角線，如 [{ sum_(i <= j) f(A[i..=j]) }] 是比較好算的。
 * 若不是的話，可以先算完再扣掉或加回去。
 
 ## Sweep Line
