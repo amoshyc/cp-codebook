@@ -108,6 +108,41 @@ dp[0][arr[0]] = 1
 dp[i, j] = dp[i - 1][j ^ A[i]] + (1 if A[i] == j else 0)
 ```
 
+## Two Pointers
+
+> 給定長度為 `N` 的列列 `A`，問有多少個 substring `A[i..=j], (i <= j)` unique elements 的數量 <= `k`。[CSES2428](https://cses.fi/problemset/result/10076634/)
+
+對於每個左端點 `i`，找到最小的右端點 `j` 滿足 `A[i..=j]` 有 `> k` 個 unique elements.
+
+```rust
+let mut cnt = HashMap::new();
+let mut uni = 0;
+let mut ans = 0;
+let mut i = 0;
+let mut j = 0;
+while i < n {
+    while j < n && uni + (cnt.get(&arr[j]).unwrap_or(&0) == &0) as usize <= k {
+        let c = *cnt.get(&arr[j]).unwrap_or(&0);
+        cnt.insert(arr[j], c + 1);
+        if c == 0 {
+            uni += 1;
+        }
+        j += 1;
+    }
+
+    ans += j - i;
+
+    let c = *cnt.get(&arr[i]).unwrap();
+    cnt.insert(arr[i], c - 1);
+    if c == 1 {
+        uni -= 1;
+    }
+    i += 1;
+}
+```
+
+
+
 ## 2 Sequences
 
 > 給定長度為 `N` 的序列 `A` 與 `B`，請在 `O(N)` 的時間求出 $\sum_{0 \le i < j < N} A_i B_j$ 。
