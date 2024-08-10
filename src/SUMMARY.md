@@ -10,6 +10,7 @@
     - [Monotonic Stack/Deque](./datastructures/monotonic_stack_deque.md)
     - [Prefix Sum](./datastructures/prefix_sum.md)
     - [Prefix2D](./datastructures/prefix2d.md)
+    - [Prefix3D](./datastructures/prefix3d.md)
     - [SegTree](./datastructures/segtree.md)
     - [Sparse Table](./datastructures/sparse_table.md)
     - [Treap](./datastructures/treap.md)

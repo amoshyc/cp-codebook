@@ -1,24 +1,19 @@
 # Prefix 2D
 
 ```rust
-fn build_2d<T>(arr: &Vec<Vec<T>>) -> Vec<Vec<T>>
-where
-    T: Default + Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T>,
-{
-    assert!(arr.len() >= 1 && arr[0].len() >= 1);
-    let (n, m) = (arr.len(), arr[0].len());
-    let mut pref = vec![vec![T::default(); m]; n];
-    for r in 0..n {
-        for c in 0..m {
+fn build_2d(arr: &Vec<Vec<i64>>) -> Vec<Vec<i64>> {
+    let (nr, nc) = (arr.len(), arr[0].len());
+    let mut pref = vec![vec![0; nc]; nr];
+    let transition = [((-1, 0), 1), ((0, -1), 1), ((-1, -1), -1)];
+    for r in 0..nr {
+        for c in 0..nc {
             pref[r][c] = arr[r][c];
-            if r >= 1 {
-                pref[r][c] = pref[r][c] + pref[r - 1][c];
-            }
-            if c >= 1 {
-                pref[r][c] = pref[r][c] + pref[r][c - 1];
-            }
-            if r >= 1 && c >= 1 {
-                pref[r][c] = pref[r][c] - pref[r - 1][c - 1];
+            for &((dr, dc), s) in transition.iter() {
+                let pr = r.checked_add_signed(dr).unwrap_or(nr);
+                let py = c.checked_add_signed(dc).unwrap_or(nc);
+                if pr < nr && py < nc {
+                    pref[r][c] += s * pref[pr][py];
+                }
             }
         }
     }
@@ -26,23 +21,23 @@ where
 }
 
 // arr[r1..=r2, c1..=c2]
-fn query_2d<T>(pref: &Vec<Vec<T>>, r1: usize, c1: usize, r2: usize, c2: usize) -> T
-where
-    T: Default + Copy + std::ops::Add<Output = T> + std::ops::Sub<Output = T>,
-{
-    let mut res = pref[r2][c2];
-    if r1 >= 1 {
-        res = res - pref[r1 - 1][c2];
-    }
-    if c1 >= 1 {
-        res = res - pref[r2][c1 - 1];
-    }
-    if r1 >= 1 && c1 >= 1 {
-        res = res + pref[r1 - 1][c1 - 1];
+fn query_2d(pref: &Vec<Vec<i64>>, r1: usize, r2: usize, c1: usize, c2: usize) -> i64 {
+    let (nr, nc) = (pref.len(), pref[0].len());
+    let r1 = r1.checked_add_signed(-1).unwrap_or(nr);
+    let c1 = c1.checked_add_signed(-1).unwrap_or(nc);
+    let transition = [((r2, c2), 1), ((r1, c2), -1), ((r2, c1), -1), ((r1, c1), 1)];
+    let mut res = 0;
+    for ((r, c), s) in transition {
+        if r < nr && c < nc {
+            res += s * pref[r][c];
+        }
     }
     res
 }
 ```
+
+<https://atcoder.jp/contests/abc366/submissions/56582177>
+
 
 ## Diff2D
 
