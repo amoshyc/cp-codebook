@@ -190,8 +190,10 @@
                     <main>
                         <h1 id="l1-distance"><a class="header" href="#l1-distance">L1 Distance</a></h1>
 <h2 id="median"><a class="header" href="#median">Median</a></h2>
+<blockquote>
 <p>Given <code>n</code> points [{x}] on a line and a non-negative integer <code>s</code>,
 find an interval <code>p..=(p+s)</code> that minimize the total distance from every points to the interval.</p>
+</blockquote>
 <p>[{ p = "argmin"_p F(p) = "argmin"_p sum_i f(i; p) " where " }]
 [{ f(i; p) = {(p - x_i, if x_i &lt; p), (0, if p &lt;= x &lt;= p + s), (x_i - (p + s), if x_i &gt; p + s) :} }]</p>
 <p>Differentiate [{F(p)}]:
@@ -200,9 +202,29 @@ find an interval <code>p..=(p+s)</code> that minimize the total distance from ev
 That is, the [{p}] that makes the number of [{p &gt; x_i}] equals to the number of [{ p &lt; x_i - s }].
 Which is [{ "median"([x_i] uu [x_i - s]) }].</p>
 <p><a href="https://atcoder.jp/contests/abc330/submissions/47968987">https://atcoder.jp/contests/abc330/submissions/47968987</a></p>
+<h2 id="total-distance-to-points"><a class="header" href="#total-distance-to-points">Total Distance to Points</a></h2>
+<blockquote>
+<p>Given N points <code>pts</code> in number line and a query point <code>x</code>, find total L1 distance from <code>x</code> to <code>pts</code>. That is, [{ sum_i |pts[i] - x| }].</p>
+</blockquote>
+<p>If the <code>pts</code> are <strong>sorted</strong> and the <strong>prefix sum</strong> are already computed, then it can be found in [{O(lg(n))}]. We simply binary search the position of <code>x</code> in <code>pts</code> to get <code>p</code>.</p>
+<ol>
+<li>The distance to the points at the left of <code>p</code> is [{ sum_i (x - pts[i]) }].</li>
+<li>The distance to the points at the right of <code>p</code> [{ sum_i (pts[i] - x) }].</li>
+</ol>
+<p>Therefore by using the prefix sum, we get</p>
+<pre><code class="language-rust">fn total_l1_dist_to_sorted(x: i64, sorted: &amp;Vec&lt;i64&gt;, pref: &amp;Vec&lt;i64&gt;) -&gt; i64 {
+    let n = sorted.len();
+    let p = sorted.partition_point(|xi| *xi &lt;= x);
+    let d1 = (p as i64) * x - query(&amp;pref, 0, p);
+    let d2 = query(&amp;pref, p, n) - ((n - p) as i64) * x;
+    d1 + d2
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/abc366/submissions/56581238">https://atcoder.jp/contests/abc366/submissions/56581238</a></p>
 <h2 id="pairwise-l1-distance"><a class="header" href="#pairwise-l1-distance">Pairwise L1 Distance</a></h2>
-<p>Give a sequence [{A}], Find [{ sum_(i &lt; j) |A_i - A_j|  }].
+<blockquote>
+<p>Given a sequence [{A}], find [{ sum_(i &lt; j) |A_i - A_j|  }].
 Since L1 distance is commutative, we can sort the sequence.</p>
+</blockquote>
 <pre><code class="language-rust">fn f(mut arr: Vec&lt;i64&gt;) -&gt; i64 {
     if arr.len() == 0 {
         return 0;
@@ -255,6 +277,15 @@ A move in [{(x, y)}] is [{2}] unit of distance in [{(u, v)}] and [{u, v}] is ind
 This indicates that we can classify points into 2 groups via parity.
 For each group, the problem reduce to a pairwise L1 distance problem.</p>
 <p><a href="https://atcoder.jp/contests/abc351/submissions/52883662">https://atcoder.jp/contests/abc351/submissions/52883662</a></p>
+<blockquote>
+<p>Given N points, find the number of lattice points [{ (x, y)  }] in 2D plane ([{ |x| &lt;= 10^6, |y| &lt;= 10^6 }]) that satisfies [{ sum_i (|x - x_i| + |y - y_i|) &lt;= D }].</p>
+</blockquote>
+<p>By inspecting all the possible values of <code>x</code>, we transform the problem to a 1D version:
+Given the points <code>pts</code> in number line, find the number of integer <code>x</code> such that</p>
+<pre><code>sum([abs(x - pts[i]) for i in 0..n]) &lt;= bound
+</code></pre>
+<p>The total distance function is a U-shaped (concave) function with minimum at the median of the points. We want to find range the function has value &lt;= bound. It can be solved by binary searching the left border and the right border.</p>
+<p><a href="https://atcoder.jp/contests/abc366/submissions/56581238">https://atcoder.jp/contests/abc366/submissions/56581238</a></p>
 
                     </main>
 
