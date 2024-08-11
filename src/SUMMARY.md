@@ -46,6 +46,7 @@
     - [Intervals](./topics/intervals.md)
     - [L1 Distance](./topics/l1.md)
     - [Longest Common Prefix](./topics/longest_common_prefix.md)
+    - [K-th Smallest](./topics/k_th_smallest.md)
     - [Multiples](./topics/multiples.md)
     - [Pairwise/Substring](./topics/pairwise_substring.md)
     - [Square Number](./topics/square_number.md)
