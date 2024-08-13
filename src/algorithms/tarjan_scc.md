@@ -73,4 +73,4 @@ for u in 0..n {
 }
 ```
 
-<https://atcoder.jp/contests/practice2/submissions/53308987>
+[Practice2-G](https://atcoder.jp/contests/practice2/submissions/53308987)

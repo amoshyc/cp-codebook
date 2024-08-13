@@ -45,8 +45,8 @@ fn ceil_div(a: i64, b: i64) -> i64 {
 }
 ```
 
-<https://atcoder.jp/contests/abc334/submissions/48817195>
-<https://atcoder.jp/contests/abc334/submissions/53956374>
+[ABC334B](https://atcoder.jp/contests/abc334/submissions/48817195)
+[ABC334B](https://atcoder.jp/contests/abc334/submissions/53956374)
 
 
 ## Number of digits

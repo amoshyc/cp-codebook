@@ -71,4 +71,4 @@ impl PolyHasher2 {
 }
 ```
 
-<https://atcoder.jp/contests/abc284/submissions/50879393>
+[ABC284F](https://atcoder.jp/contests/abc284/submissions/50879393)

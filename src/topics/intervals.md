@@ -16,11 +16,11 @@ for i in 0..n {
 }
 ```
 
-<https://atcoder.jp/contests/abc355/submissions/53915036>
+[ABC355D](https://atcoder.jp/contests/abc355/submissions/53915036)
 
 
 ## Number of Non-overlapping Pairs
 
 Inspect intervals from **left to right**, via **right endpoints**. For `curr_l..=curr_r`, find how many previous intervals `prev_l..=prev_r` satisfies `prev_r < curr_l`. It can be implemented as binary search, two pointers, or BIT with coordinate compression.
 
-<https://atcoder.jp/contests/abc355/submissions/53915566>
+[ABC355D](https://atcoder.jp/contests/abc355/submissions/53915566)

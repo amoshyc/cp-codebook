@@ -10,4 +10,4 @@ sum(A[..r]) = sum(A[..l]) % k or
 sum(A[..r]) = 0 % k
 ```
 
-<https://atcoder.jp/contests/abc164/submissions/53505764>
+[ABC164D](https://atcoder.jp/contests/abc164/submissions/53505764)

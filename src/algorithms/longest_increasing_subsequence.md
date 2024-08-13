@@ -44,7 +44,7 @@ let (mut dp2, _) = longest_increasing_subsequence(&inv_rev, true, i32::MAX);
 dp2.reverse();
 ```
 
-<https://atcoder.jp/contests/abc354/submissions/53665012>
+[ABC354F](https://atcoder.jp/contests/abc354/submissions/53665012)
 
 
 ## Weighted LIS

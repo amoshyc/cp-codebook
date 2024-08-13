@@ -45,5 +45,5 @@ for i in 0..n {
 }
 ```
 
-* <https://atcoder.jp/contests/practice2/submissions/53484489>
-* <https://codeforces.com/contest/1971/submission/260608172>
+* [Practice2-H](https://atcoder.jp/contests/practice2/submissions/53484489)
+* [CF1971H](https://codeforces.com/contest/1971/submission/260608172)

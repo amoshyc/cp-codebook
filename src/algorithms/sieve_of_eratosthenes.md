@@ -44,7 +44,7 @@ impl SieveOfEratosthenes {
 }
 ```
 
-<https://atcoder.jp/contests/abc280/submissions/54072369>
+[ABC280D](https://atcoder.jp/contests/abc280/submissions/54072369)
 
 
 # Number/Sum/Product of Factors
@@ -64,7 +64,7 @@ Take the factors of 36 as example:
 ```
 There are [{"number of factors" / 2 = 4.5}] pairs that have product 36.
 
-<https://atcoder.jp/contests/arc167/submissions/46642235>
+[ARC167B](https://atcoder.jp/contests/arc167/submissions/46642235)
 
 
 ## Number of Primes Under `x`
@@ -110,4 +110,4 @@ for i in 2..=n {
 }
 ```
 
-<https://atcoder.jp/contests/typical90/submissions/54072242>
+[Typical90-030](https://atcoder.jp/contests/typical90/submissions/54072242)

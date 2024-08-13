@@ -53,5 +53,5 @@ fn matpow(mat: &Mat, mut exp: u64, m: u64) -> Mat {
 }
 ```
 
-<https://atcoder.jp/contests/abc357/submissions/54403266>
-<https://atcoder.jp/contests/abc293/submissions/54403547>
+[ABC357D](https://atcoder.jp/contests/abc357/submissions/54403266)
+[ABC293E](https://atcoder.jp/contests/abc293/submissions/54403547)

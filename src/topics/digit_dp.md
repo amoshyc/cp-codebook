@@ -99,7 +99,7 @@ For r[i] >= m[i] - v[i] - c[i], we have c[i] + v[i] + r[i] >= m[i], so
 Minimum occurs when r[i] = m[i] - v[i] - c[i] (r[i] >= 0)
 ```
 
-<https://atcoder.jp/contests/abc231/submissions/53732734>
+[ABC231E](https://atcoder.jp/contests/abc231/submissions/53732734)
 
 
 ## [Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s)

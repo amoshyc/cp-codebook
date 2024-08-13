@@ -13,4 +13,5 @@ for d in (1..).take_while(|&d| d * d <= m) {
 }
 ```
 
-ABC254D, ABC342D: <https://atcoder.jp/contests/abc342/submissions/50600083>
+* [ABC254D](https://atcoder.jp/contests/abc254/submissions/41798627)
+* [ABC342D](https://atcoder.jp/contests/abc342/submissions/50600083)

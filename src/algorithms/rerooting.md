@@ -42,5 +42,5 @@ fn rec(
 }
 ```
 
-<https://atcoder.jp/contests/abc348/submissions/52118283>
-<https://atcoder.jp/contests/typical90/submissions/54320817>
+[ABC348E](https://atcoder.jp/contests/abc348/submissions/52118283)
+[Typical90-039](https://atcoder.jp/contests/typical90/submissions/54320817)

@@ -65,4 +65,4 @@ fn query_3d(
 }
 ```
 
-<https://atcoder.jp/contests/abc366/submissions/56582097>
+[ABC366D](https://atcoder.jp/contests/abc366/submissions/56582097)

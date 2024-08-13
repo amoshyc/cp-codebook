@@ -26,4 +26,4 @@ where
 }
 ```
 
-<https://cses.fi/problemset/result/10075694/>
+[CSES1644](https://cses.fi/paste/da6df54e45964ee799be2e/)

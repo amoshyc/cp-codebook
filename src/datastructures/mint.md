@@ -89,5 +89,4 @@ impl std::fmt::Display for Mint {
     }
 }
 ```
-
-<https://atcoder.jp/contests/abc265/submissions/37053848>
+[ABC265E](https://atcoder.jp/contests/abc265/submissions/37053848)

@@ -18,4 +18,4 @@ fn max_match(s: &Vec<char>, t: &Vec<char>) -> usize {
 
 Sequence [{"concat"(A, B)}] contains [{T}] as subsequence if and only if [{"max_match"(A, T) + "max_match"("rev"(B), "rev"(T)) >= |T| }]
 
-<https://atcoder.jp/contests/abc324/submissions/46616960>
+[ABC324E](https://atcoder.jp/contests/abc324/submissions/46616960)

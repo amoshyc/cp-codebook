@@ -37,7 +37,7 @@ impl CombTool {
     }
 }
 ```
-<https://atcoder.jp/contests/abc262/submissions/37074323>
+[ABC262E](https://atcoder.jp/contests/abc262/submissions/37074323)
 
 ## Problems
 
@@ -70,5 +70,5 @@ for i in 1..26 {
     }
 }
 ```
-<https://atcoder.jp/contests/abc358/submissions/54619518>
+[ABC358E](https://atcoder.jp/contests/abc358/submissions/54619518)
 

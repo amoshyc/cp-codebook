@@ -202,7 +202,7 @@ ABC......CBA (k is even)
 <p>(1) comes from the fact there are 1 position <code>A</code> that has 9 possible digits and <code>(k + 1) // 2 - 1</code> positions that has 10. (2) comes from that the prefix of the x-th smallest k-digit palindrome is x itself if we allow leading zero. Since positive <code>A</code> cannot be 0, we simply add 1 to the position <code>A</code>.</p>
 <pre><code class="language-rust">let f = |k: i64| 9 * 10i64.pow(((k + 1) / 2) as u32 - 1);
 let g = |x: i64, k: i64| 10i64.pow(((k + 1) / 2) as u32 - 1) + x;</code></pre>
-<p><a href="https://atcoder.jp/contests/abc363/submissions/55856350">https://atcoder.jp/contests/abc363/submissions/55856350</a></p>
+<p><a href="https://atcoder.jp/contests/abc363/submissions/55856350">ABC363D</a></p>
 <h2 id="avoid-k-palindrome"><a class="header" href="#avoid-k-palindrome">Avoid K Palindrome</a></h2>
 <blockquote>
 <p>Given a string consisting of <code>A</code>, <code>B</code>, or <code>?</code>.
@@ -218,7 +218,7 @@ curr:         ^^^^^
 next:           ^^^^^
 dp[i, m] -&gt; dp[i + 1, m']
 </code></pre>
-<p><a href="https://atcoder.jp/contests/abc359/submissions/54874723">https://atcoder.jp/contests/abc359/submissions/54874723</a></p>
+<p><a href="https://atcoder.jp/contests/abc359/submissions/54874723">ABC359D</a></p>
 
                     </main>
 

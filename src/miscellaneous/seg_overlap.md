@@ -11,4 +11,4 @@ let w = (r1.min(r2) - l1.max(l2)).max(0);
 When the segments do not overlap, the result segment is **invalid**.
 Don't use unsigned types for such operation, use `i64`.
 
-Cube: <https://atcoder.jp/contests/abc361/submissions/55258977>
+Cube: [ABC361B](https://atcoder.jp/contests/abc361/submissions/55258977)

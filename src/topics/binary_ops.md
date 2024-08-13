@@ -31,7 +31,7 @@ index : 4 3 2 1 0
    * [{0..2 ^ i}] is [{0}]
    * [{2 ^ i..2 ^ (i + 1)}] is [{1}]
 
-<https://atcoder.jp/contests/abc356/submissions/54154574>
+[ABC356D](https://atcoder.jp/contests/abc356/submissions/54154574)
 
 
 ## XOR

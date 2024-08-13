@@ -201,7 +201,7 @@ find an interval <code>p..=(p+s)</code> that minimize the total distance from ev
 <p>[{ F'(p) = 0 }] occurs when the number of [{x_i &lt; p}] equals to the number of [{ x_i &gt; p + s }].
 That is, the [{p}] that makes the number of [{p &gt; x_i}] equals to the number of [{ p &lt; x_i - s }].
 Which is [{ "median"([x_i] uu [x_i - s]) }].</p>
-<p><a href="https://atcoder.jp/contests/abc330/submissions/47968987">https://atcoder.jp/contests/abc330/submissions/47968987</a></p>
+<p><a href="https://atcoder.jp/contests/abc330/submissions/47968987">ABC330F</a></p>
 <h2 id="total-distance-to-points"><a class="header" href="#total-distance-to-points">Total Distance to Points</a></h2>
 <blockquote>
 <p>Given N points <code>pts</code> in number line and a query point <code>x</code>, find total L1 distance from <code>x</code> to <code>pts</code>. That is, [{ sum_i |pts[i] - x| }].</p>
@@ -219,7 +219,7 @@ Which is [{ "median"([x_i] uu [x_i - s]) }].</p>
     let d2 = query(&amp;pref, p, n) - ((n - p) as i64) * x;
     d1 + d2
 }</code></pre>
-<p><a href="https://atcoder.jp/contests/abc366/submissions/56581238">https://atcoder.jp/contests/abc366/submissions/56581238</a></p>
+<p><a href="https://atcoder.jp/contests/abc366/submissions/56581238">ABC366E</a></p>
 <h2 id="pairwise-l1-distance"><a class="header" href="#pairwise-l1-distance">Pairwise L1 Distance</a></h2>
 <blockquote>
 <p>Given a sequence [{A}], find [{ sum_(i &lt; j) |A_i - A_j|  }].
@@ -251,14 +251,14 @@ Since L1 distance is commutative, we can sort the sequence.</p>
 [{ = max {max_j ( u_i - u_j), max_j (v_i - v_j), max_j(v_j - v_i), max_j( u_j - u_i ) } }]
 [{ = max {(max_j u_i - min_j  u_j) , (max_j v_i - min_j v_j) , (max_j v_j - min_j v_i) , (max_j u_j - min_j u_i) } }]
 [{ = max {u_i - u_min , v_i - v_min , v_max - v_i , u_max - u_i } }]</p>
-<p><a href="https://atcoder.jp/contests/typical90/submissions/54315752">https://atcoder.jp/contests/typical90/submissions/54315752</a></p>
+<p><a href="https://atcoder.jp/contests/typical90/submissions/54315752">Typical90-036</a></p>
 <p>If we are finding pairwise maximum L1 distance, we simply find the maximum for all [{i}]:</p>
 <p>[{ max_(0 &lt;= i &lt; N) max {u_i - u_min , v_i - v_min , v_max - v_i , u_max - u_i } }]
 [{ = max {max_i (u_i - u_min) , max_i (v_i - v_min) , max_i (v_max - v_i) , max_i (u_max - u_i) } }]
 [{ = max {(max_i u_i) - u_min , (max_i v_i) - v_min , v_max - (min_i v_i) , u_max - (min_i u_i) } }]
 [{ = max {u_max - u_min , v_max - v_min , v_max - v_min , u_max - u_min } }]
 [{ = max {u_max - u_min , v_max - v_min } }]</p>
-<p><a href="https://atcoder.jp/contests/abc178/submissions/54030318">https://atcoder.jp/contests/abc178/submissions/54030318</a></p>
+<p><a href="https://atcoder.jp/contests/abc178/submissions/54030318">ABC178E</a></p>
 <blockquote>
 <p>Given N points, for each point, find the distance to its closest neighboring point.</p>
 </blockquote>
@@ -266,7 +266,7 @@ Since L1 distance is commutative, we can sort the sequence.</p>
 <p>[{ min_(x_i &gt;= x, y_i &gt;= y) (x_i - x + y_i - y) = (min_(x_i &gt;= x, y_i &gt;= y) (x_i + y_i)) - (x + y)}]</p>
 <p>It is similar to the 2D Poset Problem which can be solved using sweep line and SegTree.
 For top-left, bottom-right and bottom-left, we can simply flip the points (along x-axis or y-axis) and run the algorithm again.</p>
-<p><a href="https://atcoder.jp/contests/abc283/submissions/46191119">https://atcoder.jp/contests/abc283/submissions/46191119</a></p>
+<p><a href="https://atcoder.jp/contests/abc283/submissions/46191119">ABC283F</a></p>
 <blockquote>
 <p>Given N points, find the total distance of all pair of points.
 Distance is defined as the minimum number of moves:
@@ -276,7 +276,7 @@ Distance is defined as the minimum number of moves:
 A move in [{(x, y)}] is [{2}] unit of distance in [{(u, v)}] and [{u, v}] is independent of each other.
 This indicates that we can classify points into 2 groups via parity.
 For each group, the problem reduce to a pairwise L1 distance problem.</p>
-<p><a href="https://atcoder.jp/contests/abc351/submissions/52883662">https://atcoder.jp/contests/abc351/submissions/52883662</a></p>
+<p><a href="https://atcoder.jp/contests/abc351/submissions/52883662">ABC351E</a></p>
 <blockquote>
 <p>Given N points, find the number of lattice points [{ (x, y)  }] in 2D plane ([{ |x| &lt;= 10^6, |y| &lt;= 10^6 }]) that satisfies [{ sum_i (|x - x_i| + |y - y_i|) &lt;= D }].</p>
 </blockquote>
@@ -285,7 +285,7 @@ Given the points <code>pts</code> in number line, find the number of integer <co
 <pre><code>sum([abs(x - pts[i]) for i in 0..n]) &lt;= bound
 </code></pre>
 <p>The total distance function is a U-shaped (concave) function with minimum at the median of the points. We want to find range the function has value &lt;= bound. It can be solved by binary searching the left border and the right border.</p>
-<p><a href="https://atcoder.jp/contests/abc366/submissions/56581238">https://atcoder.jp/contests/abc366/submissions/56581238</a></p>
+<p><a href="https://atcoder.jp/contests/abc366/submissions/56581238">ABC366E</a></p>
 
                     </main>
 

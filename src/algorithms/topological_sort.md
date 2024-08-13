@@ -34,4 +34,4 @@ fn topological_sort(adj: &Vec<Vec<usize>>) -> Vec<usize> {
 }
 ```
 
-<https://atcoder.jp/contests/dp/submissions/41166690>
+[AtCoderDP-G](https://atcoder.jp/contests/dp/submissions/41166690)

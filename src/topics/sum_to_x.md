@@ -27,6 +27,6 @@ for i in 0..n {
 }
 ```
 
-<https://atcoder.jp/contests/abc362/submissions/55942834>
+[ABC362C](https://atcoder.jp/contests/abc362/submissions/55942834)
 
 

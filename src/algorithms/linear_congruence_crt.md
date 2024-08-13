@@ -55,8 +55,8 @@ fn crt(coef: &Vec<(i64, i64)>) -> Option<(i64, i64)> {
 }
 ```
 
-* <https://atcoder.jp/contests/abc186/submissions/43184083>
-* <https://atcoder.jp/contests/abc193/submissions/43191810>
+* [ABC186E](https://atcoder.jp/contests/abc186/submissions/43184083)
+* [ABC193E](https://atcoder.jp/contests/abc193/submissions/43191810)
 
 
 ## Linear Congruence

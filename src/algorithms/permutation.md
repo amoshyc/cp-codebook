@@ -52,7 +52,7 @@ Ref:
 * [next_permutation](https://atcoder.jp/contests/abc363/editorial/10493)
 * [next_combination](https://leetcode.cn/problems/iterator-for-combination/solutions/101723/zi-mu-zu-he-die-dai-qi-by-leetcode-solution/)
 
-<https://atcoder.jp/contests/abc328/submissions/47509695>
-<https://atcoder.jp/contests/abc363/submissions/55819341>
+[ABC328E](https://atcoder.jp/contests/abc328/submissions/47509695)
+[ABC363C](https://atcoder.jp/contests/abc363/submissions/55819341)
 
-(Python): <https://atcoder.jp/contests/abc363/submissions/55943673>
+(Python): [ABC363C](https://atcoder.jp/contests/abc363/submissions/55943673)

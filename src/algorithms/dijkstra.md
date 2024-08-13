@@ -34,7 +34,7 @@ where
 }
 ```
 
-<https://cses.fi/problemset/result/7462588/>
+[CSES1195](https://cses.fi/paste/cc143ad21450a97e71debc/)
 
 
 ## Applications
@@ -51,4 +51,4 @@ Maximize the distance (score) using dijkstra. For edge `(u, v)`, there are 3 cas
 
 When poping candidate from pq, choose the one with minimum `A`.
 
-<https://atcoder.jp/contests/abc335/submissions/54858379>
+[ABC335E](https://atcoder.jp/contests/abc335/submissions/54858379)

@@ -14,4 +14,4 @@ For each point `(X[i], Y[i])`, find how many other points is at its upper-left.
 
 May need to do coordinate compression in prior. Be aware the points may be repeated.
 
-<https://atcoder.jp/contests/abc231/submissions/43081686>
+[ABC231F](https://atcoder.jp/contests/abc231/submissions/43081686)

@@ -36,7 +36,7 @@ fn query_2d(pref: &Vec<Vec<i64>>, r1: usize, r2: usize, c1: usize, c2: usize) ->
 }
 ```
 
-<https://atcoder.jp/contests/abc366/submissions/56582177>
+[ABC366D](https://atcoder.jp/contests/abc366/submissions/56582177)
 
 
 ## Diff2D
@@ -52,4 +52,4 @@ diff[r2 + 1][c2 + 1] += 1;
 
 The original array can be recovered using `build_2d(&diff)`.
 
-<https://atcoder.jp/contests/typical90/submissions/54070660>
+[Typical90-028](https://atcoder.jp/contests/typical90/submissions/54070660)

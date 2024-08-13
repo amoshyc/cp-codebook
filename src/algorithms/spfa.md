@@ -47,5 +47,4 @@ impl<T: Copy + Ord + Default + std::ops::Add<Output = T>> SPFA<T> {
     }
 }
 ```
-
-<https://cses.fi/problemset/result/5980703/>
+[CSES1673](https://cses.fi/paste/ce6ef3502f52e0f65b421f/)

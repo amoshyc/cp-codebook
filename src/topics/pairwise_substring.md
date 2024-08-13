@@ -74,7 +74,7 @@ for (_, v) in pos.iter() {
 }
 ```
 
-> 給定長度為 `N` 的序列 `A`，求出所以長度在 `a` 與 `b` 之間的 substring，最大的 sum，即 [{ max_(l <= r, a <= r - l + 1 <= b) "sum"(A[l..=r]) }] [CSES1644](https://cses.fi/problemset/result/10075694/)
+> 給定長度為 `N` 的序列 `A`，求出所有長度在 `a` 與 `b` 之間的 substring，最大的 sum，即 [{ max_(l <= r, a <= r - l + 1 <= b) "sum"(A[l..=r]) }] [CSES1644](https://cses.fi/problemset/result/10075694/)
 
 ```rust
 max_(a <= r - l + 1 <= b) sum(A[l..=r])

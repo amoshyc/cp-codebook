@@ -257,7 +257,7 @@ for (_, v) in pos.iter() {
     // -&gt; contribute (n - 1 - y + 1) * (x + 2) to answer
 }</code></pre>
 <blockquote>
-<p>給定長度為 <code>N</code> 的序列 <code>A</code>，求出所以長度在 <code>a</code> 與 <code>b</code> 之間的 substring，最大的 sum，即 [{ max_(l &lt;= r, a &lt;= r - l + 1 &lt;= b) "sum"(A[l..=r]) }] <a href="https://cses.fi/problemset/result/10075694/">CSES1644</a></p>
+<p>給定長度為 <code>N</code> 的序列 <code>A</code>，求出所有長度在 <code>a</code> 與 <code>b</code> 之間的 substring，最大的 sum，即 [{ max_(l &lt;= r, a &lt;= r - l + 1 &lt;= b) "sum"(A[l..=r]) }] <a href="https://cses.fi/problemset/result/10075694/">CSES1644</a></p>
 </blockquote>
 <pre><code class="language-rust">max_(a &lt;= r - l + 1 &lt;= b) sum(A[l..=r])
 = max_(a &lt;= r - l + 1 &lt;= b) pref[r] - (pref[l - 1] if l &gt;= 1 else 0)

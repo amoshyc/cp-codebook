@@ -45,5 +45,5 @@ impl<T: Clone + Default + std::ops::AddAssign + std::ops::Sub<Output = T>> BIT<T
     }
 }
 ```
-    
-<https://atcoder.jp/contests/abc231/submissions/42564667>
+
+[ABC231F](https://atcoder.jp/contests/abc231/submissions/42564667)

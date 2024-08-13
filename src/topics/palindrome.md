@@ -22,7 +22,7 @@ let f = |k: i64| 9 * 10i64.pow(((k + 1) / 2) as u32 - 1);
 let g = |x: i64, k: i64| 10i64.pow(((k + 1) / 2) as u32 - 1) + x;
 ```
 
-<https://atcoder.jp/contests/abc363/submissions/55856350>
+[ABC363D](https://atcoder.jp/contests/abc363/submissions/55856350)
 
 
 ## Avoid K Palindrome
@@ -43,4 +43,4 @@ next:           ^^^^^
 dp[i, m] -> dp[i + 1, m']
 ```
 
-<https://atcoder.jp/contests/abc359/submissions/54874723>
+[ABC359D](https://atcoder.jp/contests/abc359/submissions/54874723)

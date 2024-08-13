@@ -23,9 +23,9 @@ for i in 0..num_scc {
 }
 ```
 
-<https://atcoder.jp/contests/abc311/submissions/54385687>
-<https://atcoder.jp/contests/abc357/submissions/54387589>
-<https://atcoder.jp/contests/abc256/submissions/54402714>
+[ABC311C](https://atcoder.jp/contests/abc311/submissions/54385687)
+[ABC357E](https://atcoder.jp/contests/abc357/submissions/54387589)
+[ABC256E](https://atcoder.jp/contests/abc256/submissions/54402714)
 
 Sometimes, we just want to inspect the current connected component's prefix and cycle:
 
@@ -47,7 +47,7 @@ let cycle = path[vis[x]..].to_vec(); // [16, 256, 471, 620]
 let prefix = path[..vis[x]].to_vec(); // [2, 4]
 ```
 
-<https://atcoder.jp/contests/abc179/submissions/54401791>
+[ABC179E](https://atcoder.jp/contests/abc179/submissions/54401791)
 
 
 ## Permutation Graph
@@ -59,4 +59,4 @@ let prefix = path[..vis[x]].to_vec(); // [2, 4]
 * Each connected componenet is a cycle.
 * A permutation is a permutation graph.
 
-<https://atcoder.jp/contests/abc175/tasks/abc175_d>
+[ABC175D](https://atcoder.jp/contests/abc175/submissions/15967185)

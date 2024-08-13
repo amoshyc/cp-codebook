@@ -209,9 +209,9 @@ for i in 0..num_scc {
         // scc[i] is a cycle
     }
 }</code></pre>
-<p><a href="https://atcoder.jp/contests/abc311/submissions/54385687">https://atcoder.jp/contests/abc311/submissions/54385687</a>
-<a href="https://atcoder.jp/contests/abc357/submissions/54387589">https://atcoder.jp/contests/abc357/submissions/54387589</a>
-<a href="https://atcoder.jp/contests/abc256/submissions/54402714">https://atcoder.jp/contests/abc256/submissions/54402714</a></p>
+<p><a href="https://atcoder.jp/contests/abc311/submissions/54385687">ABC311C</a>
+<a href="https://atcoder.jp/contests/abc357/submissions/54387589">ABC357E</a>
+<a href="https://atcoder.jp/contests/abc256/submissions/54402714">ABC256E</a></p>
 <p>Sometimes, we just want to inspect the current connected component's prefix and cycle:</p>
 <pre><code class="language-rust">let mut vis = vec![!0; m]; // visiting index
 let mut path = vec![];
@@ -228,7 +228,7 @@ while vis[x] == !0 {
 // path: 2 -&gt; 4 -&gt; 16 -&gt; 256 -&gt; 471 -&gt; 620 [-&gt; 16 -&gt; ...]
 let cycle = path[vis[x]..].to_vec(); // [16, 256, 471, 620]
 let prefix = path[..vis[x]].to_vec(); // [2, 4]</code></pre>
-<p><a href="https://atcoder.jp/contests/abc179/submissions/54401791">https://atcoder.jp/contests/abc179/submissions/54401791</a></p>
+<p><a href="https://atcoder.jp/contests/abc179/submissions/54401791">ABC179E</a></p>
 <h2 id="permutation-graph"><a class="header" href="#permutation-graph">Permutation Graph</a></h2>
 <ul>
 <li>A spectial case of functional graph</li>
@@ -238,7 +238,7 @@ let prefix = path[..vis[x]].to_vec(); // [2, 4]</code></pre>
 <li>Each connected componenet is a cycle.</li>
 <li>A permutation is a permutation graph.</li>
 </ul>
-<p><a href="https://atcoder.jp/contests/abc175/tasks/abc175_d">https://atcoder.jp/contests/abc175/tasks/abc175_d</a></p>
+<p><a href="https://atcoder.jp/contests/abc175/submissions/15967185">ABC175D</a></p>
 
                     </main>
 
