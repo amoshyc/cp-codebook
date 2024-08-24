@@ -34,6 +34,7 @@
     - [Tarjan SCC](./algorithms/tarjan_scc.md)
     - [Ternary Search](./algorithms/ternary_search.md)
     - [Topological Sort](./algorithms/topological_sort.md)
+    - [XorShift](./algorithms/xorshift.md)
 
 - [Topics](./topics/readme.md)
     - [2 Sets](./topics/2_sets.md)
@@ -54,6 +55,7 @@
     - [Unique Elements](./topics/num_uniques.md)
     - [Palindrome](./topics/palindrome.md)
     - [Sum to X](./topics/sum_to_x.md)
+    - [Random Hashing](./topics/random_hashing.md)
 
 - [Miscellaneous](./miscellaneous/readme.md)
     - [Rust Basic](./miscellaneous/rust_basic.md)

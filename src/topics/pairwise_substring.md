@@ -46,7 +46,7 @@ sum(arr[l..=j]) = x
 Case1: For each `pref[j]`, find the number of `pref[j] - x`.
 Case2: `pref[x]`
 
-> 給定長度為 `N` 的序列 `A`，有多少個 pair `(l, r)` 滿足 `l <= r` 且 [{ "sum"(A[l..=r]) % k = 0 }]？ [ABC164D](https://atcoder.jp/contests/abc164/submissions/53505764)
+> 給定長度為 `N` 的序列 `A`，有多少個 pair `(l, r)` 滿足 `l <= r` 且 [{ "sum"(A[l..=r]) % k = 0 }]？ [ABC164D](https://atcoder.jp/contests/abc164/submissions/53505764), [ABC367D](https://atcoder.jp/contests/abc367/tasks/abc367_d)
 
 ```
 sum(A[l..r]) % k = 0 <-> Case 1 or Case 2
