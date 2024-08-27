@@ -1,3 +1,7 @@
+:root {
+    --mono-font: "Fira Code", Consolas, "Source Code Pro", "Ubuntu Mono", Menlo, "DejaVu Sans Mono", monospace, monospace;
+}
+
 code.hljs {
     overflow-x: auto;
 }
