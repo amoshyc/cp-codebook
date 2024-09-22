@@ -48,4 +48,6 @@ impl DSU {
     }
 }
 ```
-[ABC157D](https://atcoder.jp/contests/abc157/submissions/53570231)
+
+* [ABC157D](https://atcoder.jp/contests/abc157/submissions/53570231)
+* [ABC372E](https://atcoder.jp/contests/abc372/submissions/57991122): With additional data

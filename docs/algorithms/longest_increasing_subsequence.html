@@ -189,27 +189,27 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="lis"><a class="header" href="#lis">LIS</a></h1>
-<pre><code class="language-rust">fn longest_increasing_subsequence&lt;T&gt;(arr: &amp;Vec&lt;T&gt;, strict: bool, inf: T) -&gt; (Vec&lt;usize&gt;, Vec&lt;T&gt;)
+<pre><code class="language-rust">fn longest_increasing_subsequence&lt;T&gt;(arr: &amp;Vec&lt;T&gt;, strict: bool, inf: T) -&gt; Vec&lt;usize&gt;
 where
     T: PartialOrd + Clone,
 {
-    // last[i] = the minimum value of the last element of IS of length i
-    // dp[i] = maximum length of IS ending at i
+    // dp[i] = the minimum value of the last element of IS of length i
+    // lis[i] = maximum length of IS ending at i
     let n = arr.len();
-    let mut last = vec![inf; n];
-    let mut dp = vec![0; n];
+    let mut dp = vec![inf; n];
+    let mut lis = vec![0; n];
     for i in 0..n {
-        let j = last.partition_point(|x| {
+        let j = dp.partition_point(|x| {
             if strict {
                 *x &lt; arr[i] // strictly LIS
             } else {
                 *x &lt;= arr[i] // monotonically LIS
             }
         });
-        last[j] = arr[i].clone();
-        dp[i] = j + 1;
+        dp[j] = arr[i].clone();
+        lis[i] = j + 1;
     }
-    (dp, last)
+    lis
 }</code></pre>
 <h2 id="included-in-lis"><a class="header" href="#included-in-lis">Included in LIS</a></h2>
 <blockquote>
@@ -220,10 +220,11 @@ dp1[i] = max length of increasing subsequence ending at i.
 dp2[i] = max length of increasing subsequence starting from i.
 </code></pre>
 <p><code>dp2</code> can be founded by performing LIS on the inversed and reversed <code>A</code>.</p>
-<pre><code class="language-rust">let inv_rev = (0..n).map(|i| -arr[n - 1 - i]).collect();
-let (mut dp2, _) = longest_increasing_subsequence(&amp;inv_rev, true, i32::MAX);
+<pre><code class="language-rust">let dp1 = longest_increasing_subsequence(&amp;arr, true, i32::MAX);
+let inv_rev = (0..n).map(|i| -arr[n - 1 - i]).collect();
+let mut dp2 = longest_increasing_subsequence(&amp;inv_rev, true, i32::MAX);
 dp2.reverse();</code></pre>
-<p><a href="https://atcoder.jp/contests/abc354/submissions/53665012">ABC354F</a></p>
+<p><a href="https://atcoder.jp/contests/abc354/submissions/58034179">ABC354F</a></p>
 <h2 id="weighted-lis"><a class="header" href="#weighted-lis">Weighted LIS</a></h2>
 
                     </main>
