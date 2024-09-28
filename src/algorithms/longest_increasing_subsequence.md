@@ -1,30 +1,50 @@
 # LIS
 
+While inspecting `arr` from left to right, maintain:
+
+```
+aux[k] = the smallest last element of any increasing subsequence of length k
+dp[i] = the length of LIS ending at arr[i]
+      = the smallest j that aux[j] > arr[i] when inspecting arr[i]
+```
 
 ```rust
-fn longest_increasing_subsequence<T>(arr: &Vec<T>, strict: bool, inf: T) -> Vec<usize>
+fn longest_increasing_subsequence<T>(arr: &Vec<T>, inf: T) -> Vec<usize>
 where
-    T: PartialOrd + Clone,
+    T: Clone + PartialOrd,
 {
-    // dp[i] = the minimum value of the last element of IS of length i
-    // lis[i] = maximum length of IS ending at i
+    // The length of the LIS is dp.iter().max().unwrap()
+    // aux[0] is meaningless, so we skip it.
+    // weakly: <=, strictly: <
     let n = arr.len();
-    let mut dp = vec![inf; n];
-    let mut lis = vec![0; n];
+    let mut aux = vec![inf; n + 1]; // Note the n + 1
+    let mut dp = vec![0; n];
     for i in 0..n {
-        let j = dp.partition_point(|x| {
-            if strict {
-                *x < arr[i] // strictly LIS
-            } else {
-                *x <= arr[i] // monotonically LIS
-            }
-        });
-        dp[j] = arr[i].clone();
-        lis[i] = j + 1;
+        dp[i] = aux[1..].partition_point(|x| *x <= arr[i]) + 1;
+        aux[dp[i]] = arr[i].clone();
     }
+    dp
+}
+```
+
+```rust
+fn construct_lis<T: Clone>(dp: &Vec<usize>, arr: &Vec<T>) -> Vec<T> {
+    let mut len = *dp.iter().max().unwrap();
+    let mut lis = vec![];
+    for i in (0..arr.len()).rev() {
+        if dp[i] == len {
+            lis.push(arr[i].clone());
+            len -= 1;
+        }
+    }
+    lis.reverse();
     lis
 }
 ```
+
+* [LibraryChecker](https://judge.yosupo.jp/submission/238437)
+* [ABC369F](https://atcoder.jp/contests/abc369/submissions/58176075)
+
 
 ## Included in LIS
 
