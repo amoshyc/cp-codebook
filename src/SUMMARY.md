@@ -20,7 +20,7 @@
     - [CombTool](./algorithms/combtool.md)
     - [Dijkstra](./algorithms/dijkstra.md)
     - [Eccentricity](./algorithms/ecc.md)
-    - [FloydWarhshall](./algorithms/floyd_warshall.md)
+    - [Floyd Warshall](./algorithms/floyd_warshall.md)
     - [Greedy](./algorithms/greedy.md)
     - [LCA](./algorithms/lca.md)
     - [Linear Congruence](./algorithms/linear_congruence_crt.md)

@@ -1,4 +1,4 @@
-# FloydWarhshall
+# Floyd Warshall
 
 ```rust
 fn floyd_warshall(adj: &Vec<Vec<i64>>, inf: i64) -> Vec<Vec<i64>> {
