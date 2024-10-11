@@ -53,7 +53,7 @@
     - [Pairwise/Substring](./topics/pairwise_substring.md)
     - [Square Number](./topics/square_number.md)
     - [Subsequence](./topics/subsequence.md)
-    - [Unique Elements](./topics/num_uniques.md)
+    - [Unique Elements](./topics/uniques.md)
     - [Palindrome](./topics/palindrome.md)
     - [Sum to X](./topics/sum_to_x.md)
     - [Random Hashing](./topics/random_hashing.md)

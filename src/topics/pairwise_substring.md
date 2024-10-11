@@ -142,6 +142,32 @@ while i < n {
 ```
 
 
+## Exploit the Property
+
+> Given a sequence `A[0..N]`, define [{ f(l, r) }] as the number of unique elements in `A[l..=r]`. What is [{ sum_(i=1)^N sum_(j=i)^N f(i, j) }] ? [ABC371E](https://atcoder.jp/contests/abc371/submissions/58617437)
+
+For each kind of value, find how many segments will count them:
+
+```
+index: 0 1 2 3 4 5 6 7 8 9 
+value: o o k o k o o o k o
+```
+
+We solve it by the complement, i.e., among the `N * (N + 1)` segments, how many of them do not contain `k`. By finding the positions of `k` in prior, it can be computed efficiently:
+
+```rust
+for (k, mut ps) in pos {
+    let mut cnt = (n * (n + 1) / 2) as i64;
+    ps.insert(0, -1);
+    ps.push(n as i64);
+    for w in ps.windows(2) {
+        let l = w[1] - w[0] - 1;
+        cnt -= l * (l + 1) / 2;
+    }
+    ans += cnt;
+}
+```
+
 
 ## 2 Sequences
 
