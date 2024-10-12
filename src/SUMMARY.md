@@ -41,6 +41,7 @@
     - [2 Sets](./topics/2_sets.md)
     - [2D Poset](./topics/2d_poset.md)
     - [Binary Operations](./topics/binary_ops.md)
+    - [Bivariate](./topics/bivariate.md)
     - [Digit DP](./topics/digit_dp.md)
     - [DP](./topics/dp.md)
     - [Floor and Ceiling](./topics/floor_ceil.md)
