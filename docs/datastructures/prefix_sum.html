@@ -191,12 +191,12 @@
                         <h1 id="prefix-sum"><a class="header" href="#prefix-sum">Prefix Sum</a></h1>
 <pre><code class="language-rust">fn build&lt;T&gt;(arr: &amp;[T]) -&gt; Vec&lt;T&gt;
 where
-    T: Copy + std::ops::Add&lt;Output = T&gt;,
+    T: Default + Copy + std::ops::Add&lt;Output = T&gt;,
 {
-    let mut pref = vec![];
-    pref.push(arr[0]);
+    let mut pref = vec![T::default(); arr.len()];
+    pref[0] = arr[0];
     for i in 1..arr.len() {
-        pref.push(pref[i - 1] + arr[i]);
+        pref[i] = pref[i - 1] + arr[i];
     }
     pref
 }
@@ -207,14 +207,14 @@ where
     T: Default + Copy + std::ops::Sub&lt;Output = T&gt;,
 {
     if i == j {
-        return T::default();
+        T::default()
+    } else if i == 0 {
+        pref[j - 1]
+    } else {
+        pref[j - 1] - pref[i - 1]
     }
-    let mut res = pref[j - 1];
-    if i &gt; 0 {
-        res = res - pref[i - 1];
-    }
-    res
 }</code></pre>
+<p><a href="https://atcoder.jp/contests/abc375/submissions/58813407">ABC375D</a></p>
 
                     </main>
 
