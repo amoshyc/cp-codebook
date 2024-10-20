@@ -52,3 +52,23 @@ Maximize the distance (score) using dijkstra. For edge `(u, v)`, there are 3 cas
 When poping candidate from pq, choose the one with minimum `A`.
 
 [ABC335E](https://atcoder.jp/contests/abc335/submissions/54858379)
+
+> Given a undirected graph, you are at vertex `1` at time `0`.
+> At each vertex, you can wait as long as you want.
+> The crossing time of edge i is `C[i] + floor(D[i] / (t + 1)) `
+> where t is the time starting to cross the edge.
+> What is the earliest time to arrive vertex `N`?
+
+For edge `(u, v)`, the arriving time of `v` is `f(t_w) = t_u + t_w + c + floor(d / (t_u + t_w + 1))` where `t_u` is the arriving time of `u` and `t_w` is waiting time. By ignoring the floor function and taking derivatives, we know that the minimum of `f(t_w)` occurrs when t_w is around `sqrt(d) - 1 - t_u`. Therefore we examine the numbers and find the minimum. And the rest is a Dijkstra algorithm.
+
+```rust
+let mut min = t_u + c + (d / (t_u + 1)); // f(0)
+let x = (d as f64).sqrt() as i64 - 1 - t_u;
+for t_w in (x - 3)..=(x + 3) {
+    if t_w >= 0 {
+        min = min.min(t_u + t_w + c + (d / (t_u + t_w + 1)));
+    }
+}
+```
+
+[ABC204E](https://atcoder.jp/contests/abc204/submissions/58928159)
