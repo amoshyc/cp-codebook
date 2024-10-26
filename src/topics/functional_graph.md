@@ -1,62 +1,120 @@
-# Functional Graph
+# Functional/Permutation Graph
+
+
+## Functional Graph
 
 Properties: 
 * Out degree of any vertex is 1. 
 * From any vertex, if we keep following the edge, we'll end in a cycle (or a self-loop).
 * Each connected component consists of multiple trees rooting on a circle (or a self-loop).
-* The remainders of [{x, f(x), f(f(x)), ...}] under [{m}] is a functional graph due to pigeonholing.
-
-To inspect the cycles, we can use [Tarjan SCC](../algorithms/tarjan_scc.html).
-To inspect the connected component, we can perform BFS from the cycles using the **reversed** edges.
+* The remainders of [{x, f(x), f(f(x)), ...}] under [{m}] is a functional graph due to pigeonhole.
 
 ```rust
-let (num_scc, belong) = tarjan_scc(&adj);
-let mut scc = vec![vec![]; num_scc];
-for u in 0..n {
-    scc[belong[u]].push(u);
-}
-
-for i in 0..num_scc {
-    if scc[i].len() >= 2 || (scc[i].len() == 1 && adj[scc[i][0]][0] == scc[i][0]) {
-        // scc[i] is a cycle
+fn walk_on_functional_graph(nxt: &Vec<usize>, src: usize) -> (Vec<usize>, Vec<usize>) {
+    let mut idx = vec![!0; nxt.len()];
+    idx[src] = 0;
+    let mut path = vec![src];
+    let mut u = nxt[src];
+    while idx[u] == !0 {
+        idx[u] = path.len();
+        path.push(u);
+        u = nxt[u];
     }
+    let prefix = path[..idx[u]].to_vec(); // will be empty in permutation graph
+    let cycle = path[idx[u]..].to_vec();
+    (prefix, cycle)
 }
 ```
 
-[ABC311C](https://atcoder.jp/contests/abc311/submissions/54385687)
-[ABC357E](https://atcoder.jp/contests/abc357/submissions/54387589)
-[ABC256E](https://atcoder.jp/contests/abc256/submissions/54402714)
-
-Sometimes, we just want to inspect the current connected component's prefix and cycle:
+[ABC311C](https://atcoder.jp/contests/abc311/submissions/59193557)
+[ABC179E](https://atcoder.jp/contests/abc179/submissions/59192678)
 
 ```rust
-let mut vis = vec![!0; m]; // visiting index
-let mut path = vec![];
-vis[r] = 0; // starting from r
-path.push(r);
-
-let mut x = f(r);
-while vis[x] == !0 {
-    vis[x] = path.len();
-    path.push(x);
-    x = f(x);
+fn find_cycles_in_functional_graph(nxt: &Vec<usize>) -> Vec<Vec<usize>> {
+    let n = nxt.len();
+    let mut dsu = DSU::new(n);
+    let mut cycles = vec![];
+    for u in 0..n {
+        if !dsu.same(u, nxt[u]) {
+            dsu.unite(u, nxt[u]);
+        } else {
+            // (u, nxt[u]) is the last edge of the cycle
+            let mut cycle = vec![u];
+            let mut x = nxt[u];
+            while x != u {
+                cycle.push(x);
+                x = nxt[x];
+            }
+            cycles.push(cycle);
+        }
+    }
+    cycles
 }
-
-// path: 2 -> 4 -> 16 -> 256 -> 471 -> 620 [-> 16 -> ...]
-let cycle = path[vis[x]..].to_vec(); // [16, 256, 471, 620]
-let prefix = path[..vis[x]].to_vec(); // [2, 4]
 ```
+[ABC256E](https://atcoder.jp/contests/abc256/submissions/59194110)
 
-[ABC179E](https://atcoder.jp/contests/abc179/submissions/54401791)
+To find all the prefix that walks into a cycle, one can perform BFS on the **reversed** graph.
 
+[ABC357E](https://atcoder.jp/contests/abc357/submissions/59194044)
 
 ## Permutation Graph
 
-* A spectial case of functional graph
+* A special case of functional graph
 * Out degree of all vertex is 1.
 * In degree of all vertex is 1.
 * The graph consists of multiple cycles.
 * Each connected componenet is a cycle.
 * A permutation is a permutation graph.
 
-[ABC175D](https://atcoder.jp/contests/abc175/submissions/15967185)
+```rust
+fn find_cycles_in_permutation_graph(nxt: &Vec<usize>) -> Vec<Vec<usize>> {
+    let n = nxt.len();
+    let mut idx = vec![!0; n];
+    let mut cycles = vec![];
+    for r in 0..n {
+        if idx[r] == !0 {
+            idx[r] = 0;
+            let mut path = vec![r];
+            let mut u = nxt[r];
+            while idx[u] == !0 {
+                idx[u] = path.len();
+                path.push(u);
+                u = nxt[u];
+            }
+            cycles.push(path[idx[r]..].to_vec());
+        }
+    }
+    cycles
+}
+```
+
+[ABC377E](https://atcoder.jp/contests/abc377/submissions/59193453)
+
+
+## Find the Vertex after K moves by Doubling
+
+
+```rust
+let mut dp = vec![vec![0; n]; m];
+dp[0] = nxt.clone();
+for i in 1..m {
+    for u in 0..n {
+        dp[i][u] = dp[i - 1][dp[i - 1][u]];
+    }
+}
+
+let mut ind: Vec<usize> = (0..n).collect();
+for i in 0..m {
+    if (k >> i) & 1 == 1 {
+        for u in 0..n {
+            ind[u] = dp[i][ind[u]];
+        }
+    }
+}
+
+let ans = mapv(&ind, |&i| arr[i]);
+```
+[ABC367E](https://atcoder.jp/contests/abc367/submissions/56834920)
+
+
+

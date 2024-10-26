@@ -74,3 +74,21 @@ for u in 0..n {
 ```
 
 [Practice2-G](https://atcoder.jp/contests/practice2/submissions/53308987)
+
+Tarjan SCC can be used to find directed cycles:
+
+```rust
+let (num_scc, belong) = tarjan_scc(&adj);
+let mut scc = vec![vec![]; num_scc];
+for u in 0..n {
+    scc[belong[u]].push(u);
+}
+
+for i in 0..num_scc {
+    if scc[i].len() >= 2 || (scc[i].len() == 1 && adj[scc[i][0]][0] == scc[i][0]) {
+        // scc[i] is a cycle or self loop
+    }
+}
+```
+
+[ABC357E](https://atcoder.jp/contests/abc357/submissions/54387589)
