@@ -1,4 +1,4 @@
-# Multiples
+# Multiples/GCD/LCM
 
 
 **Substring is multiple of k**

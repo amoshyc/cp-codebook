@@ -54,3 +54,15 @@ fn ceil_div(a: i64, b: i64) -> i64 {
 Number of digits in base [{b}] of a positive integer [{k}]
 
 [{"number of digits" = floor(log_b k) + 1 = ceil(log_b(k + 1))}]
+
+## Misc.
+
+> What is [{ "max"_x floor((Ax) / B) - A floor(x / B) }] given [{ 0 <= x <= N, x in bbZ,  1 < A, B, N < 10^18 }]. [ABC165D](https://atcoder.jp/contests/abc165/submissions/59297350)
+
+Let [{ x = kB + r " where " k in bbZ, r in bbZ, 0 <= r <= B - 1 }], then:
+
+[{ max floor((Ax) / B) - A floor(x / B) }]
+= [{ max floor(AK + (Ar)/B) - A * floor(k + r / B) }]
+= [{ max floor((Ar) / B) }]
+
+which is a monotonically increasing. The maximum occurs when r is maximized under constraints [{ x <= N }] and [{ r <= B - 1 }].

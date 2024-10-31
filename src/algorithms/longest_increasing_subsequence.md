@@ -69,3 +69,15 @@ dp2.reverse();
 
 
 ## Weighted LIS
+
+> Given N flowers. Flower i has height h[i] and beauty a[i]. Find a subsequence of the flower such that 
+> (1) the height of the flowers are monotonically increasing and 
+> (2) maximize the total sum of beauties.
+> (N < 2e5, h[i] < N, a[i] < 1e9) [AtCoder DP Q](https://atcoder.jp/contests/dp/submissions/59298341)
+
+The dp is:
+```
+dp[i] = maximum possible sum of the LIS ending at i
+dp[i] = max(dp[j] if h[j] <= h[i] for j in 0..i) + a[i]
+```
+By storing the `(h[i], dp[i])` data in Segment Tree, we can find the rhs in [{ O(lgN) }].

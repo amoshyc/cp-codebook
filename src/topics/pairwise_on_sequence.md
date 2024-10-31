@@ -1,4 +1,4 @@
-# Pairwise/Substring Problem
+# Pairwise Problem on Sequence
 
 * Pairwise 問題，不允許對角線上的項，如 [{ sum_(i < j) f(A_i, A_j) }] 是比較好算的。
 * Substring 問題，允許對角線，如 [{ sum_(i <= j) f(A[i..=j]) }] 是比較好算的。

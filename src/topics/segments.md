@@ -1,7 +1,5 @@
 # Segments
 
-## Union of Segments
-
 > Given `N` half-open segments, represent their union as the minimum number of segments. [ABC256D](https://atcoder.jp/contests/abc256/submissions/59194213)
 
 ```rust
