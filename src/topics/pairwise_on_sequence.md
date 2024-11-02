@@ -13,8 +13,8 @@
 我們讓 [{j}] 從左掃到右，在計算 [{A_j}] 的答案時，同時維護 [{A[0..j]}] 的統計值。例如：
 
 * [{ f(A_i, A_j) = A_i * 10^("num_digit"(A_j)) + A_j }] : [ABC353D](https://atcoder.jp/contests/abc353/submissions/53432676)
-
 * [{ f(A_i, A_j) = max(A_j - A_i, 0) }] : [ABC351F](https://atcoder.jp/contests/abc351/submissions/52882061)
+* [{ f(A_i, A_j) = sum(A[i..=j]) % m }] : [ABC378E](https://atcoder.jp/contests/abc378/submissions/59399376)
 
 
 ## Commutative and Triangular Matrix

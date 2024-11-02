@@ -201,12 +201,9 @@
 <p>[{ sum_(i=0)^(N-1) sum_(j = i + 1)^(N-1) f(A_i, A_j) = sum_(j=0)^(N-1) sum_(i = 0)^(j-1) f(A_i, A_j) }]</p>
 <p>我們讓 [{j}] 從左掃到右，在計算 [{A_j}] 的答案時，同時維護 [{A[0..j]}] 的統計值。例如：</p>
 <ul>
-<li>
-<p>[{ f(A_i, A_j) = A_i * 10^("num_digit"(A_j)) + A_j }] : <a href="https://atcoder.jp/contests/abc353/submissions/53432676">ABC353D</a></p>
-</li>
-<li>
-<p>[{ f(A_i, A_j) = max(A_j - A_i, 0) }] : <a href="https://atcoder.jp/contests/abc351/submissions/52882061">ABC351F</a></p>
-</li>
+<li>[{ f(A_i, A_j) = A_i * 10^("num_digit"(A_j)) + A_j }] : <a href="https://atcoder.jp/contests/abc353/submissions/53432676">ABC353D</a></li>
+<li>[{ f(A_i, A_j) = max(A_j - A_i, 0) }] : <a href="https://atcoder.jp/contests/abc351/submissions/52882061">ABC351F</a></li>
+<li>[{ f(A_i, A_j) = sum(A[i..=j]) % m }] : <a href="https://atcoder.jp/contests/abc378/submissions/59399376">ABC378E</a></li>
 </ul>
 <h2 id="commutative-and-triangular-matrix"><a class="header" href="#commutative-and-triangular-matrix">Commutative and Triangular Matrix</a></h2>
 <blockquote>
