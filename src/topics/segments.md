@@ -36,3 +36,41 @@ for r in 0..m {
     cnt += max_l + 1;
 }
 ```
+
+> The overlapping segment of segment `l1..=r1` and segment `l2..=r2` is 
+
+```rust
+let l: i64 = l1.max(l2);
+let r: i64 = r1.min(r2);
+let w = (r1.min(r2) - l1.max(l2)).max(0);
+```
+
+When the segments do not overlap, the result segment is **invalid**.
+Don't use unsigned types for such operation, use `i64`.
+
+Cube: [ABC361B](https://atcoder.jp/contests/abc361/submissions/55258977)
+
+## Number of Overlapping Pairs
+
+Inspect intervals from **left to right**, via **right endpoints**. For `curr_l..=curr_r`, find how many previous intervals `prev_l..=prev_r` satisfies `prev_r >= curr_l`. It can be implemented as binary search, two pointers, or BIT with coordinate compression.
+
+```rust
+let mut ans = 0;
+segs.sort_by_key(|&(l, r)| (r, l));
+for i in 0..n {
+    let (curr_l, curr_r) = segs[i];
+    let p = segs.partition_point(|&(prev_l, prev_r)| prev_r < curr_l);
+    if p < i {
+        ans += (i - p) as i64;
+    }
+}
+```
+
+[ABC355D](https://atcoder.jp/contests/abc355/submissions/53915036)
+
+
+## Number of Non-overlapping Pairs
+
+Inspect intervals from **left to right**, via **right endpoints**. For `curr_l..=curr_r`, find how many previous intervals `prev_l..=prev_r` satisfies `prev_r < curr_l`. It can be implemented as binary search, two pointers, or BIT with coordinate compression.
+
+[ABC355D](https://atcoder.jp/contests/abc355/submissions/53915566)

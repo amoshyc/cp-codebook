@@ -3,7 +3,7 @@
 ```rust
 fn floyd_warshall(adj: &Vec<Vec<i64>>, inf: i64) -> Vec<Vec<i64>> {
     // dp[k][u][v] = minimum distance from u to v using vertices 0..=k as intermediate
-    // dp[0][u][v] = adj[u][v]
+    // dp[-1][u][v] = adj[u][v]
     // dp[k][u][v] = min(dp[k - 1][u][v], dp[k - 1][u][k] + dp[k - 1][k][v]);
     // adj[u][u] is usally 0. Remember to check it.
     let n = adj.len();
@@ -36,5 +36,5 @@ for s in 0..n {
 ```
 
 Problem List:
-* basic: [ABC369E](https://atcoder.jp/contests/abc369/submissions/58735183)
-* dp update: [ABC375F](https://atcoder.jp/contests/abc375/submissions/58735132)
+* basic: [ABC369E](https://atcoder.jp/contests/abc369/submissions/59443525)
+* dp update: [ABC375F](https://atcoder.jp/contests/abc375/submissions/59443536)

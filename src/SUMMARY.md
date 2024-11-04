@@ -45,7 +45,6 @@
     - [DP](./topics/dp.md)
     - [Floor and Ceiling](./topics/floor_ceil.md)
     - [Functional/Permutation Graph](./topics/functional_graph.md)
-    - [Intervals](./topics/intervals.md)
     - [L1 Distance](./topics/l1.md)
     - [Longest Common Prefix](./topics/longest_common_prefix.md)
     - [K(-th) Smallest](./topics/k.md)
@@ -63,8 +62,5 @@
 
 - [Miscellaneous](./miscellaneous/readme.md)
     - [Rust Basic](./miscellaneous/rust_basic.md)
-    - [Cartesian Product](./miscellaneous/cartesian_product.md)
     - [Ordered Float](./miscellaneous/ordered_float.md)
-    - [Default Hasing](./miscellaneous/default_hashing.md)
     - [Merge 2 Sorted Array](./miscellaneous/merge.md)
-    - [Segment/Rect/Cube Overlapping](./miscellaneous/seg_overlap.md)
