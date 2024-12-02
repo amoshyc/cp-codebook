@@ -30,3 +30,29 @@ for j in (0..=(s / 2)).rev() {
 ```
 
 [ABC204D](https://atcoder.jp/contests/abc204/submissions/58926973)
+
+
+## Unbounded Knapsack
+
+```
+dp[i, j] = minimum total cost to achieve total value j using items 0..=i
+```
+
+if we use item `i` 1 times, the state backtracks to `dp[i, j - v[i]] + c[i]`. Note that it is not `dp[i - 1, j - v[i]] + c[i]`. If we don't use itme `i`, the state backtracks to `dp[i - 1, j]`.
+
+```
+dp[i, j] = min(dp[i, j - v[i]] + c[i], dp[i - 1, j])
+```
+
+```rust
+let inf = 10usize.pow(8);
+let mut dp = vec![inf; w + 1];
+dp[0] = 0;
+for i in 0..n {
+    for j in v[i]..=w {
+        dp[j] = dp[j].min(dp[j - v[i]] + c[i]);
+    }
+}
+```
+
+[ABC153E](https://atcoder.jp/contests/abc153/submissions/59552524)

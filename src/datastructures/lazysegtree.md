@@ -3,29 +3,22 @@
 ```rust,noplayground
 struct Node;
 impl SegTrait for Node {
-    type S = u64;
-    type F = (u64, u64);
+    type S = usize;
+    type F = usize;
     fn default_data() -> Self::S {
-        0
+        usize::MAX
     }
     fn default_lazy() -> Self::F {
-        (1, 0)
+        usize::MAX
     }
     fn op(a: Self::S, b: Self::S) -> Self::S {
-        (a + b) % M
+        a.min(b)
     }
     fn apply_lazy(lazy: Self::F, data: Self::S, l: usize, r: usize) -> Self::S {
-        let (b, c) = lazy;
-        let mut res = b * data % M;
-        res += c * ((r - l) as u64) % M;
-        res % M
+        lazy
     }
     fn merge_lazy(parent: Self::F, child: Self::F) -> Self::F {
-        let (b1, c1) = parent;
-        let (b2, c2) = child;
-        let b = b1 * b2 % M;
-        let c = (b1 * c2 % M + c1) % M;
-        (b, c)
+        parent
     }
 }
 
@@ -139,4 +132,5 @@ impl<T: SegTrait> SegTree<T> {
 }
 ```
 
+[ABC382F](https://atcoder.jp/contests/abc382/submissions/60343888)
 [Practice2-K](https://atcoder.jp/contests/practice2/submissions/49674983)
