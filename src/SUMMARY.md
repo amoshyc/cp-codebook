@@ -17,6 +17,7 @@
 
 - [Algorithms](./algorithms/readme.md)
     - [2-SAT](./algorithms/2-sat.md)
+    - [BFS](./algorithms/bfs.md)
     - [CombTool](./algorithms/combtool.md)
     - [Dijkstra](./algorithms/dijkstra.md)
     - [Eccentricity](./algorithms/ecc.md)

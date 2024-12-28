@@ -1,6 +1,6 @@
 # LazySegTree
 
-```rust,noplayground
+```rust
 struct Node;
 impl SegTrait for Node {
     type S = usize;
@@ -103,34 +103,43 @@ impl<T: SegTrait> SegTree<T> {
         self.modify(a, b, x.clone(), rch, m, r);
         self.data[u] = T::op(self.data[lch].clone(), self.data[rch].clone());
     }
-
-    fn find_first_of<P: Copy + Fn(T::S) -> bool>(
-        &mut self,
-        f: P,
-        a: usize,
-        b: usize,
-        u: usize,
-        l: usize,
-        r: usize,
-    ) -> Option<usize> {
-        if l >= b || r <= a || f(self.data[u].clone()) {
-            return None;
-        }
-        if r - l == 1 {
-            return Some(l);
-        }
-        let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
-        self.push(u, l, r);
-        if let Some(idx) = self.find_first_of(f, a, b, lch, l, m) {
-            return Some(idx);
-        }
-        if let Some(idx) = self.find_first_of(f, a, b, rch, m, r) {
-            return Some(idx);
-        }
-        None
-    }
 }
 ```
 
-[ABC382F](https://atcoder.jp/contests/abc382/submissions/60343888)
-[Practice2-K](https://atcoder.jp/contests/practice2/submissions/49674983)
+Not tested:
+
+```rust
+fn find_first_of<P: Copy + Fn(T::S) -> bool>(
+    &mut self,
+    f: P,
+    a: usize,
+    b: usize,
+    u: usize,
+    l: usize,
+    r: usize,
+) -> Option<usize> {
+    if l >= b || r <= a || f(self.data[u].clone()) {
+        return None;
+    }
+    if r - l == 1 {
+        return Some(l);
+    }
+    let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
+    self.push(u, l, r);
+    if let Some(idx) = self.find_first_of(f, a, b, lch, l, m) {
+        return Some(idx);
+    }
+    if let Some(idx) = self.find_first_of(f, a, b, rch, m, r) {
+        return Some(idx);
+    }
+    None
+}
+```
+
+Rust:
+* [ABC382F](https://atcoder.jp/contests/abc382/submissions/60343888)
+* [Practice2-K](https://atcoder.jp/contests/practice2/submissions/49674983)
+
+C++:
+* [ABC382F](https://atcoder.jp/contests/abc382/submissions/61135848)
+* [Practice2-K](https://atcoder.jp/contests/practice2/submissions/61135769)

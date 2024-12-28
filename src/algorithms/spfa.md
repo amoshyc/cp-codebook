@@ -1,50 +1,42 @@
 # SPFA
 
 ```rust
-#[derive(Debug)]
-struct SPFA<T> {
-    dis: Vec<T>,
-    par: Vec<usize>,
-    cnt: Vec<usize>,
-}
+fn spfa(
+    adj: &Vec<Vec<(usize, i64)>>,
+    inf: i64,
+    srcs: Vec<usize>,
+) -> (Vec<i64>, Vec<usize>, Vec<usize>) {
+    let n = adj.len();
+    let mut dis = vec![inf; n];
+    let mut inq = vec![false; n];
+    let mut cnt = vec![0; n];
+    let mut par = vec![!0; n];
+    let mut que = std::collections::VecDeque::new();
 
-impl<T: Copy + Ord + Default + std::ops::Add<Output = T>> SPFA<T> {
-    fn new(n: usize, inf: T) -> Self {
-        Self {
-            dis: vec![inf; n],
-            par: vec![!0; n],
-            cnt: vec![0; n],
-        }
+    for src in srcs {
+        dis[src] = 0;
+        par[src] = src;
+        inq[src] = true;
+        que.push_back(src);
     }
 
-    fn spfa(&mut self, adj: &Vec<Vec<(usize, T)>>, sources: &Vec<usize>) {
-        let n = adj.len();
-        let mut que = std::collections::VecDeque::new();
-        let mut inq = vec![false; n];
-
-        for &s in sources.iter() {
-            self.dis[s] = T::default();
-            self.par[s] = s;
-            que.push_back(s);
-            inq[s] = true;
-        }
-
-        while let Some(u) = que.pop_front() {
-            inq[u] = false;
-            for &(v, w) in adj[u].iter() {
-                let new_d = self.dis[u] + w;
-                if new_d < self.dis[v] {
-                    self.dis[v] = new_d;
-                    self.par[v] = u;
-                    self.cnt[v] += 1;
-                    if !inq[v] && self.cnt[v] < n {
-                        que.push_back(v);
-                        inq[v] = true;
-                    }
+    while let Some(u) = que.pop_front() {
+        inq[u] = false;
+        for &(v, w) in adj[u].iter() {
+            let nd = dis[u] + w;
+            if nd < dis[v] {
+                dis[v] = nd;
+                par[v] = u;
+                cnt[v] += 1;
+                if !inq[v] && cnt[v] < n {
+                    inq[v] = true;
+                    que.push_back(v);
                 }
             }
         }
     }
+
+    (dis, par, cnt)
 }
 ```
-[CSES1673](https://cses.fi/paste/ce6ef3502f52e0f65b421f/)
+[CSES1673](https://cses.fi/paste/6cecb5d37f16cbe9b0a065/)
