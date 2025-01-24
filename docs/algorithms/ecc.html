@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="light" dir="ltr">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,7 +7,7 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
@@ -43,17 +43,18 @@
                 }
             });
         </script>
-    </head>
-    <body class="sidebar-visible no-js">
-    <div id="body-container">
+
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "../";
-            // Modified by me
             // var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "coal" : "light";
             var default_theme = "light";
         </script>
-
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
@@ -75,19 +76,16 @@
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            var body = document.querySelector('body');
-            body.classList.remove('no-js')
-            body.classList.add('js');
+            html.classList.add("js");
         </script>
 
         <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var body = document.querySelector('body');
             var sidebar = null;
             var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
@@ -97,45 +95,25 @@
                 sidebar = 'hidden';
             }
             sidebar_toggle.checked = sidebar === 'visible';
-            body.classList.remove('sidebar-visible');
-            body.classList.add("sidebar-" + sidebar);
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../amoshuangyc.html"><strong aria-hidden="true">1.</strong> amoshuangyc</a></li><li class="chapter-item expanded "><a href="../datastructures/index.html"><strong aria-hidden="true">2.</strong> Data Structures</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../datastructures/bit.html"><strong aria-hidden="true">2.1.</strong> BIT</a></li><li class="chapter-item "><a href="../datastructures/dsu.html"><strong aria-hidden="true">2.2.</strong> DSU</a></li><li class="chapter-item "><a href="../datastructures/lazysegtree.html"><strong aria-hidden="true">2.3.</strong> LazySegTree</a></li><li class="chapter-item "><a href="../datastructures/mint.html"><strong aria-hidden="true">2.4.</strong> Mint</a></li><li class="chapter-item "><a href="../datastructures/monotonic_stack_deque.html"><strong aria-hidden="true">2.5.</strong> Monotonic Stack/Deque</a></li><li class="chapter-item "><a href="../datastructures/prefix_sum.html"><strong aria-hidden="true">2.6.</strong> Prefix Sum</a></li><li class="chapter-item "><a href="../datastructures/prefix2d.html"><strong aria-hidden="true">2.7.</strong> Prefix2D</a></li><li class="chapter-item "><a href="../datastructures/prefix3d.html"><strong aria-hidden="true">2.8.</strong> Prefix3D</a></li><li class="chapter-item "><a href="../datastructures/segtree.html"><strong aria-hidden="true">2.9.</strong> SegTree</a></li><li class="chapter-item "><a href="../datastructures/sparse_table.html"><strong aria-hidden="true">2.10.</strong> Sparse Table</a></li><li class="chapter-item "><a href="../datastructures/treap.html"><strong aria-hidden="true">2.11.</strong> Treap</a></li></ol></li><li class="chapter-item expanded "><a href="../algorithms/index.html"><strong aria-hidden="true">3.</strong> Algorithms</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../algorithms/2-sat.html"><strong aria-hidden="true">3.1.</strong> 2-SAT</a></li><li class="chapter-item "><a href="../algorithms/bfs.html"><strong aria-hidden="true">3.2.</strong> BFS</a></li><li class="chapter-item "><a href="../algorithms/combtool.html"><strong aria-hidden="true">3.3.</strong> CombTool</a></li><li class="chapter-item "><a href="../algorithms/dijkstra.html"><strong aria-hidden="true">3.4.</strong> Dijkstra</a></li><li class="chapter-item expanded "><a href="../algorithms/ecc.html" class="active"><strong aria-hidden="true">3.5.</strong> Eccentricity</a></li><li class="chapter-item "><a href="../algorithms/floyd_warshall.html"><strong aria-hidden="true">3.6.</strong> Floyd Warshall</a></li><li class="chapter-item "><a href="../algorithms/greedy.html"><strong aria-hidden="true">3.7.</strong> Greedy</a></li><li class="chapter-item "><a href="../algorithms/lca.html"><strong aria-hidden="true">3.8.</strong> LCA</a></li><li class="chapter-item "><a href="../algorithms/linear_congruence_crt.html"><strong aria-hidden="true">3.9.</strong> Linear Congruence</a></li><li class="chapter-item "><a href="../algorithms/longest_increasing_subsequence.html"><strong aria-hidden="true">3.10.</strong> LIS</a></li><li class="chapter-item "><a href="../algorithms/polyhash.html"><strong aria-hidden="true">3.11.</strong> PolyHash</a></li><li class="chapter-item "><a href="../algorithms/polyhash2.html"><strong aria-hidden="true">3.12.</strong> PolyHash2</a></li><li class="chapter-item "><a href="../algorithms/powmod.html"><strong aria-hidden="true">3.13.</strong> Powmod</a></li><li class="chapter-item "><a href="../algorithms/rerooting.html"><strong aria-hidden="true">3.14.</strong> Rerooting</a></li><li class="chapter-item "><a href="../algorithms/searching.html"><strong aria-hidden="true">3.15.</strong> Searching</a></li><li class="chapter-item "><a href="../algorithms/sieve_of_eratosthenes.html"><strong aria-hidden="true">3.16.</strong> Sieve of Eratosthenes</a></li><li class="chapter-item "><a href="../algorithms/spfa.html"><strong aria-hidden="true">3.17.</strong> SPFA</a></li><li class="chapter-item "><a href="../algorithms/tarjan_scc.html"><strong aria-hidden="true">3.18.</strong> Tarjan SCC</a></li><li class="chapter-item "><a href="../algorithms/ternary_search.html"><strong aria-hidden="true">3.19.</strong> Ternary Search</a></li><li class="chapter-item "><a href="../algorithms/topological_sort.html"><strong aria-hidden="true">3.20.</strong> Topological Sort</a></li><li class="chapter-item "><a href="../algorithms/xorshift.html"><strong aria-hidden="true">3.21.</strong> XorShift</a></li></ol></li><li class="chapter-item expanded "><a href="../topics/index.html"><strong aria-hidden="true">4.</strong> Topics</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../topics/2d_poset.html"><strong aria-hidden="true">4.1.</strong> 2D Poset</a></li><li class="chapter-item "><a href="../topics/binary_ops.html"><strong aria-hidden="true">4.2.</strong> Binary Operations</a></li><li class="chapter-item "><a href="../topics/bivariate.html"><strong aria-hidden="true">4.3.</strong> Bivariate</a></li><li class="chapter-item "><a href="../topics/digit_dp.html"><strong aria-hidden="true">4.4.</strong> Digit DP</a></li><li class="chapter-item "><a href="../topics/dp.html"><strong aria-hidden="true">4.5.</strong> DP</a></li><li class="chapter-item "><a href="../topics/floor_ceil.html"><strong aria-hidden="true">4.6.</strong> Floor and Ceiling</a></li><li class="chapter-item "><a href="../topics/functional_graph.html"><strong aria-hidden="true">4.7.</strong> Functional/Permutation Graph</a></li><li class="chapter-item "><a href="../topics/l1.html"><strong aria-hidden="true">4.8.</strong> L1 Distance</a></li><li class="chapter-item "><a href="../topics/longest_common_prefix.html"><strong aria-hidden="true">4.9.</strong> Longest Common Prefix</a></li><li class="chapter-item "><a href="../topics/k.html"><strong aria-hidden="true">4.10.</strong> K(-th) Smallest</a></li><li class="chapter-item "><a href="../topics/multiples_gcd_lcm.html"><strong aria-hidden="true">4.11.</strong> Multiples/GCD/LCM</a></li><li class="chapter-item "><a href="../topics/pairwise_on_graph.html"><strong aria-hidden="true">4.12.</strong> Pairwise on Graph/Tree</a></li><li class="chapter-item "><a href="../topics/pairwise_on_sequence.html"><strong aria-hidden="true">4.13.</strong> Pairwise on Sequence</a></li><li class="chapter-item "><a href="../topics/square_number.html"><strong aria-hidden="true">4.14.</strong> Square Number</a></li><li class="chapter-item "><a href="../topics/segments.html"><strong aria-hidden="true">4.15.</strong> Segments</a></li><li class="chapter-item "><a href="../topics/subsequence.html"><strong aria-hidden="true">4.16.</strong> Subsequence</a></li><li class="chapter-item "><a href="../topics/palindrome.html"><strong aria-hidden="true">4.17.</strong> Palindrome</a></li><li class="chapter-item "><a href="../topics/random_hashing.html"><strong aria-hidden="true">4.18.</strong> Random Hashing</a></li><li class="chapter-item "><a href="../topics/ring.html"><strong aria-hidden="true">4.19.</strong> Ring</a></li><li class="chapter-item "><a href="../topics/sum_to_x.html"><strong aria-hidden="true">4.20.</strong> Sum to X</a></li><li class="chapter-item "><a href="../topics/uniques.html"><strong aria-hidden="true">4.21.</strong> Unique Elements</a></li></ol></li><li class="chapter-item expanded "><a href="../miscellaneous/index.html"><strong aria-hidden="true">5.</strong> Miscellaneous</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../miscellaneous/rust_basic.html"><strong aria-hidden="true">5.1.</strong> Rust Basic</a></li><li class="chapter-item "><a href="../miscellaneous/rle.html"><strong aria-hidden="true">5.2.</strong> Running Length Encoding</a></li><li class="chapter-item "><a href="../miscellaneous/merge.html"><strong aria-hidden="true">5.3.</strong> Merge 2 Sorted Array</a></li><li class="chapter-item "><a href="../miscellaneous/ordered_float.html"><strong aria-hidden="true">5.4.</strong> Ordered Float</a></li></ol></li></ol>
-            </div>
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
             </div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -263,17 +241,33 @@ where
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../algorithms/dijkstra.html" class="nav-chapters mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../algorithms/dijkstra.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../algorithms/floyd_warshall.html" class="nav-chapters mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../algorithms/floyd_warshall.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

@@ -15,7 +15,7 @@ For each point `(X[i], Y[i])`, find how many other points is at its upper-left.
     - Query the BIT to find how many previous points is at its upper-left.
     - Add `Y[i]` to the BIT.
 
-![](../assets/2d-poset-diagram.png =x200)
+![](../assets/2d-poset-diagram.png)
 
 May need to do coordinate compression in prior. Be aware the points may be repeated.
 

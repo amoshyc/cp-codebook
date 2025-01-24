@@ -109,16 +109,16 @@ impl<T: SegTrait> SegTree<T> {
 Not tested:
 
 ```rust
-fn find_first_of<P: Copy + Fn(T::S) -> bool>(
+fn find_first_of<P: Fn(T::S) -> bool>(
     &mut self,
-    f: P,
+    f: &P,
     a: usize,
     b: usize,
     u: usize,
     l: usize,
     r: usize,
 ) -> Option<usize> {
-    if l >= b || r <= a || f(self.data[u].clone()) {
+    if l >= b || r <= a || !f(self.data[u].clone()) {
         return None;
     }
     if r - l == 1 {
@@ -139,6 +139,7 @@ fn find_first_of<P: Copy + Fn(T::S) -> bool>(
 Rust:
 * [ABC382F](https://atcoder.jp/contests/abc382/submissions/60343888)
 * [Practice2-K](https://atcoder.jp/contests/practice2/submissions/49674983)
+* [ABC389F](https://atcoder.jp/contests/abc389/submissions/61992551): `find_first_of`
 
 C++:
 * [ABC382F](https://atcoder.jp/contests/abc382/submissions/61135848)
