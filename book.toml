@@ -26,6 +26,3 @@ enable = false
 editable = false # allows editing the source code
 copyable = true  # include the copy button for copying code snippets
 runnable = false # displays a run button for rust code
-
-[preprocessor.image-size]
-command = "mdbook-image-size"
