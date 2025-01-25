@@ -241,6 +241,39 @@ where
     r1.flat_map(move |x| r2.clone().map(move |y| (x.clone(), y)))
 }</code></pre>
 <p><code>RangeBounds</code> is a trait that <code>Range</code> and <code>RangeInclusive</code> both implements.</p>
+<h2 id="set-partitions-bell-number"><a class="header" href="#set-partitions-bell-number">Set Partitions (Bell Number)</a></h2>
+<p>Partition a set into one or more different groups. Like [{ {a, b, c} }] has 5 ways to partition:</p>
+<ol>
+<li>[{ {{a}, {b}, {c}} }]</li>
+<li>[{ {{a}, {b, c}} }]</li>
+<li>[{ {{b}, {a, c}} }]</li>
+<li>[{ {{c}, {a, b}} }]</li>
+<li>[{ {{a, b, c}} }]</li>
+</ol>
+<p>Given already partitioned groups and an element [{ x }] that is not processed, there are only 2 cases:</p>
+<ol>
+<li>[{ x }] belongs to one of the previous group.</li>
+<li>[{ x }] belongs to a new group.</li>
+</ol>
+<pre><code class="language-rust">fn dfs(i: usize, groups: &amp;mut Vec&lt;Vec&lt;i64&gt;&gt;, arr: &amp;Vec&lt;i64&gt;) {
+    if i == arr.len() {
+        ...
+        return;
+    }
+
+    // arr[i] belongs to one of the previous groups
+    for j in 0..groups.len() {
+        groups[j].push(arr[i]);
+        dfs(i + 1, groups, arr);
+        groups[j].pop();
+    }
+
+    // arr[i] belongs to a new group
+    groups.push(vec![arr[i]]);
+    dfs(i + 1, groups, arr);
+    groups.pop();
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/abc390/submissions/62069324">ABC390D</a></p>
 
                     </main>
 
@@ -271,22 +304,6 @@ where
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

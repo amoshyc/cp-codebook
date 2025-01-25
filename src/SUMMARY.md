@@ -49,6 +49,7 @@
     - [L1 Distance](./topics/l1.md)
     - [Longest Common Prefix](./topics/longest_common_prefix.md)
     - [K(-th) Smallest](./topics/k.md)
+    - [Knapsack](./topics/knapsack.md)
     - [Multiples/GCD/LCM](./topics/multiples_gcd_lcm.md)
     - [Pairwise on Graph/Tree](./topics/pairwise_on_graph.md)
     - [Pairwise on Sequence](./topics/pairwise_on_sequence.md)

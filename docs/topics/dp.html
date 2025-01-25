@@ -189,21 +189,6 @@ dp[i, j] = d[i - 1][j] or dp[i - 1][j - t[i]]
     }
 }</code></pre>
 <p><a href="https://atcoder.jp/contests/abc204/submissions/58926973">ABC204D</a></p>
-<h2 id="unbounded-knapsack"><a class="header" href="#unbounded-knapsack">Unbounded Knapsack</a></h2>
-<pre><code>dp[i, j] = minimum total cost to achieve total value j using items 0..=i
-</code></pre>
-<p>if we use item <code>i</code> 1 times, the state backtracks to <code>dp[i, j - v[i]] + c[i]</code>. Note that it is not <code>dp[i - 1, j - v[i]] + c[i]</code>. If we don't use itme <code>i</code>, the state backtracks to <code>dp[i - 1, j]</code>.</p>
-<pre><code>dp[i, j] = min(dp[i, j - v[i]] + c[i], dp[i - 1, j])
-</code></pre>
-<pre><code class="language-rust">let inf = 10usize.pow(8);
-let mut dp = vec![inf; w + 1];
-dp[0] = 0;
-for i in 0..n {
-    for j in v[i]..=w {
-        dp[j] = dp[j].min(dp[j - v[i]] + c[i]);
-    }
-}</code></pre>
-<p><a href="https://atcoder.jp/contests/abc153/submissions/59552524">ABC153E</a></p>
 
                     </main>
 
@@ -234,22 +219,6 @@ for i in 0..n {
 
         </div>
 
-        <!-- Livereload script (if served using the cli tool) -->
-        <script>
-            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
-            const socket = new WebSocket(wsAddress);
-            socket.onmessage = function (event) {
-                if (event.data === "reload") {
-                    socket.close();
-                    location.reload();
-                }
-            };
-
-            window.onbeforeunload = function() {
-                socket.close();
-            }
-        </script>
 
 
 

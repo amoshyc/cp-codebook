@@ -91,3 +91,42 @@ where
 ```
 
 `RangeBounds` is a trait that `Range` and `RangeInclusive` both implements.
+
+
+## Set Partitions (Bell Number)
+
+Partition a set into one or more different groups. Like [{ {a, b, c} }] has 5 ways to partition:
+1. [{ {{a}, {b}, {c}} }]
+2. [{ {{a}, {b, c}} }]
+3. [{ {{b}, {a, c}} }]
+4. [{ {{c}, {a, b}} }]
+5. [{ {{a, b, c}} }]
+
+
+Given already partitioned groups and an element [{ x }] that is not processed, there are only 2 cases:
+1. [{ x }] belongs to one of the previous group.
+2. [{ x }] belongs to a new group.
+
+
+```rust
+fn dfs(i: usize, groups: &mut Vec<Vec<i64>>, arr: &Vec<i64>) {
+    if i == arr.len() {
+        ...
+        return;
+    }
+
+    // arr[i] belongs to one of the previous groups
+    for j in 0..groups.len() {
+        groups[j].push(arr[i]);
+        dfs(i + 1, groups, arr);
+        groups[j].pop();
+    }
+
+    // arr[i] belongs to a new group
+    groups.push(vec![arr[i]]);
+    dfs(i + 1, groups, arr);
+    groups.pop();
+}
+```
+
+[ABC390D](https://atcoder.jp/contests/abc390/submissions/62069324)
