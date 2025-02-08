@@ -178,7 +178,10 @@ struct Treap&lt;T&gt; {
     seed: u32,
 }
 
-impl&lt;T: std::cmp::PartialOrd + std::fmt::Debug + Clone&gt; Treap&lt;T&gt; {
+impl&lt;T&gt; Treap&lt;T&gt;
+where
+    T: std::cmp::PartialOrd + Clone + std::fmt::Display,
+{
     fn new() -&gt; Self {
         Self {
             root: None,
@@ -187,7 +190,7 @@ impl&lt;T: std::cmp::PartialOrd + std::fmt::Debug + Clone&gt; Treap&lt;T&gt; {
             siz: vec![],
             key: vec![],
             rnd: vec![],
-            seed: 123,
+            seed: 1234,
         }
     }
 
@@ -207,30 +210,64 @@ impl&lt;T: std::cmp::PartialOrd + std::fmt::Debug + Clone&gt; Treap&lt;T&gt; {
         id
     }
 
-    fn size(&amp;self, t: Option&lt;usize&gt;) -&gt; usize {
-        if let Some(t) = t {
-            self.siz[t]
+    fn size(&amp;self, u: Option&lt;usize&gt;) -&gt; usize {
+        if let Some(u) = u {
+            self.siz[u]
         } else {
             0
         }
     }
 
-    fn pull(&amp;mut self, t: usize) {
-        self.siz[t] = 1 + self.size(self.lch[t]) + self.size(self.rch[t]);
+    fn pull(&amp;mut self, u: usize) {
+        self.siz[u] = 1 + self.size(self.lch[u]) + self.size(self.rch[u]);
     }
 
-    fn split_by_key(&amp;mut self, t: Option&lt;usize&gt;, k: T) -&gt; (Option&lt;usize&gt;, Option&lt;usize&gt;) {
-        if let Some(t) = t {
-            if k &lt;= self.key[t] {
-                let (a, b) = self.split_by_key(self.lch[t], k);
-                self.lch[t] = b;
-                self.pull(t);
-                (a, Some(t))
+    fn split_by_size(&amp;mut self, u: Option&lt;usize&gt;, size: usize) -&gt; (Option&lt;usize&gt;, Option&lt;usize&gt;) {
+        if let Some(u) = u {
+            if size &lt;= self.size(self.lch[u]) {
+                // pivot is at lch
+                //     u
+                //   /   \
+                // a+b   rch
+                // ---------
+                //  a   u
+                //     / \
+                //    b  rch
+                let (a, b) = self.split_by_size(self.lch[u], size);
+                self.lch[u] = b;
+                self.pull(u);
+                (a, Some(u))
             } else {
-                let (a, b) = self.split_by_key(self.rch[t], k);
-                self.rch[t] = a;
-                self.pull(t);
-                (Some(t), b)
+                // pivot is at rch
+                //     u
+                //   /   \
+                // lch   a+b
+                // ---------
+                //    u    b
+                //   / \
+                // lch  a
+                let (a, b) = self.split_by_size(self.rch[u], size - self.size(self.lch[u]) - 1);
+                self.rch[u] = a;
+                self.pull(u);
+                (Some(u), b)
+            }
+        } else {
+            (None, None)
+        }
+    }
+
+    fn split_by_key(&amp;mut self, u: Option&lt;usize&gt;, key: T) -&gt; (Option&lt;usize&gt;, Option&lt;usize&gt;) {
+        if let Some(u) = u {
+            if key &lt;= self.key[u] {
+                let (a, b) = self.split_by_key(self.lch[u], key);
+                self.lch[u] = b;
+                self.pull(u);
+                (a, Some(u))
+            } else {
+                let (a, b) = self.split_by_key(self.rch[u], key);
+                self.rch[u] = a;
+                self.pull(u);
+                (Some(u), b)
             }
         } else {
             (None, None)
@@ -238,12 +275,28 @@ impl&lt;T: std::cmp::PartialOrd + std::fmt::Debug + Clone&gt; Treap&lt;T&gt; {
     }
 
     fn merge(&amp;mut self, a: Option&lt;usize&gt;, b: Option&lt;usize&gt;) -&gt; Option&lt;usize&gt; {
-        if let (Some(a), Some(b)) = (a, b) {
+        if let Some((a, b)) = a.zip(b) {
             if self.rnd[a] &gt; self.rnd[b] {
+                // merge b into rch of a
+                //    a      b
+                //   / \
+                // lch rch
+                // -------------
+                //       a
+                //     /   \
+                //   lch  rch+b
                 self.rch[a] = self.merge(self.rch[a], Some(b));
                 self.pull(a);
                 Some(a)
             } else {
+                // merge a into lch of b
+                //    a      b
+                //          / \
+                //        lch rch
+                // -------------
+                //       b
+                //     /   \
+                //  a+lch  rch
                 self.lch[b] = self.merge(Some(a), self.lch[b]);
                 self.pull(b);
                 Some(b)
@@ -253,33 +306,87 @@ impl&lt;T: std::cmp::PartialOrd + std::fmt::Debug + Clone&gt; Treap&lt;T&gt; {
         }
     }
 
-    fn insert(&amp;mut self, t: Option&lt;usize&gt;, k: T) -&gt; Option&lt;usize&gt; {
-        let node = self.new_node(k.clone());
-        let (t1, t2) = self.split_by_key(t, k);
-        let res = self.merge(t1, Some(node));
-        let res = self.merge(res, t2);
-        res
+    fn insert_at_pos(&amp;mut self, k: T, p: usize) {
+        let node = self.new_node(k);
+        let (t1, t2) = self.split_by_size(self.root, p);
+        self.root = self.merge(t1, Some(node));
+        self.root = self.merge(self.root, t2);
     }
 
-    fn print(&amp;self, t: Option&lt;usize&gt;, dep: usize) {
-        let margin = " ".repeat(dep * 3);
-        if let Some(t) = t {
-            print!("{}(", margin);
-            print!(
-                "\n{} k={:?}, r={}, s={}",
-                margin, self.key[t], self.rnd[t], self.siz[t]
-            );
-            print!("\n{} lch=\n", margin);
-            self.print(self.lch[t], dep + 1);
-            print!("\n{} rch=\n", margin);
-            self.print(self.rch[t], dep + 1);
-            print!("\n{})", margin);
+    fn insert_key(&amp;mut self, k: T) {
+        let node = self.new_node(k.clone());
+        let (t1, t2) = self.split_by_key(self.root, k);
+        self.root = self.merge(t1, Some(node));
+        self.root = self.merge(self.root, t2);
+    }
+
+    fn traverse&lt;F: FnMut(Option&lt;T&gt;, usize)&gt;(
+        &amp;self,
+        u: Option&lt;usize&gt;,
+        dep: usize,
+        f: &amp;mut F,
+        mode: &amp;str,
+    ) {
+        if let Some(u) = u {
+            match mode {
+                "pre" =&gt; {
+                    f(Some(self.key[u].clone()), dep);
+                    self.traverse(self.lch[u], dep + 1, f, mode);
+                    self.traverse(self.rch[u], dep + 1, f, mode);
+                }
+                "in" =&gt; {
+                    self.traverse(self.lch[u], dep + 1, f, mode);
+                    f(Some(self.key[u].clone()), dep);
+                    self.traverse(self.rch[u], dep + 1, f, mode);
+                }
+                "post" =&gt; {
+                    self.traverse(self.lch[u], dep + 1, f, mode);
+                    self.traverse(self.rch[u], dep + 1, f, mode);
+                    f(Some(self.key[u].clone()), dep);
+                }
+                _ =&gt; (),
+            }
         } else {
-            print!("{}None", margin);
+            f(None, dep);
         }
     }
+
+    fn to_vec(&amp;self) -&gt; Vec&lt;T&gt; {
+        let mut arr = vec![];
+        self.traverse(
+            self.root,
+            0,
+            &amp;mut |key, dep| {
+                if let Some(key) = key {
+                    arr.push(key)
+                }
+            },
+            "in",
+        );
+        arr
+    }
+
+    fn show(&amp;self) {
+        self.traverse(
+            self.root,
+            0,
+            &amp;mut |key, dep| {
+                if let Some(key) = key {
+                    println!("{}- {}", " ".repeat(dep * 2), key);
+                } else {
+                    println!("{}- None", " ".repeat(dep * 2));
+                }
+            },
+            "pre",
+        );
+    }
 }</code></pre>
-<p><a href="https://atcoder.jp/contests/abc231/submissions/43081575">ABC231F</a></p>
+<p><a href="https://atcoder.jp/contests/abc392/submissions/62575641">ABC392F</a>: <code>split_by_size</code></p>
+<pre><code class="language-rust">let mut treap = Treap::&lt;usize&gt;::new();
+for i in 0..n {
+    treap.insert_at_pos(i + 1, p[i]);
+}
+let ans = treap.to_vec();</code></pre>
 
                     </main>
 
