@@ -1,5 +1,7 @@
 # SegTree
 
+Supports only single point update. Since we cannot update an interval, we support only "assignment", no "increment".
+
 ```rust
 struct Node;
 impl SegTrait for Node {
@@ -117,6 +119,6 @@ impl<T: SegTrait> SegTree<T> {
 }
 ```
 
-~[ABC283F](https://atcoder.jp/contests/abc283/submissions/46191119)~
-[ABC382F](https://atcoder.jp/contests/abc392/submissions/62735822)
+- [ABC283F](https://atcoder.jp/contests/abc283/submissions/46191119)
+- [ABC382F](https://atcoder.jp/contests/abc392/submissions/62735924): `find_first_of`
 

@@ -167,6 +167,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="segtree"><a class="header" href="#segtree">SegTree</a></h1>
+<p>Supports only single point update. Since we cannot update an interval, we support only "assignment", no "increment".</p>
 <pre><code class="language-rust">struct Node;
 impl SegTrait for Node {
     type S = usize;
@@ -281,8 +282,10 @@ impl&lt;T: SegTrait&gt; SegTree&lt;T&gt; {
         self.show(2 * u + 2, dep + 1);
     }
 }</code></pre>
-<p><del><a href="https://atcoder.jp/contests/abc283/submissions/46191119">ABC283F</a></del>
-<a href="https://atcoder.jp/contests/abc392/submissions/62735822">ABC382F</a></p>
+<ul>
+<li><a href="https://atcoder.jp/contests/abc283/submissions/46191119">ABC283F</a></li>
+<li><a href="https://atcoder.jp/contests/abc392/submissions/62735924">ABC382F</a>: <code>find_first_of</code></li>
+</ul>
 
                     </main>
 
