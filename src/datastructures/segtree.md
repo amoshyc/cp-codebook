@@ -6,24 +6,18 @@ Supports only single point update. Since we cannot update an interval, we suppor
 struct Node;
 impl SegTrait for Node {
     type S = usize;
-    type F = isize;
     fn default() -> Self::S {
         0
     }
     fn op(a: Self::S, b: Self::S) -> Self::S {
         a + b
     }
-    fn apply(x: Self::F, d: Self::S) -> Self::S {
-        d.checked_add_signed(x).unwrap_or(0)
-    }
 }
 
 trait SegTrait {
     type S: Clone + std::fmt::Debug;
-    type F: Clone;
     fn default() -> Self::S;
     fn op(a: Self::S, b: Self::S) -> Self::S;
-    fn apply(x: Self::F, d: Self::S) -> Self::S;
 }
 
 struct SegTree<T: SegTrait> {
@@ -49,7 +43,7 @@ impl<T: SegTrait> SegTree<T> {
         Self { nn, data }
     }
 
-    fn query(&mut self, a: usize, b: usize, u: usize, l: usize, r: usize) -> T::S {
+    fn get(&mut self, a: usize, b: usize, u: usize, l: usize, r: usize) -> T::S {
         if l >= b || r <= a {
             return T::default();
         }
@@ -58,22 +52,22 @@ impl<T: SegTrait> SegTree<T> {
         }
         let m = (l + r) / 2;
         T::op(
-            self.query(a, b, 2 * u + 1, l, m),
-            self.query(a, b, 2 * u + 2, m, r),
+            self.get(a, b, 2 * u + 1, l, m),
+            self.get(a, b, 2 * u + 2, m, r),
         )
     }
 
-    fn modify(&mut self, i: usize, x: T::F, u: usize, l: usize, r: usize) {
+    fn set(&mut self, i: usize, x: T::S, u: usize, l: usize, r: usize) {
         if l >= i + 1 || r <= i {
             return;
         }
         if l >= i && r <= i + 1 {
-            self.data[u] = T::apply(x, self.data[u].clone());
+            self.data[u] = x;
             return;
         }
         let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
-        self.modify(i, x.clone(), lch, l, m);
-        self.modify(i, x.clone(), rch, m, r);
+        self.set(i, x.clone(), lch, l, m);
+        self.set(i, x.clone(), rch, m, r);
         self.data[u] = T::op(self.data[lch].clone(), self.data[rch].clone());
     }
 

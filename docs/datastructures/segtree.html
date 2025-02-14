@@ -171,24 +171,18 @@
 <pre><code class="language-rust">struct Node;
 impl SegTrait for Node {
     type S = usize;
-    type F = isize;
     fn default() -&gt; Self::S {
         0
     }
     fn op(a: Self::S, b: Self::S) -&gt; Self::S {
         a + b
     }
-    fn apply(x: Self::F, d: Self::S) -&gt; Self::S {
-        d.checked_add_signed(x).unwrap_or(0)
-    }
 }
 
 trait SegTrait {
     type S: Clone + std::fmt::Debug;
-    type F: Clone;
     fn default() -&gt; Self::S;
     fn op(a: Self::S, b: Self::S) -&gt; Self::S;
-    fn apply(x: Self::F, d: Self::S) -&gt; Self::S;
 }
 
 struct SegTree&lt;T: SegTrait&gt; {
@@ -214,7 +208,7 @@ impl&lt;T: SegTrait&gt; SegTree&lt;T&gt; {
         Self { nn, data }
     }
 
-    fn query(&amp;mut self, a: usize, b: usize, u: usize, l: usize, r: usize) -&gt; T::S {
+    fn get(&amp;mut self, a: usize, b: usize, u: usize, l: usize, r: usize) -&gt; T::S {
         if l &gt;= b || r &lt;= a {
             return T::default();
         }
@@ -223,22 +217,22 @@ impl&lt;T: SegTrait&gt; SegTree&lt;T&gt; {
         }
         let m = (l + r) / 2;
         T::op(
-            self.query(a, b, 2 * u + 1, l, m),
-            self.query(a, b, 2 * u + 2, m, r),
+            self.get(a, b, 2 * u + 1, l, m),
+            self.get(a, b, 2 * u + 2, m, r),
         )
     }
 
-    fn modify(&amp;mut self, i: usize, x: T::F, u: usize, l: usize, r: usize) {
+    fn set(&amp;mut self, i: usize, x: T::S, u: usize, l: usize, r: usize) {
         if l &gt;= i + 1 || r &lt;= i {
             return;
         }
         if l &gt;= i &amp;&amp; r &lt;= i + 1 {
-            self.data[u] = T::apply(x, self.data[u].clone());
+            self.data[u] = x;
             return;
         }
         let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
-        self.modify(i, x.clone(), lch, l, m);
-        self.modify(i, x.clone(), rch, m, r);
+        self.set(i, x.clone(), lch, l, m);
+        self.set(i, x.clone(), rch, m, r);
         self.data[u] = T::op(self.data[lch].clone(), self.data[rch].clone());
     }
 
