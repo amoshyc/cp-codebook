@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Prefix2D - Codebook</title>
+        <title>Prefix3D - Codebook</title>
 
 
         <!-- Custom HTML head -->
@@ -166,19 +166,30 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="prefix-2d"><a class="header" href="#prefix-2d">Prefix 2D</a></h1>
-<pre><code class="language-rust">fn build_2d(arr: &amp;Vec&lt;Vec&lt;i64&gt;&gt;) -&gt; Vec&lt;Vec&lt;i64&gt;&gt; {
-    let (nr, nc) = (arr.len(), arr[0].len());
-    let mut pref = vec![vec![0; nc]; nr];
-    let transition = [((-1, 0), 1), ((0, -1), 1), ((-1, -1), -1)];
-    for r in 0..nr {
-        for c in 0..nc {
-            pref[r][c] = arr[r][c];
-            for &amp;((dr, dc), s) in transition.iter() {
-                let pr = r.checked_add_signed(dr).unwrap_or(nr);
-                let py = c.checked_add_signed(dc).unwrap_or(nc);
-                if pr &lt; nr &amp;&amp; py &lt; nc {
-                    pref[r][c] += s * pref[pr][py];
+                        <h1 id="prefix3d"><a class="header" href="#prefix3d">Prefix3D</a></h1>
+<pre><code class="language-rust">fn build_3d(arr: &amp;Vec&lt;Vec&lt;Vec&lt;i64&gt;&gt;&gt;) -&gt; Vec&lt;Vec&lt;Vec&lt;i64&gt;&gt;&gt; {
+    let (nx, ny, nz) = (arr.len(), arr[0].len(), arr[0][0].len());
+    let mut pref = vec![vec![vec![0; nz]; ny]; nx];
+    let transition = [
+        ((-1, 0, 0), 1),
+        ((0, -1, 0), 1),
+        ((0, 0, -1), 1),
+        ((0, -1, -1), -1),
+        ((-1, 0, -1), -1),
+        ((-1, -1, 0), -1),
+        ((-1, -1, -1), 1),
+    ];
+    for x in 0..nx {
+        for y in 0..ny {
+            for z in 0..nz {
+                pref[x][y][z] = arr[x][y][z];
+                for &amp;((dx, dy, dz), s) in transition.iter() {
+                    let px = x.checked_add_signed(dx).unwrap_or(nx);
+                    let py = y.checked_add_signed(dy).unwrap_or(ny);
+                    let pz = z.checked_add_signed(dz).unwrap_or(nz);
+                    if px &lt; nx &amp;&amp; py &lt; ny &amp;&amp; pz &lt; nz {
+                        pref[x][y][z] += s * pref[px][py][pz];
+                    }
                 }
             }
         }
@@ -186,39 +197,49 @@
     pref
 }
 
-// arr[r1..=r2, c1..=c2]
-fn query_2d(pref: &amp;Vec&lt;Vec&lt;i64&gt;&gt;, r1: usize, r2: usize, c1: usize, c2: usize) -&gt; i64 {
-    let (nr, nc) = (pref.len(), pref[0].len());
-    let r1 = r1.checked_add_signed(-1).unwrap_or(nr);
-    let c1 = c1.checked_add_signed(-1).unwrap_or(nc);
-    let transition = [((r2, c2), 1), ((r1, c2), -1), ((r2, c1), -1), ((r1, c1), 1)];
+// arr[x1..=x2, y1..=y2, z1..=z2]
+fn query_3d(
+    pref: &amp;Vec&lt;Vec&lt;Vec&lt;i64&gt;&gt;&gt;,
+    x1: usize,
+    x2: usize,
+    y1: usize,
+    y2: usize,
+    z1: usize,
+    z2: usize,
+) -&gt; i64 {
+    let (nx, ny, nz) = (pref.len(), pref[0].len(), pref[0][0].len());
+    let x1 = x1.checked_add_signed(-1).unwrap_or(nx);
+    let y1 = y1.checked_add_signed(-1).unwrap_or(ny);
+    let z1 = z1.checked_add_signed(-1).unwrap_or(nz);
+    let transition = [
+        ((x2, y2, z2), 1),
+        ((x1, y2, z2), -1),
+        ((x2, y1, z2), -1),
+        ((x2, y2, z1), -1),
+        ((x1, y1, z2), 1),
+        ((x1, y2, z1), 1),
+        ((x2, y1, z1), 1),
+        ((x1, y1, z1), -1),
+    ];
     let mut res = 0;
-    for ((r, c), s) in transition {
-        if r &lt; nr &amp;&amp; c &lt; nc {
-            res += s * pref[r][c];
+    for ((x, y, z), s) in transition {
+        if x &lt; nx &amp;&amp; y &lt; ny &amp;&amp; z &lt; nz {
+            res += s * pref[x][y][z];
         }
     }
     res
 }</code></pre>
-<p><a href="https://atcoder.jp/contests/abc366/submissions/56582177">ABC366D</a></p>
-<h2 id="diff2d"><a class="header" href="#diff2d">Diff2D</a></h2>
-<p>To add a rectange <code>r1..=r2, c1..=c2</code> in difference array:</p>
-<pre><code class="language-rust">diff[r1][c1] += 1;
-diff[r1][c2 + 1] -= 1;
-diff[r2 + 1][c1] -= 1;
-diff[r2 + 1][c2 + 1] += 1;</code></pre>
-<p>The original array can be recovered using <code>build_2d(&amp;diff)</code>.</p>
-<p><a href="https://atcoder.jp/contests/typical90/submissions/54070660">Typical90-028</a></p>
+<p><a href="https://atcoder.jp/contests/abc366/submissions/56582097">ABC366D</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../datastructures/prefix_sum.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../algorithms/prefix2d.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../datastructures/prefix3d.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../algorithms/rerooting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -228,11 +249,11 @@ diff[r2 + 1][c2 + 1] += 1;</code></pre>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../datastructures/prefix_sum.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../algorithms/prefix2d.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../datastructures/prefix3d.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../algorithms/rerooting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

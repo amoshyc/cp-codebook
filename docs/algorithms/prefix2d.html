@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Monotonic Stack/Deque - Codebook</title>
+        <title>Prefix2D - Codebook</title>
 
 
         <!-- Custom HTML head -->
@@ -166,40 +166,59 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="monotonic-stackdeque"><a class="header" href="#monotonic-stackdeque">Monotonic Stack/Deque</a></h1>
-<pre><code class="language-rust">fn sliding_argmax&lt;T&gt;(arr: &amp;[T], k: usize) -&gt; Vec&lt;usize&gt;
-where
-    T: std::cmp::PartialOrd,
-{
-    let mut deq = VecDeque::new();
-    let mut res = vec![usize::MAX; arr.len()];
-    for i in 0..arr.len() {
-        while let Some(x) = deq.back() {
-            if arr[i] &gt;= arr[*x] {
-                deq.pop_back();
-            } else {
-                break;
+                        <h1 id="prefix-2d"><a class="header" href="#prefix-2d">Prefix 2D</a></h1>
+<pre><code class="language-rust">fn build_2d(arr: &amp;Vec&lt;Vec&lt;i64&gt;&gt;) -&gt; Vec&lt;Vec&lt;i64&gt;&gt; {
+    let (nr, nc) = (arr.len(), arr[0].len());
+    let mut pref = vec![vec![0; nc]; nr];
+    let transition = [((-1, 0), 1), ((0, -1), 1), ((-1, -1), -1)];
+    for r in 0..nr {
+        for c in 0..nc {
+            pref[r][c] = arr[r][c];
+            for &amp;((dr, dc), s) in transition.iter() {
+                let pr = r.checked_add_signed(dr).unwrap_or(nr);
+                let py = c.checked_add_signed(dc).unwrap_or(nc);
+                if pr &lt; nr &amp;&amp; py &lt; nc {
+                    pref[r][c] += s * pref[pr][py];
+                }
             }
         }
-        deq.push_back(i);
-        res[i] = *deq.front().unwrap();
-        if *deq.front().unwrap() + k - 1 == i {
-            deq.pop_front();
+    }
+    pref
+}
+
+// arr[r1..=r2, c1..=c2]
+fn query_2d(pref: &amp;Vec&lt;Vec&lt;i64&gt;&gt;, r1: usize, r2: usize, c1: usize, c2: usize) -&gt; i64 {
+    let (nr, nc) = (pref.len(), pref[0].len());
+    let r1 = r1.checked_add_signed(-1).unwrap_or(nr);
+    let c1 = c1.checked_add_signed(-1).unwrap_or(nc);
+    let transition = [((r2, c2), 1), ((r1, c2), -1), ((r2, c1), -1), ((r1, c1), 1)];
+    let mut res = 0;
+    for ((r, c), s) in transition {
+        if r &lt; nr &amp;&amp; c &lt; nc {
+            res += s * pref[r][c];
         }
     }
     res
 }</code></pre>
-<p><a href="https://cses.fi/paste/da6df54e45964ee799be2e/">CSES1644</a></p>
+<p><a href="https://atcoder.jp/contests/abc366/submissions/56582177">ABC366D</a></p>
+<h2 id="diff2d"><a class="header" href="#diff2d">Diff2D</a></h2>
+<p>To add a rectange <code>r1..=r2, c1..=c2</code> in difference array:</p>
+<pre><code class="language-rust">diff[r1][c1] += 1;
+diff[r1][c2 + 1] -= 1;
+diff[r2 + 1][c1] -= 1;
+diff[r2 + 1][c2 + 1] += 1;</code></pre>
+<p>The original array can be recovered using <code>build_2d(&amp;diff)</code>.</p>
+<p><a href="https://atcoder.jp/contests/typical90/submissions/54070660">Typical90-028</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../datastructures/mint.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../algorithms/powmod.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../datastructures/prefix_sum.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../algorithms/prefix3d.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -209,11 +228,11 @@ where
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../datastructures/mint.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../algorithms/powmod.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../datastructures/prefix_sum.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../algorithms/prefix3d.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -167,6 +167,25 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="k-th-smallest"><a class="header" href="#k-th-smallest">K(-th) Smallest</a></h1>
+<h2 id="k-th-smallest-in-a-container-with-add-and-remove-with-limited-value"><a class="header" href="#k-th-smallest-in-a-container-with-add-and-remove-with-limited-value">K-th Smallest in a Container with Add and Remove with Limited Value</a></h2>
+<p>Store the frequency of each value in a SegTree/BIT.
+When querying k-th smallest (1-based) element, we find the first value that has prefix sum = k:</p>
+<pre><code class="language-rust">let j = seg
+    .first_of(&amp;|data, pref, suff| pref &gt;= k, 0, 0, 0, 0, seg.nn)
+    .unwrap();</code></pre>
+<p><a href="https://atcoder.jp/contests/abc392/submissions/62925585">ABC392F</a></p>
+<h2 id="k-smallest-elements-with-only-add"><a class="header" href="#k-smallest-elements-with-only-add">K Smallest Elements with only Add</a></h2>
+<p>Use a priority queue (max heap).</p>
+<pre><code class="language-rust">que.push(arr[i]);
+sum += arr[i];
+if que.len() &gt; k {
+    sum -= que.pop().unwrap();
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/abc376/submissions/58989144">ABC376E</a></p>
+<h2 id="k-smallest-elements-with-add-and-remove"><a class="header" href="#k-smallest-elements-with-add-and-remove">K Smallest Elements with Add and Remove</a></h2>
+<p>Use two priority queues.</p>
+<p><a href="https://atcoder.jp/contests/abc312/submissions/44105261">ABC312F</a>
+<a href="https://atcoder.jp/contests/abc314/submissions/44556667">ABC314G</a></p>
 <h2 id="k-th-smallest-binary-string"><a class="header" href="#k-th-smallest-binary-string">K-th Smallest Binary String</a></h2>
 <blockquote>
 <p>Given A, B, K, find the K-th smallest string consisting of A occurrences of <code>a</code> and B occurences of <code>b</code>.</p>
@@ -188,18 +207,6 @@
     }
 }</code></pre>
 <p><a href="https://atcoder.jp/contests/abc202/submissions/56601554">ABC202D</a></p>
-<h1 id="k-smallest-elements-with-only-add"><a class="header" href="#k-smallest-elements-with-only-add">K Smallest Elements with only Add</a></h1>
-<p>Use a priority queue (max heap).</p>
-<pre><code class="language-rust">que.push(arr[i]);
-sum += arr[i];
-if que.len() &gt; k {
-    sum -= que.pop().unwrap();
-}</code></pre>
-<p><a href="https://atcoder.jp/contests/abc376/submissions/58989144">ABC376E</a></p>
-<h1 id="k-smallest-elements-with-add-and-remove"><a class="header" href="#k-smallest-elements-with-add-and-remove">K Smallest Elements with Add and Remove</a></h1>
-<p>Use two priority queues.</p>
-<p><a href="https://atcoder.jp/contests/abc312/submissions/44105261">ABC312F</a>
-<a href="https://atcoder.jp/contests/abc314/submissions/44556667">ABC314G</a></p>
 
                     </main>
 

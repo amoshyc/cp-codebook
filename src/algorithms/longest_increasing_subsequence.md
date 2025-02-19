@@ -1,4 +1,4 @@
-# LIS
+# Longest Increasing Subsequence
 
 While inspecting `arr` from left to right, maintain:
 

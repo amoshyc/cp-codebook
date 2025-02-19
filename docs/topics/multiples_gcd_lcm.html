@@ -167,6 +167,22 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="multiplesgcdlcm"><a class="header" href="#multiplesgcdlcm">Multiples/GCD/LCM</a></h1>
+<p><strong>Enumerate the Answer</strong></p>
+<blockquote>
+<p>Choosing <code>K</code> items from <code>A[0..N]</code> at will, what is the maximum gcd of them?</p>
+</blockquote>
+<p>Enumerate all possible gcd, check if there are <code>K</code> items that is a multiple of it.
+[{ O(nlgn) }] complexity due to finite harmonic series.</p>
+<pre><code class="language-rust">let freq = Counter(arr);
+let max = arr.iter().max().unwrap();
+for gcd in (1..=max).rev() {
+    let cnt = (gcd..=max).step_by(gcd).map(|x| freq[x]).sum::&lt;usize&gt;();
+    if cnt &gt;= k {
+        println!("{}", gcd);
+        break;
+    }
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/abc393/submissions/62819583">ABC393E</a></p>
 <p><strong>Substring is multiple of k</strong></p>
 <pre><code>sum(A[l..r]) % k = 0 
 &lt;-&gt; 

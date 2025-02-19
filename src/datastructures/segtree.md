@@ -73,18 +73,20 @@ impl<T: SegTrait> SegTree<T> {
 
     // 0 0 0 1 1 1
     //       ^
-    fn find_first_of<P: Fn(T::S, T::S, T::S) -> bool>(
+    fn first_of<P: Fn(T::S, T::S, T::S) -> bool>(
         &self,
-        f: &P,
+        ok: &P,
         pref: T::S,
         suff: T::S,
         u: usize,
         l: usize,
         r: usize,
     ) -> Option<usize> {
-        let new_pref = T::op(pref.clone(), self.data[u].clone());
-        let new_suff = T::op(self.data[u].clone(), suff.clone());
-        if !f(self.data[u].clone(), new_pref, new_suff) {
+        if !ok(
+            self.data[u].clone(),
+            T::op(pref.clone(), self.data[u].clone()),
+            T::op(self.data[u].clone(), suff.clone()),
+        ) {
             return None;
         }
         if r - l == 1 {
@@ -92,11 +94,11 @@ impl<T: SegTrait> SegTree<T> {
         }
         let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
         let new_suff = T::op(self.data[rch].clone(), suff.clone());
-        if let Some(i) = self.find_first_of(f, pref.clone(), new_suff, lch, l, m) {
+        if let Some(i) = self.first_of(ok, pref.clone(), new_suff, lch, l, m) {
             return Some(i);
         }
         let new_pref = T::op(pref.clone(), self.data[lch].clone());
-        if let Some(i) = self.find_first_of(f, new_pref, suff.clone(), rch, m, r) {
+        if let Some(i) = self.first_of(ok, new_pref, suff.clone(), rch, m, r) {
             return Some(i);
         }
         None
@@ -114,5 +116,5 @@ impl<T: SegTrait> SegTree<T> {
 ```
 
 - [ABC283F](https://atcoder.jp/contests/abc283/submissions/46191119)
-- [ABC382F](https://atcoder.jp/contests/abc392/submissions/62735924): `find_first_of`
+- [ABC382F](https://atcoder.jp/contests/abc392/submissions/62925585): `first_of`
 

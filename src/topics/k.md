@@ -1,13 +1,19 @@
 # K(-th) Smallest
 
-# K-th Smallest in a Container with Add and Remove with Limited Value
+## K-th Smallest in a Container with Add and Remove with Limited Value
 
-Store the frequency of each value in a SegTree/BIT. When querying k-th smallest (1-based) element, we find the first value that has prefix sum = k using `first_of`.
+Store the frequency of each value in a SegTree/BIT. 
+When querying k-th smallest (1-based) element, we find the first value that has prefix sum = k:
 
-[ABC392F](https://atcoder.jp/contests/abc392/submissions/62735924)
+```rust
+let j = seg
+    .first_of(&|data, pref, suff| pref >= k, 0, 0, 0, 0, seg.nn)
+    .unwrap();
+```
 
+[ABC392F](https://atcoder.jp/contests/abc392/submissions/62925585)
 
-# K Smallest Elements with only Add
+## K Smallest Elements with only Add
 
 Use a priority queue (max heap).
 
@@ -22,7 +28,7 @@ if que.len() > k {
 [ABC376E](https://atcoder.jp/contests/abc376/submissions/58989144)
 
 
-# K Smallest Elements with Add and Remove
+## K Smallest Elements with Add and Remove
 
 Use two priority queues.
 

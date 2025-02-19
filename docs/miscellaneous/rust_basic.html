@@ -174,7 +174,7 @@ fn main() {
 
 fn read&lt;T: std::str::FromStr&gt;() -&gt; T {
     let mut s = String::new();
-    std::io::stdin().read_line(&amp;mut s).ok();
+    std::io::stdin().read_line(&amp;mut s);
     s.trim().parse().ok().unwrap()
 }
 

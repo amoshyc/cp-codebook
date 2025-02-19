@@ -238,18 +238,20 @@ impl&lt;T: SegTrait&gt; SegTree&lt;T&gt; {
 
     // 0 0 0 1 1 1
     //       ^
-    fn find_first_of&lt;P: Fn(T::S, T::S, T::S) -&gt; bool&gt;(
+    fn first_of&lt;P: Fn(T::S, T::S, T::S) -&gt; bool&gt;(
         &amp;self,
-        f: &amp;P,
+        ok: &amp;P,
         pref: T::S,
         suff: T::S,
         u: usize,
         l: usize,
         r: usize,
     ) -&gt; Option&lt;usize&gt; {
-        let new_pref = T::op(pref.clone(), self.data[u].clone());
-        let new_suff = T::op(self.data[u].clone(), suff.clone());
-        if !f(self.data[u].clone(), new_pref, new_suff) {
+        if !ok(
+            self.data[u].clone(),
+            T::op(pref.clone(), self.data[u].clone()),
+            T::op(self.data[u].clone(), suff.clone()),
+        ) {
             return None;
         }
         if r - l == 1 {
@@ -257,11 +259,11 @@ impl&lt;T: SegTrait&gt; SegTree&lt;T&gt; {
         }
         let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
         let new_suff = T::op(self.data[rch].clone(), suff.clone());
-        if let Some(i) = self.find_first_of(f, pref.clone(), new_suff, lch, l, m) {
+        if let Some(i) = self.first_of(ok, pref.clone(), new_suff, lch, l, m) {
             return Some(i);
         }
         let new_pref = T::op(pref.clone(), self.data[lch].clone());
-        if let Some(i) = self.find_first_of(f, new_pref, suff.clone(), rch, m, r) {
+        if let Some(i) = self.first_of(ok, new_pref, suff.clone(), rch, m, r) {
             return Some(i);
         }
         None
@@ -278,14 +280,14 @@ impl&lt;T: SegTrait&gt; SegTree&lt;T&gt; {
 }</code></pre>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc283/submissions/46191119">ABC283F</a></li>
-<li><a href="https://atcoder.jp/contests/abc392/submissions/62735924">ABC382F</a>: <code>find_first_of</code></li>
+<li><a href="https://atcoder.jp/contests/abc392/submissions/62925585">ABC382F</a>: <code>first_of</code></li>
 </ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../datastructures/prefix3d.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../datastructures/prefix_sum.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
@@ -299,7 +301,7 @@ impl&lt;T: SegTrait&gt; SegTree&lt;T&gt; {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../datastructures/prefix3d.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../datastructures/prefix_sum.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
