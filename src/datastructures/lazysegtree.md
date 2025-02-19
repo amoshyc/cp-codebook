@@ -6,19 +6,19 @@ impl SegTrait for Node {
     type S = usize;
     type F = usize;
     fn default_data() -> Self::S {
-        usize::MAX
+        0
     }
     fn default_lazy() -> Self::F {
-        usize::MAX
+        0
     }
     fn op(a: Self::S, b: Self::S) -> Self::S {
-        a.min(b)
+        a.max(b)
     }
     fn apply_lazy(lazy: Self::F, data: Self::S, l: usize, r: usize) -> Self::S {
-        lazy
+        data + lazy
     }
     fn merge_lazy(parent: Self::F, child: Self::F) -> Self::F {
-        parent
+        parent + child
     }
 }
 
@@ -103,43 +103,61 @@ impl<T: SegTrait> SegTree<T> {
         self.modify(a, b, x.clone(), rch, m, r);
         self.data[u] = T::op(self.data[lch].clone(), self.data[rch].clone());
     }
-}
-```
 
-Not tested:
+    fn show(&mut self, dep: usize, u: usize, l: usize, r: usize) {
+        if u >= 2 * self.nn - 1 {
+            return;
+        }
+        println!("{}{:?}", " ".repeat(dep * 3), self.data[u]);
+        self.push(u, l, r);
+        self.show(dep + 1, 2 * u + 1, l, (l + r) / 2);
+        self.show(dep + 1, 2 * u + 2, (l + r) / 2, r);
+    }
 
-```rust
-fn find_first_of<P: Fn(T::S) -> bool>(
-    &mut self,
-    f: &P,
-    a: usize,
-    b: usize,
-    u: usize,
-    l: usize,
-    r: usize,
-) -> Option<usize> {
-    if l >= b || r <= a || !f(self.data[u].clone()) {
-        return None;
+    // 0 0 0 1 1 1
+    //       ^
+    fn first_of<P: Fn(T::S, T::S, T::S) -> bool>(
+        &mut self,
+        ok: &P,
+        pref: T::S,
+        suff: T::S,
+        u: usize,
+        l: usize,
+        r: usize,
+    ) -> Option<usize> {
+        if !ok(
+            self.data[u].clone(),
+            T::op(pref.clone(), self.data[u].clone()),
+            T::op(suff.clone(), self.data[u].clone()),
+        ) {
+            return None;
+        }
+        if r - l == 1 {
+            return Some(l);
+        }
+        self.push(u, l, r);
+        let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
+        // pivot at left
+        let new_pref = T::op(T::default_data(), pref.clone());
+        let new_suff = T::op(suff.clone(), self.data[rch].clone());
+        if let Some(idx) = self.first_of(ok, new_pref, new_suff, lch, l, m) {
+            return Some(idx);
+        }
+        // pivot at right
+        let new_pref = T::op(self.data[lch].clone(), pref.clone());
+        let new_suff = T::op(suff.clone(), T::default_data());
+        if let Some(idx) = self.first_of(ok, new_pref, new_suff, rch, m, r) {
+            return Some(idx);
+        }
+        None
     }
-    if r - l == 1 {
-        return Some(l);
-    }
-    let (m, lch, rch) = ((l + r) / 2, 2 * u + 1, 2 * u + 2);
-    self.push(u, l, r);
-    if let Some(idx) = self.find_first_of(f, a, b, lch, l, m) {
-        return Some(idx);
-    }
-    if let Some(idx) = self.find_first_of(f, a, b, rch, m, r) {
-        return Some(idx);
-    }
-    None
 }
 ```
 
 Rust:
 * [ABC382F](https://atcoder.jp/contests/abc382/submissions/60343888)
 * [Practice2-K](https://atcoder.jp/contests/practice2/submissions/49674983)
-* [ABC389F](https://atcoder.jp/contests/abc389/submissions/61992551): `find_first_of`
+* [ABC389F](https://atcoder.jp/contests/abc389/submissions/62924558): `find_first_of`
 
 C++:
 * [ABC382F](https://atcoder.jp/contests/abc382/submissions/61135848)

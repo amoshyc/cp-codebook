@@ -217,11 +217,5 @@ where
 }
 ```
 
-[ABC392F](https://atcoder.jp/contests/abc392/submissions/62575641): `split_by_size`
-```rust
-let mut treap = Treap::<usize>::new();
-for i in 0..n {
-    treap.insert_at_pos(i + 1, p[i]);
-}
-let ans = treap.to_vec();
-```
+- [ABC392F](https://atcoder.jp/contests/abc392/submissions/62575641): `split_by_size`
+- [ABC392F](https://atcoder.jp/contests/abc392/submissions/62587787): Python reference
