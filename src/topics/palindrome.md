@@ -24,6 +24,60 @@ let g = |x: i64, k: i64| 10i64.pow(((k + 1) / 2) as u32 - 1) + x;
 
 [ABC363D](https://atcoder.jp/contests/abc363/submissions/55856350)
 
+## Palindrome Paths
+
+> Given a directed graph with N vertices and at most N(N - 1)/2 edges,
+> each edge has a lowercase English character as label.
+> For each pair of vertex (s, t), find the shortest path from s to t where
+> the concatenation of the edge labels is a palindrome.
+> (N < 100)
+
+At first glance, it is tempting to stripping out the head and tail vertex of a palindrome like floyd-warshall. 
+But the key of his problem is extending existing palindrome paths:
+
+dp[u, v] = minimum distance from u to v using palindrome path
+
+By initializing the dp using 0-distance edges and 1-distance edges:
+
+```rust
+// 0-length edges
+for a in 0..n {
+    dp[a][a] = 0;
+    que.push_back((a, a));
+}
+
+// 1-length edges
+for a in 0..n {
+    for b in 0..n {
+        if a != b && arr[a][b] != '-' {
+            dp[a][b] = 1;
+            que.push_back((a, b));
+        }
+    }
+}
+```
+
+and using the queue to find the previous and the next label:
+
+```rust
+while let Some((s, t)) = que.pop_front() {
+    for u in 0..n {
+        for v in 0..n {
+            // u -> s ~> t -> v
+            if arr[u][s] == arr[t][v] && arr[u][s] != '-' && arr[t][v] != '-' {
+                if dp[s][t] + 2 < dp[u][v] {
+                    dp[u][v] = dp[u][v].min(dp[s][t] + 2);
+                    que.push_back((u, v));
+                }
+            }
+        }
+    }
+}
+```
+
+, the answer can be found.
+
+[ABC394E](https://atcoder.jp/contests/abc394/submissions/63065958)
 
 ## Avoid K Palindrome
 
@@ -44,3 +98,5 @@ dp[i, m] -> dp[i + 1, m']
 ```
 
 [ABC359D](https://atcoder.jp/contests/abc359/submissions/54874723)
+
+
