@@ -187,20 +187,37 @@ fn knapsack_01(values: &amp;Vec&lt;i64&gt;, costs: &amp;Vec&lt;usize&gt;, max: u
 }</code></pre>
 <p><a href="https://atcoder.jp/contests/abc390/submissions/62105294">ABC390E</a></p>
 <h1 id="unbounded-knapsack"><a class="header" href="#unbounded-knapsack">Unbounded Knapsack</a></h1>
-<pre><code>dp[i, j] = minimum total cost to achieve total value j using items 0..=i
-</code></pre>
-<p>if we use item <code>i</code> 1 times, the state backtracks to <code>dp[i, j - v[i]] + c[i]</code>. Note that it is not <code>dp[i - 1, j - v[i]] + c[i]</code>. If we don't use itme <code>i</code>, the state backtracks to <code>dp[i - 1, j]</code>.</p>
-<pre><code>dp[i, j] = min(dp[i, j - v[i]] + c[i], dp[i - 1, j])
-</code></pre>
-<pre><code class="language-rust">let inf = 10usize.pow(8);
-let mut dp = vec![inf; w + 1];
-dp[0] = 0;
-for i in 0..n {
-    for j in v[i]..=w {
-        dp[j] = dp[j].min(dp[j - v[i]] + c[i]);
+<pre><code class="language-rust">// dp[i, j] = minimum total cost of total value j using items 0..=i
+// if we use item i one time, dp[i, j] = dp[i, j - v[i]] + c[i]
+// if we don't use item i, dp[i, j] = dp[i - 1, j]
+fn unbounded_knapsack_by_value(v: Vec&lt;usize&gt;, c: Vec&lt;i64&gt;, p: usize, inf: i64) -&gt; Vec&lt;i64&gt; {
+    assert!(v.len() == c.len());
+    let mut dp = vec![inf; p + 1];
+    dp[0] = 0;
+    for i in 0..v.len() {
+        for j in v[i]..=p {
+            dp[j] = dp[j].min(dp[j - v[i]] + c[i]);
+        }
     }
+    dp
 }</code></pre>
-<p><a href="https://atcoder.jp/contests/abc153/submissions/59552524">ABC153E</a></p>
+<p><a href="https://atcoder.jp/contests/sumitrust2019/submissions/63488310">AtCoder Sumitrust 2019 C</a></p>
+<pre><code class="language-rust">// dp[i, j] = maximum total value of total cost j using items 0..=i
+// if we use item i one time, dp[i, j] = dp[i, j - c[i]] + v[i]
+// if we don't use item i, dp[i, j] = dp[i - 1, j]
+fn unbounded_knapsack_by_cost(v: Vec&lt;i64&gt;, c: Vec&lt;usize&gt;, w: usize, inf: i64) -&gt; Vec&lt;i64&gt; {
+    assert!(v.len() == c.len());
+    let mut dp = vec![-inf; w + 1];
+    dp[0] = 0;
+    for i in 0..v.len() {
+        for j in c[i]..=w {
+            dp[j] = dp[j].max(dp[j - c[i]] + v[i]);
+        }
+    }
+    dp
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/sumitrust2019/submissions/63564639">AtCoder Sumitrust 2019 C</a>
+<a href="https://atcoder.jp/contests/abc153/submissions/59552524">ABC153E</a></p>
 
                     </main>
 

@@ -37,4 +37,26 @@ index : 4 3 2 1 0
 ## XOR
 
 * XOR is not distributive over addition.
-* XOR is bit independent. [ABC365E](https://atcoder.jp/contests/abc365/submissions/56361454)
+
+[ABC365E](https://atcoder.jp/contests/abc365/submissions/56361454)
+
+> Given `A[0..N]`, find a value [{ x }] that minimize [{ sum_i (x o+ A_i) }].
+
+Note that in XOR, each bit is independent of each other. 
+We can determine the i-th bit of [{x}] independently.
+For the i-th bit, we count "the number of 0" and "the number of 1" of all elements' i-th bit.
+If the latter is larger, then the i-th bit of [{x}] should be 1.
+
+```rust
+let mut x = 0;
+for i in 0..32 {
+   let cnt_0 = arr.iter().filter(|&&x| (x >> i) & 1 == 0).count();
+   let cnt_1 = arr.len() - count_same;
+   if cnt_0 < cnt_1 {
+      x |= 1 << i;
+   }
+}
+```
+
+
+[ABC396E](https://atcoder.jp/contests/abc396/submissions/63569997)

@@ -202,8 +202,24 @@
 <h2 id="xor"><a class="header" href="#xor">XOR</a></h2>
 <ul>
 <li>XOR is not distributive over addition.</li>
-<li>XOR is bit independent. <a href="https://atcoder.jp/contests/abc365/submissions/56361454">ABC365E</a></li>
 </ul>
+<p><a href="https://atcoder.jp/contests/abc365/submissions/56361454">ABC365E</a></p>
+<blockquote>
+<p>Given <code>A[0..N]</code>, find a value [{ x }] that minimize [{ sum_i (x o+ A_i) }].</p>
+</blockquote>
+<p>Note that in XOR, each bit is independent of each other.
+We can determine the i-th bit of [{x}] independently.
+For the i-th bit, we count "the number of 0" and "the number of 1" of all elements' i-th bit.
+If the latter is larger, then the i-th bit of [{x}] should be 1.</p>
+<pre><code class="language-rust">let mut x = 0;
+for i in 0..32 {
+   let cnt_0 = arr.iter().filter(|&amp;&amp;x| (x &gt;&gt; i) &amp; 1 == 0).count();
+   let cnt_1 = arr.len() - count_same;
+   if cnt_0 &lt; cnt_1 {
+      x |= 1 &lt;&lt; i;
+   }
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/abc396/submissions/63569997">ABC396E</a></p>
 
                     </main>
 

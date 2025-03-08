@@ -28,25 +28,41 @@ fn knapsack_01(values: &Vec<i64>, costs: &Vec<usize>, max: usize) -> Vec<i64> {
 
 # Unbounded Knapsack
 
-```
-dp[i, j] = minimum total cost to achieve total value j using items 0..=i
-```
-
-if we use item `i` 1 times, the state backtracks to `dp[i, j - v[i]] + c[i]`. Note that it is not `dp[i - 1, j - v[i]] + c[i]`. If we don't use itme `i`, the state backtracks to `dp[i - 1, j]`.
-
-```
-dp[i, j] = min(dp[i, j - v[i]] + c[i], dp[i - 1, j])
-```
-
 ```rust
-let inf = 10usize.pow(8);
-let mut dp = vec![inf; w + 1];
-dp[0] = 0;
-for i in 0..n {
-    for j in v[i]..=w {
-        dp[j] = dp[j].min(dp[j - v[i]] + c[i]);
+// dp[i, j] = minimum total cost of total value j using items 0..=i
+// if we use item i one time, dp[i, j] = dp[i, j - v[i]] + c[i]
+// if we don't use item i, dp[i, j] = dp[i - 1, j]
+fn unbounded_knapsack_by_value(v: Vec<usize>, c: Vec<i64>, p: usize, inf: i64) -> Vec<i64> {
+    assert!(v.len() == c.len());
+    let mut dp = vec![inf; p + 1];
+    dp[0] = 0;
+    for i in 0..v.len() {
+        for j in v[i]..=p {
+            dp[j] = dp[j].min(dp[j - v[i]] + c[i]);
+        }
     }
+    dp
 }
 ```
 
+[AtCoder Sumitrust 2019 C](https://atcoder.jp/contests/sumitrust2019/submissions/63488310)
+
+```rust
+// dp[i, j] = maximum total value of total cost j using items 0..=i
+// if we use item i one time, dp[i, j] = dp[i, j - c[i]] + v[i]
+// if we don't use item i, dp[i, j] = dp[i - 1, j]
+fn unbounded_knapsack_by_cost(v: Vec<i64>, c: Vec<usize>, w: usize, inf: i64) -> Vec<i64> {
+    assert!(v.len() == c.len());
+    let mut dp = vec![-inf; w + 1];
+    dp[0] = 0;
+    for i in 0..v.len() {
+        for j in c[i]..=w {
+            dp[j] = dp[j].max(dp[j - c[i]] + v[i]);
+        }
+    }
+    dp
+}
+```
+
+[AtCoder Sumitrust 2019 C](https://atcoder.jp/contests/sumitrust2019/submissions/63564639)
 [ABC153E](https://atcoder.jp/contests/abc153/submissions/59552524)
