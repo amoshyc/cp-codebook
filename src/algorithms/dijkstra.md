@@ -35,6 +35,7 @@ where
 ```
 
 [CSES1195](https://cses.fi/paste/cc143ad21450a97e71debc/)
+[ABC395E](https://atcoder.jp/contests/abc395/submissions/63290265)
 
 
 ## Applications
