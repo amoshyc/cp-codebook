@@ -66,3 +66,24 @@ Let [{ x = kB + r " where " k in bbZ, r in bbZ, 0 <= r <= B - 1 }], then:
 = [{ max floor((Ar) / B) }]
 
 which is a monotonically increasing. The maximum occurs when r is maximized under constraints [{ x <= N }] and [{ r <= B - 1 }].
+
+## isqrt
+
+```rust
+fn isqrt(x: u64) -> u64 {
+    // 1 1 1 0 0 0
+    let mut lb = 0;
+    let mut ub = 1u64 << 32;
+    while ub - lb > 1 {
+        let m = (lb + ub) / 2;
+        if m.saturating_mul(m) <= x {
+            lb = m;
+        } else {
+            ub = m;
+        }
+    }
+    lb
+}
+```
+
+[ABC400C](https://atcoder.jp/contests/abc400/submissions/64707922)

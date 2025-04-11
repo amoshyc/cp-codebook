@@ -218,6 +218,22 @@ fn ceil_div(a: i64, b: i64) -&gt; i64 {
 = [{ max floor(AK + (Ar)/B) - A * floor(k + r / B) }]
 = [{ max floor((Ar) / B) }]</p>
 <p>which is a monotonically increasing. The maximum occurs when r is maximized under constraints [{ x &lt;= N }] and [{ r &lt;= B - 1 }].</p>
+<h2 id="isqrt"><a class="header" href="#isqrt">isqrt</a></h2>
+<pre><code class="language-rust">fn isqrt(x: u64) -&gt; u64 {
+    // 1 1 1 0 0 0
+    let mut lb = 0;
+    let mut ub = 1u64 &lt;&lt; 32;
+    while ub - lb &gt; 1 {
+        let m = (lb + ub) / 2;
+        if m.saturating_mul(m) &lt;= x {
+            lb = m;
+        } else {
+            ub = m;
+        }
+    }
+    lb
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/abc400/submissions/64707922">ABC400C</a></p>
 
                     </main>
 
