@@ -216,6 +216,14 @@ Since L1 distance is commutative, we can sort the sequence.</p>
     }
     ans
 }</code></pre>
+<h2 id="prevent-d"><a class="header" href="#prevent-d">Prevent D</a></h2>
+<blockquote>
+<p>Given A[0..N], find the minimum number of element to remove to make A satisfy A[i] - A[j] ≠ D for all i ≠ j.</p>
+</blockquote>
+<p>Observed that A[i] can only put constraints on A[i] - D and A[i] + D, we can split A into multiple chains.
+Each chain is an arithmetic sequence. For each chain, we can the following problems using dp:
+Given P[0..M], find the minium total sum if for any adjacent element we must pick at least one.
+<a href="https://atcoder.jp/contests/abc403/submissions/65297775">ABC403D</a></p>
 <h2 id="2d-points"><a class="header" href="#2d-points">2D Points</a></h2>
 <blockquote>
 <p>Given N points, find the maximum L1 distance between any pair of points.</p>
