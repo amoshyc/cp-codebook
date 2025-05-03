@@ -194,7 +194,7 @@ loop {
         break;
     }
 }</code></pre>
-<p><code>next_perm</code> does <strong>not</strong> produce all <code>N!</code> permutations if there are duplicated items in <code>arr</code>.</p>
+<p>Note that <code>next_perm</code> does <strong>not</strong> produce all <code>N!</code> permutations if there are duplicated items in <code>arr</code>.</p>
 <ul>
 <li><a href="https://atcoder.jp/contests/abc363/submissions/55819341">ABC363C</a></li>
 <li><a href="https://atcoder.jp/contests/abc369/submissions/58171789">ABC369E</a></li>
@@ -227,6 +227,45 @@ fn comb_iter(n: usize, r: usize) -&gt; impl std::iter::Iterator&lt;Item = Vec&lt
 <ul>
 <li><a href="https://leetcode.cn/problems/iterator-for-combination/solutions/101723/zi-mu-zu-he-die-dai-qi-by-leetcode-solution/">https://leetcode.cn/problems/iterator-for-combination/solutions/101723/zi-mu-zu-he-die-dai-qi-by-leetcode-solution/</a></li>
 </ul>
+<h2 id="submasksubset"><a class="header" href="#submasksubset">Submask/Subset</a></h2>
+<pre><code class="language-rust">fn submask_iter(mask: usize) -&gt; impl std::iter::Iterator&lt;Item = usize&gt; {
+    let mut submask = mask;
+    let iter1 = std::iter::once(submask);
+    let iter2 = std::iter::from_fn(move || {
+        if submask == 0 {
+            None
+        } else {
+            submask = (submask - 1) &amp; mask;
+            Some(submask)
+        }
+    });
+    iter1.chain(iter2)
+}</code></pre>
+<p><a href="https://cp-algorithms.com/algebra/all-submasks.html#iterating-through-all-masks-with-their-submasks-complexity-o3n">CP Algorithm Reference</a></p>
+<p>Given a mask, we want to enumerate all its submask. To do so, we pick only the bit that is <code>1</code>. In theory, assume there are <code>k</code> of <code>1</code>, we  simply iterate all the number <code>2^k - 1</code> to <code>0</code> and restore the bit to the original position.</p>
+<pre><code>mask    : 1 1 0 1 0 0
+pick    : ^ ^   ^       (k=3)
+----------------------
+iterate : 1 1   1       (111)  
+iterate : 1 1   0       (110)  
+iterate : 1 0   1       (101)  
+iterate : 1 0   0       (100)  
+iterate : 0 1   1       (011)  
+iterate : 0 1   0       (010)  
+iterate : 0 0   1       (001)  
+iterate : 0 0   0       (000)  
+----------------------
+submask : 1 1 0 1 0 0   (111)  
+submask : 1 1 0 0 0 0   (110)  
+submask : 1 0 0 1 0 0   (101)  
+submask : 1 0 0 0 0 0   (100)  
+submask : 0 1 0 1 0 0   (011)  
+submask : 0 1 0 0 0 0   (010)  
+submask : 0 0 0 1 0 0   (001)  
+submask : 0 0 0 0 0 0   (000)  
+</code></pre>
+<p>For  implementation, given previous <code>submask</code>, the next submask is <code>(submask - 1) &amp; mask</code>. <code>submask - 1</code> performs iteration and <code>&amp; mask</code> makes it valid.</p>
+<p><a href="https://atcoder.jp/contests/abc404/submissions/65479955">ABC404D</a></p>
 <h2 id="cartesian-product"><a class="header" href="#cartesian-product">Cartesian Product</a></h2>
 <pre><code class="language-rust">// cartesian(0..h, 0..w)
 // cartesian(0..=h, 0..w)

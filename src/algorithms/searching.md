@@ -37,7 +37,7 @@ loop {
     }
 }
 ```
-`next_perm` does **not** produce all `N!` permutations if there are duplicated items in `arr`. 
+Note that `next_perm` does **not** produce all `N!` permutations if there are duplicated items in `arr`. 
 
 * [ABC363C](https://atcoder.jp/contests/abc363/submissions/55819341)
 * [ABC369E](https://atcoder.jp/contests/abc369/submissions/58171789)
@@ -72,6 +72,55 @@ fn comb_iter(n: usize, r: usize) -> impl std::iter::Iterator<Item = Vec<usize>> 
 Ref:
 * <https://leetcode.cn/problems/iterator-for-combination/solutions/101723/zi-mu-zu-he-die-dai-qi-by-leetcode-solution/>
 
+
+## Submask/Subset
+
+```rust
+fn submask_iter(mask: usize) -> impl std::iter::Iterator<Item = usize> {
+    let mut submask = mask;
+    let iter1 = std::iter::once(submask);
+    let iter2 = std::iter::from_fn(move || {
+        if submask == 0 {
+            None
+        } else {
+            submask = (submask - 1) & mask;
+            Some(submask)
+        }
+    });
+    iter1.chain(iter2)
+}
+```
+
+[CP Algorithm Reference](https://cp-algorithms.com/algebra/all-submasks.html#iterating-through-all-masks-with-their-submasks-complexity-o3n)
+
+Given a mask, we want to enumerate all its submask. To do so, we pick only the bit that is `1`. In theory, assume there are `k` of `1`, we  simply iterate all the number `2^k - 1` to `0` and restore the bit to the original position.
+
+```
+mask    : 1 1 0 1 0 0
+pick    : ^ ^   ^       (k=3)
+----------------------
+iterate : 1 1   1       (111)  
+iterate : 1 1   0       (110)  
+iterate : 1 0   1       (101)  
+iterate : 1 0   0       (100)  
+iterate : 0 1   1       (011)  
+iterate : 0 1   0       (010)  
+iterate : 0 0   1       (001)  
+iterate : 0 0   0       (000)  
+----------------------
+submask : 1 1 0 1 0 0   (111)  
+submask : 1 1 0 0 0 0   (110)  
+submask : 1 0 0 1 0 0   (101)  
+submask : 1 0 0 0 0 0   (100)  
+submask : 0 1 0 1 0 0   (011)  
+submask : 0 1 0 0 0 0   (010)  
+submask : 0 0 0 1 0 0   (001)  
+submask : 0 0 0 0 0 0   (000)  
+```
+
+For  implementation, given previous `submask`, the next submask is `(submask - 1) & mask`. `submask - 1` performs iteration and `& mask` makes it valid.
+
+[ABC404D](https://atcoder.jp/contests/abc404/submissions/65479955)
 
 ## Cartesian Product
 
