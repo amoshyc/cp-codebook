@@ -11,6 +11,7 @@
     - [SegTree](./datastructures/segtree.md)
     - [Sparse Table](./datastructures/sparse_table.md)
     - [Treap](./datastructures/treap.md)
+    - [Wavelet Matrix](./datastructures/wavelet_matrix.md)
 
 - [Algorithms](./algorithms/readme.md)
     - [2-SAT](./algorithms/2-sat.md)
@@ -64,6 +65,7 @@
 
 - [Miscellaneous](./miscellaneous/readme.md)
     - [Rust Basic](./miscellaneous/rust_basic.md)
+    - [Rotate](./miscellaneous/rotate.md)
     - [Running Length Encoding](./miscellaneous/rle.md)
     - [Merge 2 Sorted Array](./miscellaneous/merge.md)
     - [Ordered Float](./miscellaneous/ordered_float.md)
