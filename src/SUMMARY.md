@@ -19,6 +19,7 @@
     - [CombTool](./algorithms/combtool.md)
     - [Dijkstra](./algorithms/dijkstra.md)
     - [Eccentricity](./algorithms/ecc.md)
+    - [Euler Tour](./algorithms/euler_tour.md)
     - [Floyd Warshall](./algorithms/floyd_warshall.md)
     - [Greedy](./algorithms/greedy.md)
     - [LCA](./algorithms/lca.md)
