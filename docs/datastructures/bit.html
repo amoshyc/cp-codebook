@@ -198,7 +198,7 @@ impl&lt;T: Clone + Default + std::ops::AddAssign + std::ops::Sub&lt;Output = T&g
         res
     }
 
-    // l..i, 0-based
+    // l..r, 0-based
     fn sum(&amp;self, mut l: usize, mut r: usize) -&gt; T {
         if r == 0 {
             T::default()

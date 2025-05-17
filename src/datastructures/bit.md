@@ -33,7 +33,7 @@ impl<T: Clone + Default + std::ops::AddAssign + std::ops::Sub<Output = T>> BIT<T
         res
     }
 
-    // l..i, 0-based
+    // l..r, 0-based
     fn sum(&self, mut l: usize, mut r: usize) -> T {
         if r == 0 {
             T::default()
