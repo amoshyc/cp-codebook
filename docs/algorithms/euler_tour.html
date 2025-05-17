@@ -173,7 +173,7 @@ fn euler_tour(adj: &amp;Vec&lt;Vec&lt;usize&gt;&gt;, root: usize) -&gt; (Vec&lt;
     let mut t = 0;
     let mut enter = vec![!0; n]; // enter time
     let mut leave = vec![!0; n]; // leave time
-    euler_dfs(root, !0, &amp;mut t, &amp;mut enter, &amp;mut leave, &amp;adj);
+    euler_dfs(root, !0, &amp;mut t, &amp;mut enter, &amp;mut leave, adj);
     (enter, leave)
 }
 
@@ -194,7 +194,7 @@ fn euler_dfs(
     }
     leave[u] = *t;
 }</code></pre>
-<p><a href="https://atcoder.jp/contests/abc406/submissions/65929372">ABC406F</a></p>
+<p><a href="https://atcoder.jp/contests/abc406/submissions/65933685">ABC406F</a></p>
 
                     </main>
 
