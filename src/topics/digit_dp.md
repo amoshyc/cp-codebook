@@ -48,7 +48,7 @@ for i in range(N):
 
 概念上就是如此，不過這題只有這樣會 TLE，還需做額外的優化，在此不展開。
 
-## [Valid payments](https://atcoder.jp/contests/abc182/tasks/abc182_f)
+## [Minimal payments](https://atcoder.jp/contests/abc231/tasks/abc231_e)
 
 在 $A$ 進制中，給定一個數 $V$，請找出一個數 $r$，最小化「組出 $r$ 與組出 $(V + r)$ 所需要的硬幣總數」。
 
@@ -138,7 +138,6 @@ $$
 K = [int(x) for x in reversed(input())]
 N = len(K)
 D = int(input())
-M = 10 ** 9 + 7
 
 dp = [[[0, 0] for _ in range(D)] for _ in range(N + 1)]
 dp[0][0][0] = 1
@@ -150,10 +149,29 @@ for i in range(N):
                 new_s = (s + d) % D
                 new_f = int((d > K[i]) or (d == K[i] and f == 1))
                 dp[i + 1][new_s][new_f] += dp[i][s][f]
-                dp[i + 1][new_s][new_f] %= M
 
-print((dp[N][0][0] - 1 + M) % M) # subtract the 0
+print(dp[N][0][0] - 1) # subtract the 0
 ```
+
+有時題目會要求輸出那些數的和，而不是那些數的個數，此時可以維護另一個 dp 記錄和。
+在轉移時考慮該 digit 對答案的增加，即「個數」乘上「該 digit 的值」。
+
+```python
+dp = [[[0, 0] for _ in range(D)] for _ in range(N + 1)]
+ans = [[[0, 0] for _ in range(D)] for _ in range(N + 1)]
+dp[0][0][0] = 1
+for i in range(N):
+    for s in range(D):
+        for f in range(2):
+            for d in range(10):
+                new_s = (s + d) % D
+                new_f = int((d > K[i]) or (d == K[i] and f == 1))
+                dp[i + 1][new_s][new_f] += dp[i][s][f]
+
+                val = dp[i][s][f] * (10**D)
+                ans[i + 1][new_s][new_f] += ans[i][s][f] + val
+```
+[ABC406E](https://atcoder.jp/contests/abc406/submissions/65917206)
 
 
 ## [Windy 數](https://vjudge.net/problem/LibreOJ-10165)

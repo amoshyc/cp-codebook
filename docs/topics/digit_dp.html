@@ -202,7 +202,7 @@ $$</p>
                 dp[i + 1][new_c] += dp[i][c]
 </code></pre>
 <p>概念上就是如此，不過這題只有這樣會 TLE，還需做額外的優化，在此不展開。</p>
-<h2 id="valid-payments-1"><a class="header" href="#valid-payments-1"><a href="https://atcoder.jp/contests/abc182/tasks/abc182_f">Valid payments</a></a></h2>
+<h2 id="minimal-payments"><a class="header" href="#minimal-payments"><a href="https://atcoder.jp/contests/abc231/tasks/abc231_e">Minimal payments</a></a></h2>
 <p>在 $A$ 進制中，給定一個數 $V$，請找出一個數 $r$，最小化「組出 $r$ 與組出 $(V + r)$ 所需要的硬幣總數」。</p>
 <p>c is carry, r is change, p is pay, v is price.</p>
 <pre><code>    c3  c2  c1   0
@@ -264,7 +264,6 @@ $$</p>
 <pre><code class="language-python">K = [int(x) for x in reversed(input())]
 N = len(K)
 D = int(input())
-M = 10 ** 9 + 7
 
 dp = [[[0, 0] for _ in range(D)] for _ in range(N + 1)]
 dp[0][0][0] = 1
@@ -276,10 +275,26 @@ for i in range(N):
                 new_s = (s + d) % D
                 new_f = int((d &gt; K[i]) or (d == K[i] and f == 1))
                 dp[i + 1][new_s][new_f] += dp[i][s][f]
-                dp[i + 1][new_s][new_f] %= M
 
-print((dp[N][0][0] - 1 + M) % M) # subtract the 0
+print(dp[N][0][0] - 1) # subtract the 0
 </code></pre>
+<p>有時題目會要求輸出那些數的和，而不是那些數的個數，此時可以維護另一個 dp 記錄和。
+在轉移時考慮該 digit 對答案的增加，即「個數」乘上「該 digit 的值」。</p>
+<pre><code class="language-python">dp = [[[0, 0] for _ in range(D)] for _ in range(N + 1)]
+ans = [[[0, 0] for _ in range(D)] for _ in range(N + 1)]
+dp[0][0][0] = 1
+for i in range(N):
+    for s in range(D):
+        for f in range(2):
+            for d in range(10):
+                new_s = (s + d) % D
+                new_f = int((d &gt; K[i]) or (d == K[i] and f == 1))
+                dp[i + 1][new_s][new_f] += dp[i][s][f]
+
+                val = dp[i][s][f] * (10**D)
+                ans[i + 1][new_s][new_f] += ans[i][s][f] + val
+</code></pre>
+<p><a href="https://atcoder.jp/contests/abc406/submissions/65917206">ABC406E</a></p>
 <h2 id="windy-數"><a class="header" href="#windy-數"><a href="https://vjudge.net/problem/LibreOJ-10165">Windy 數</a></a></h2>
 <p>定義 Windy 數為該數的數字（不含 leading 0）與數字之間差至少 2，問 $[a, b]$ 之間有多少 Windy 數？</p>
 <p>如同上一題，我們轉換題目為求 $f(K)$ = $[0, K]$ 之間有多少數是 Windy 數。不同的是我們不只記錄前一位是否是 2，而是記錄前一位的數字是什麼。</p>
