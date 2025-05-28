@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Square Number - Codebook</title>
+        <title>Parenthesis Sequence - Codebook</title>
 
 
         <!-- Custom HTML head -->
@@ -166,30 +166,47 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="square-number"><a class="header" href="#square-number">Square Number</a></h1>
-<p>Let <code>f(x)</code> = largest divisor of x that is square number.
-<code>a * b</code> is square number if and only if <code>a / f(a) == b / f(b)</code>.</p>
-<pre><code class="language-rust">// Build f
-let mut f = vec![0; m + 1];
-for d in (1..).take_while(|&amp;d| d * d &lt;= m) {
-    for x in ((d * d)..=m).step_by(d * d) {
-        f[x] = d * d;
+                        <h1 id="parenthesis-sequence"><a class="header" href="#parenthesis-sequence">Parenthesis Sequence</a></h1>
+<p>Sequences like:</p>
+<ul>
+<li><code>()()()</code></li>
+<li><code>(())((()))()</code></li>
+<li><code>(()(()))</code></li>
+</ul>
+<p>A valid parenthesis sequence <code>S[0..2N]</code> has following property:</p>
+<blockquote>
+<p>For every prefix <code>S[0..=i]</code>, the number of <code>(</code> in it is <code>floor(i/2) + 1</code>.</p>
+</blockquote>
+<h2 id="most-valuable-parentheses"><a class="header" href="#most-valuable-parentheses"><a href="https://atcoder.jp/contests/abc407/tasks/abc407_e">Most Valuable Parentheses</a></a></h2>
+<blockquote>
+<p>Given a positive integer sequence A[0..2N], construct a valid parenthesis sequence <code>S</code> which maximize the score. The score is defined as <code>sum(A[i] for i in 0..2N if S[i] == '(')</code>.</p>
+</blockquote>
+<p>When scanning the <code>A</code> from left to right, greedily pick the position that has maximum value as <code>(</code>.</p>
+<pre><code class="language-rust">let mut heap = BinaryHeap::new(); // max heap
+let mut seq = vec![')'; 2 * n];
+
+seq[0] = '(';
+let mut cnt = 1;
+
+for i in 1..(2 * n - 1) {
+    heap.push((arr[i], i));
+    if cnt &lt; i / 2 + 1 {
+        let (_, j) = heap.pop().unwrap();
+        seq[j] = '(';
+        cnt += 1;
     }
 }</code></pre>
-<ul>
-<li><a href="https://atcoder.jp/contests/abc254/submissions/41798627">ABC254D</a></li>
-<li><a href="https://atcoder.jp/contests/abc342/submissions/50600083">ABC342D</a></li>
-</ul>
+<p><a href="https://atcoder.jp/contests/abc407/submissions/66232324">ABC407E</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../topics/parenthesis_sequence.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../topics/pairwise_on_sequence.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../topics/segments.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../topics/square_number.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -199,11 +216,11 @@ for d in (1..).take_while(|&amp;d| d * d &lt;= m) {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../topics/parenthesis_sequence.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../topics/pairwise_on_sequence.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../topics/segments.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../topics/square_number.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

@@ -55,6 +55,7 @@
     - [Multiples/GCD/LCM](./topics/multiples_gcd_lcm.md)
     - [Pairwise on Graph/Tree](./topics/pairwise_on_graph.md)
     - [Pairwise on Sequence](./topics/pairwise_on_sequence.md)
+    - [Parenthesis Sequence](./topics/parenthesis_sequence.md)
     - [Square Number](./topics/square_number.md)
     - [Segments](./topics/segments.md)
     - [Subsequence](./topics/subsequence.md)
