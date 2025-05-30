@@ -179,9 +179,9 @@
 </blockquote>
 <h2 id="most-valuable-parentheses"><a class="header" href="#most-valuable-parentheses"><a href="https://atcoder.jp/contests/abc407/tasks/abc407_e">Most Valuable Parentheses</a></a></h2>
 <blockquote>
-<p>Given a positive integer sequence A[0..2N], construct a valid parenthesis sequence <code>S</code> which maximize the score. The score is defined as <code>sum(A[i] for i in 0..2N if S[i] == '(')</code>.</p>
+<p>Given a positive integer sequence <code>A[0..2N]</code>, construct a valid parenthesis sequence <code>S</code> that maximizes the score. The score is defined as <code>sum(A[i] for i in 0..2N if S[i] == '(')</code>.</p>
 </blockquote>
-<p>When scanning the <code>A</code> from left to right, greedily pick the position that has maximum value as <code>(</code>.</p>
+<p>When scanning <code>A</code> from left to right, greedily pick the position that has maximum value as <code>(</code>.</p>
 <pre><code class="language-rust">let mut heap = BinaryHeap::new(); // max heap
 let mut seq = vec![')'; 2 * n];
 

@@ -11,9 +11,9 @@ A valid parenthesis sequence `S[0..2N]` has following property:
 
 ## [Most Valuable Parentheses](https://atcoder.jp/contests/abc407/tasks/abc407_e)
 
-> Given a positive integer sequence A[0..2N], construct a valid parenthesis sequence `S` which maximize the score. The score is defined as `sum(A[i] for i in 0..2N if S[i] == '(')`.
+> Given a positive integer sequence `A[0..2N]`, construct a valid parenthesis sequence `S` that maximizes the score. The score is defined as `sum(A[i] for i in 0..2N if S[i] == '(')`.
 
-When scanning the `A` from left to right, greedily pick the position that has maximum value as `(`.
+When scanning `A` from left to right, greedily pick the position that has maximum value as `(`.
 
 ```rust
 let mut heap = BinaryHeap::new(); // max heap
