@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Ordered Float - Codebook</title>
+        <title>Bit Operations - Codebook</title>
 
 
         <!-- Custom HTML head -->
@@ -166,33 +166,23 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="ordered-float"><a class="header" href="#ordered-float">Ordered Float</a></h1>
-<pre><code class="language-rust">use std::cmp::Ordering;
-
-#[derive(PartialEq, PartialOrd, Clone, Copy)]
-struct F(f64);
-
-impl Eq for F {}
-
-impl Ord for F {
-    fn cmp(&amp;self, other: &amp;F) -&gt; Ordering {
-        self.partial_cmp(other).unwrap()
-    }
-}</code></pre>
-<p>or</p>
-<pre><code class="language-rust">arr.sort_by_cmp(|a: f64, b: f64| a.partial_cmp(&amp;b));</code></pre>
+                        <h1 id="bit-operations"><a class="header" href="#bit-operations">Bit Operations</a></h1>
+<pre><code>fn kth_bit&lt;T&gt;(x: T, k: usize) -&gt; T
+where
+    T: std::ops::BitAnd&lt;Output=T&gt; + std::ops::Shr&lt;usize, Output=T&gt; + From&lt;u8&gt;,
+{
+    (x &gt;&gt; k) &amp; T::from(1)
+}
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../miscellaneous/merge.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../miscellaneous/ordered_float.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../miscellaneous/bit_ops.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -200,13 +190,10 @@ impl Ord for F {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../miscellaneous/merge.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../miscellaneous/ordered_float.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../miscellaneous/bit_ops.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
-                    </a>
             </nav>
 
         </div>

@@ -71,3 +71,4 @@
     - [Running Length Encoding](./miscellaneous/rle.md)
     - [Merge 2 Sorted Array](./miscellaneous/merge.md)
     - [Ordered Float](./miscellaneous/ordered_float.md)
+    - [Bit Operations](./miscellaneous/bit_ops.md)
