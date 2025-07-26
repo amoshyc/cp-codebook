@@ -187,7 +187,7 @@ fn floyd_warshall(adj: &amp;Vec&lt;Vec&lt;i64&gt;&gt;, inf: i64) -&gt; Vec&lt;Ve
     }
     dp
 }</code></pre>
-<p>The dp can be updated in [{ O(n^2) }] when the weight of an edge updated:</p>
+<p>The dp can be updated in [{ O(n^2) }] when the weight of an edge decreases:</p>
 <pre><code class="language-rust">let relax = |dis: &amp;mut Vec&lt;Vec&lt;i64&gt;&gt;, x: usize, y: usize, w: i64| {
     for i in 0..dis.len() {
         for j in 0..dis.len() {
