@@ -27,8 +27,8 @@ The dp can be updated in [{ O(n^2) }] when the weight of an edge updated:
 
 ```rust
 let relax = |dis: &mut Vec<Vec<i64>>, x: usize, y: usize, w: i64| {
-    for i in 0..=n {
-        for j in 0..=n {
+    for i in 0..dis.len() {
+        for j in 0..dis.len() {
             if dis[i][x] != inf && dis[y][j] != inf {
                 dis[i][j] = dis[i][j].min(dis[i][x] + w + dis[y][j]);
             }
