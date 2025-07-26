@@ -1,11 +1,13 @@
 # Floyd Warshall
 
 ```rust
+// Please check:
+// 1. adj[u][u] = 0 in most cases
+// 2. adj[u][v] = adj[u][v].min(w) to deal with multiple edges
 fn floyd_warshall(adj: &Vec<Vec<i64>>, inf: i64) -> Vec<Vec<i64>> {
     // dp[k][u][v] = minimum distance from u to v using vertices 0..=k as intermediate
     // dp[-1][u][v] = adj[u][v]
     // dp[k][u][v] = min(dp[k - 1][u][v], dp[k - 1][u][k] + dp[k - 1][k][v]);
-    // adj[u][u] is usally 0. Remember to check it.
     let n = adj.len();
     let mut dp = adj.clone();
     for k in 0..n {
