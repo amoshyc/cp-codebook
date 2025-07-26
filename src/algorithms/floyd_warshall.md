@@ -21,21 +21,24 @@ fn floyd_warshall(adj: &Vec<Vec<i64>>, inf: i64) -> Vec<Vec<i64>> {
 }
 ```
 
-The dp can be updated in [{ O(n^2) }] when the weight of an edge decreased to `w`:
+The dp can be updated in [{ O(n^2) }] when the weight of an edge updated:
 
 ```rust
-let dis = floyd_warshall(&adj, inf);
-dis[u][v] = w; // (u, v) decreases to w
-for s in 0..n {
-    for t in 0..n {
-        if dis[s][u] != inf && dis[v][t] != inf {
-            dis[s][t] = dis[s][t].min(dis[s][u] + dis[u][v] + dis[v][t]);
+let relax = |dis: &mut Vec<Vec<i64>>, x: usize, y: usize, w: i64| {
+    for i in 0..=n {
+        for j in 0..=n {
+            if dis[i][x] != inf && dis[y][j] != inf {
+                dis[i][j] = dis[i][j].min(dis[i][x] + w + dis[y][j]);
+            }
         }
     }
-}
+};
+
+let dis = floyd_warshall(&adj, inf);
+relax(&mut dis, u, v, w); // u -> v decreases to w
 ```
 
 Problem List:
 * basic: [ABC369E](https://atcoder.jp/contests/abc369/submissions/59443525)
 * 2 times: [ABC143E](https://atcoder.jp/contests/abc143/submissions/65400848)
-* dp update: [ABC375F](https://atcoder.jp/contests/abc375/submissions/59443536)
+* dp update: [ABC375F](https://atcoder.jp/contests/abc375/submissions/59443536), [ABC416E](https://atcoder.jp/contests/abc416/submissions/67977770)

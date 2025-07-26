@@ -185,21 +185,24 @@
     }
     dp
 }</code></pre>
-<p>The dp can be updated in [{ O(n^2) }] when the weight of an edge decreased to <code>w</code>:</p>
-<pre><code class="language-rust">let dis = floyd_warshall(&amp;adj, inf);
-dis[u][v] = w; // (u, v) decreases to w
-for s in 0..n {
-    for t in 0..n {
-        if dis[s][u] != inf &amp;&amp; dis[v][t] != inf {
-            dis[s][t] = dis[s][t].min(dis[s][u] + dis[u][v] + dis[v][t]);
+<p>The dp can be updated in [{ O(n^2) }] when the weight of an edge updated:</p>
+<pre><code class="language-rust">let relax = |dis: &amp;mut Vec&lt;Vec&lt;i64&gt;&gt;, x: usize, y: usize, w: i64| {
+    for i in 0..=n {
+        for j in 0..=n {
+            if dis[i][x] != inf &amp;&amp; dis[y][j] != inf {
+                dis[i][j] = dis[i][j].min(dis[i][x] + w + dis[y][j]);
+            }
         }
     }
-}</code></pre>
+};
+
+let dis = floyd_warshall(&amp;adj, inf);
+relax(&amp;mut dis, u, v, w); // u -&gt; v decreases to w</code></pre>
 <p>Problem List:</p>
 <ul>
 <li>basic: <a href="https://atcoder.jp/contests/abc369/submissions/59443525">ABC369E</a></li>
 <li>2 times: <a href="https://atcoder.jp/contests/abc143/submissions/65400848">ABC143E</a></li>
-<li>dp update: <a href="https://atcoder.jp/contests/abc375/submissions/59443536">ABC375F</a></li>
+<li>dp update: <a href="https://atcoder.jp/contests/abc375/submissions/59443536">ABC375F</a>, <a href="https://atcoder.jp/contests/abc416/submissions/67977770">ABC416E</a></li>
 </ul>
 
                     </main>
