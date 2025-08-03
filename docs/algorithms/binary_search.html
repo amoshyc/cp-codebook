@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>CombTool - Codebook</title>
+        <title>Binary Search - Codebook</title>
 
 
         <!-- Custom HTML head -->
@@ -166,79 +166,20 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="combtool"><a class="header" href="#combtool">CombTool</a></h1>
-<p>$$
-x!^{-1}
-\equiv (\frac{(x + 1)!}{x + 1}) ^ {-1}
-\equiv (x + 1)!^{-1} (x + 1)
-\pmod {p}
-$$</p>
-<pre><code class="language-rust">struct CombTool {
-    fact: Vec&lt;Mint&gt;,
-    finv: Vec&lt;Mint&gt;,
-}
-
-impl CombTool {
-    fn new(n: usize) -&gt; Self {
-        let mut fact = vec![Mint(1); n + 1];
-        let mut finv = vec![Mint(1); n + 1];
-        for i in 1..=n {
-            fact[i] = fact[i - 1] * Mint(i as u64);
-        }
-        finv[n] = fact[n].inv();
-        for i in (1..n).rev() {
-            finv[i] = finv[i + 1] * Mint((i + 1) as u64);
-        }
-        Self { fact, finv }
-    }
-    fn comb(&amp;self, a: usize, b: usize) -&gt; Mint {
-        self.fact[a] * self.finv[b] * self.finv[a - b]
-    }
-    fn perm(&amp;self, a: usize, b: usize) -&gt; Mint {
-        self.fact[a] * self.finv[a - b]
-    }
-    fn hcomb(self, a: usize, b: usize) -&gt; Mint {
-        self.comb(a + b - 1, b)
-    }
-}</code></pre>
-<p><a href="https://atcoder.jp/contests/abc262/submissions/37074323">ABC262E</a></p>
-<h2 id="problems"><a class="header" href="#problems">Problems</a></h2>
-<blockquote>
-<p>Given the upperbounds [{{c_a, c_b, ..., c_z}}] and $K$, how many string of length [{K}] can be formed where the number of character [{x}] satisfies the upperbound, [{ 0 &lt;= n(x) &lt;= c_x }].</p>
-</blockquote>
-<p>Let [{dp[i, j]}] = number of string of length [{j}] that uses first [{i}] characters, i.e., [{{a, b, ..., i}}].
-For [{dp[i, j]}], inspect the number of character [{i}]  and their possible locations:</p>
-<pre><code>source: xxxx
-(l = 0) =&gt; xxxx
-(l = 1) =&gt; ixxx, xixx, xxix, xxxi
-(l = 2) =&gt; iixx, ixix, ixxi, xiix, xixi, xxii 
-...
-(l = c[i])
-</code></pre>
-<p>That is, choosing [{l}] characters from the length [{j}] string to be filled with [{i}]. The remaining positions forms a repeated subproblem, the number of string of length [{j - l}] that uses first [{i - 1}] characters:
-[{ dp[i, j] = \sum_(l=0)^(c_i) ((j), (l)) dp[i - 1, j - l]}]</p>
-<pre><code class="language-rust">let mut dp = vec![vec![Mint(0); k + 1]; 26];
-for j in 0..=cnt[0].min(k) { // Aware the base case
-    dp[0][j] = Mint(1);
-}
-for i in 1..26 {
-    for j in 0..=k {
-        for l in 0..=cnt[i].min(j) {
-            dp[i][j] = dp[i][j] + tool.comb(j, l) * dp[i - 1][j - l];
-        }
-    }
-}</code></pre>
-<p><a href="https://atcoder.jp/contests/abc358/submissions/54619518">ABC358E</a></p>
+                        <h1 id="binary-search"><a class="header" href="#binary-search">Binary Search</a></h1>
+<p>I had made a binary search tutorial <a href="https://docs.google.com/presentation/d/1m5mVHdYYGr4juw6walPvX9UpbtijlHt-AgowzAHFT5Q/edit?usp=sharing">here</a>.
+In this page I only list some tricky binary search problems for future reference.</p>
+<h2 id="zone2021c"><a class="header" href="#zone2021c"><a href="https://atcoder.jp/contests/zone2021/submissions/68098847">Zone2021C</a></a></h2>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../algorithms/binary_search.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../algorithms/bfs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../algorithms/dijkstra.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../algorithms/combtool.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -248,11 +189,11 @@ for i in 1..26 {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../algorithms/binary_search.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../algorithms/bfs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../algorithms/dijkstra.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../algorithms/combtool.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
