@@ -50,7 +50,7 @@ fn greedy_packing_10(mut items: Vec<(i64, i64)>, boxes: Vec<i64>) -> i64 {
 }
 ```
 
-> Given `N` items with weight `W[i]` and value `V[i]`, and `M` boxes with **maximum** capcacity `X[i]`, each box can contain at most 1 item. What is the maximum total value that can be put in the boxes? (`N < 1e5, M < 1e5`)
+> Given `N` items with weight `W[i]` and value `V[i]`, and `M` boxes with size `X[i]`, each box can contain at most 1 item that `w < x (or w >= x)`. What is the maximum total value that can be put in the boxes? (`N < 1e5, M < 1e5`)
 
 Assume we've already found the maximum value achievable by packing items `0..i` into the `M` available boxes. What's the optimal solution for packing items `0..=i` into `M` boxes? With the addition of item `i`, the optimal solution comes from two scenarios
 
@@ -70,8 +70,7 @@ Scenario 2 is tricky to implement directly. However, it only occurs when `V[j] <
 * The ranges are usually in a large space (> 10^9).
 * Maximize the matching number.
 
-Using sweep line from left to right, at each point, we choose a segment with minimum `r` from valid segments.
-Valid segments are maintained in a `BTreeSet`.
+Using sweep line from left to right, at each point, we choose a segment with minimum `r` from valid segments. Valid segments are maintained in a `BTreeSet`.
 Note that the space is usually large, be careful about how `t` is updated.
 
 ```rust

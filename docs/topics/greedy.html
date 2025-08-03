@@ -212,7 +212,7 @@ fn greedy_packing_10(mut items: Vec&lt;(i64, i64)&gt;, boxes: Vec&lt;i64&gt;) -&
     ans
 }</code></pre>
 <blockquote>
-<p>Given <code>N</code> items with weight <code>W[i]</code> and value <code>V[i]</code>, and <code>M</code> boxes with <strong>maximum</strong> capcacity <code>X[i]</code>, each box can contain at most 1 item. What is the maximum total value that can be put in the boxes? (<code>N &lt; 1e5, M &lt; 1e5</code>)</p>
+<p>Given <code>N</code> items with weight <code>W[i]</code> and value <code>V[i]</code>, and <code>M</code> boxes with size <code>X[i]</code>, each box can contain at most 1 item that <code>w &lt; x (or w &gt;= x)</code>. What is the maximum total value that can be put in the boxes? (<code>N &lt; 1e5, M &lt; 1e5</code>)</p>
 </blockquote>
 <p>Assume we've already found the maximum value achievable by packing items <code>0..i</code> into the <code>M</code> available boxes. What's the optimal solution for packing items <code>0..=i</code> into <code>M</code> boxes? With the addition of item <code>i</code>, the optimal solution comes from two scenarios</p>
 <ol>
@@ -231,8 +231,7 @@ fn greedy_packing_10(mut items: Vec&lt;(i64, i64)&gt;, boxes: Vec&lt;i64&gt;) -&
 <li>The ranges are usually in a large space (&gt; 10^9).</li>
 <li>Maximize the matching number.</li>
 </ul>
-<p>Using sweep line from left to right, at each point, we choose a segment with minimum <code>r</code> from valid segments.
-Valid segments are maintained in a <code>BTreeSet</code>.
+<p>Using sweep line from left to right, at each point, we choose a segment with minimum <code>r</code> from valid segments. Valid segments are maintained in a <code>BTreeSet</code>.
 Note that the space is usually large, be careful about how <code>t</code> is updated.</p>
 <pre><code class="language-rust">//            Boxes
 //          0 1 2 3 4
