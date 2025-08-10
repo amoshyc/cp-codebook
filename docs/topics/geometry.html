@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Greedy - Codebook</title>
+        <title>Geometry - Codebook</title>
 
 
         <!-- Custom HTML head -->
@@ -166,131 +166,33 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="greedy"><a class="header" href="#greedy">Greedy</a></h1>
-<h2 id="matching-with-01-or-10-distribution"><a class="header" href="#matching-with-01-or-10-distribution">Matching with 0..1 or 1..0 distribution</a></h2>
-<ul>
-<li>Matching items with boxes.</li>
-<li>Maximize the total matched values.</li>
-<li>0/1 indicates matching feasibility.</li>
-</ul>
-<pre><code class="language-rust">//             Sorted Boxes
-//               A B C D
-// item 0 (v0):      1 1
-// item 1 (v1):    1 1 1
-// item 2 (v2):        1
-// item 3 (v3):  1 1 1 1
-// Each row (item) is a 0...1 distribution.
-fn greedy_packing_01(mut items: Vec&lt;(i64, i64)&gt;, boxes: Vec&lt;i64&gt;) -&gt; i64 {
-    let mut boxes = BTreeSet::from_iter((0..boxes.len()).map(|i| (boxes[i], i)));
-    items.sort_by_key(|&amp;(w, v)| (Reverse(v), w));
-    let mut ans = 0;
-    for &amp;(w, v) in &amp;items {
-        if let Some(&amp;(b, i)) = boxes.range((w, 0)..).next() {
-            boxes.remove(&amp;(b, i));
-            ans += v;
-        }
-    }
-    ans
-}</code></pre>
-<pre><code class="language-rust">//             Sorted Boxes
-//               A B C D
-// item 0 (v0):  1
-// item 1 (v1):  1 1 1
-// item 2 (v2):  1 1 1 1
-// item 3 (v3):  1 1
-// Each row (item) is a 1...0 distribution.
-fn greedy_packing_10(mut items: Vec&lt;(i64, i64)&gt;, boxes: Vec&lt;i64&gt;) -&gt; i64 {
-    let mut boxes = BTreeSet::from_iter((0..boxes.len()).map(|i| (boxes[i], i)));
-    items.sort_by_key(|&amp;(w, v)| (std::cmp::Reverse(v), w));
-    let mut ans = 0;
-    for &amp;(w, v) in &amp;items {
-        if let Some(&amp;(b, i)) = boxes.range(..=(w, !0)).last() {
-            boxes.remove(&amp;(b, i));
-            ans += v;
-        }
-    }
-    ans
-}</code></pre>
-<blockquote>
-<p>Given <code>N</code> items with weight <code>W[i]</code> and value <code>V[i]</code>, and <code>M</code> boxes with size <code>X[i]</code>, each box can contain at most 1 item that <code>w &lt; x (or w &gt;= x)</code>. What is the maximum total value that can be put in the boxes? (<code>N &lt; 1e5, M &lt; 1e5</code>)</p>
-</blockquote>
-<p>Assume we've already found the maximum value achievable by packing items <code>0..i</code> into the <code>M</code> available boxes. What's the optimal solution for packing items <code>0..=i</code> into <code>M</code> boxes? With the addition of item <code>i</code>, the optimal solution comes from two scenarios</p>
-<ol>
-<li>There's an empty box: Place item <code>i</code> into an empty box that can accommodate it. If there are multiple such boxes, choose the one with the smallest capacity.</li>
-<li>There are no empty boxes: Check if, among all boxes that could accommodate item <code>i</code>, there's an item <code>j</code> already packed whose value <code>V[j]</code> is less than <code>V[i]</code>. If so, we replace item <code>j</code> with item <code>i</code>.</li>
-</ol>
-<p>Scenario 2 is tricky to implement directly. However, it only occurs when <code>V[j] &lt; V[i]</code>. This observation leads to a crucial optimization: if we pre-sort the items by their value in descending order, we no longer need to consider scenario 2. This is because when we are processing item <code>i</code>, all items already packed in boxes will have a value greater than or equal to item <code>i</code>'s value. In such a case, there's no reason to remove a higher-value item to make space for a lower-value item <code>i</code>.</p>
-<ul>
-<li><a href="https://atcoder.jp/contests/abc195/submissions/68199969">ABC195D</a></li>
-<li><a href="https://atcoder.jp/contests/abc137/submissions/68200006">ABC137D</a></li>
-<li><a href="https://atcoder.jp/contests/abc308/submissions/68200041">ABC308F</a></li>
-</ul>
-<h2 id="matching-with-segments"><a class="header" href="#matching-with-segments">Matching with Segments</a></h2>
-<ul>
-<li>Each item's feasiblity is a range.</li>
-<li>The ranges are usually in a large space (&gt; 10^9).</li>
-<li>Maximize the matching number.</li>
-</ul>
-<p>Using sweep line from left to right, at each point, we choose a segment with minimum <code>r</code> from valid segments. Valid segments are maintained in a <code>BTreeSet</code>.
-Note that the space is usually large, be careful about how <code>t</code> is updated.</p>
-<pre><code class="language-rust">//            Boxes
-//          0 1 2 3 4
-// item 0:    o---o
-// item 1:  o-----o
-// item 2:      o-o
-// item 3:      o---o
-fn greedy_matching_segs(mut segs: Vec&lt;(i64, i64)&gt;) -&gt; usize {
-    segs.sort();
-    let ls = BTreeSet::from_iter(segs.iter().map(|s| s.0));
-    let mut rs = BTreeSet::new();
-    let mut t = 0; // sweep line
-    let mut i = 0; // segs index
-    let mut ans = 0;
-    loop {
-        // Insert new valid segments to rs
-        while i &lt; segs.len() &amp;&amp; segs[i].0 &lt;= t {
-            rs.insert((segs[i].1, i));
-            i += 1;
-        }
-        // Remove invalid segments from rs
-        while let Some(&amp;(r, j)) = rs.first() {
-            if r &lt; t {
-                rs.remove(&amp;(r, j));
-            } else {
-                break;
-            }
-        }
-        // Try to pick 1 segment
-        if let Some(&amp;(r, j)) = rs.first() {
-            // Successfully picked, t += 1
-            rs.remove(&amp;(r, j));
-            ans += 1;
-            t += 1;
-        } else {
-            // Failed, jump to next possible time
-            if let Some(&amp;l) = ls.range(t + 1..).next() {
-                t = l;
-            } else {
-                break;
-            }
-        }
-    }
-    ans
-}</code></pre>
-<ul>
-<li><a href="https://atcoder.jp/contests/abc214/submissions/68201205">ABC214E</a></li>
-<li><a href="https://atcoder.jp/contests/abc325/submissions/68201188">ABC325D</a></li>
-</ul>
+                        <h1 id="geometry"><a class="header" href="#geometry">Geometry</a></h1>
+<h2 id="group-by-slope"><a class="header" href="#group-by-slope">Group by slope</a></h2>
+<pre><code class="language-rust">let dx = (xy[j].0 - xy[i].0);
+let dy = (xy[j].1 - xy[i].1);
+
+let g = gcd(dx.abs(), dy.abs());
+let (dx, dy) = (dx / g, dy / g);
+
+// normalize (dx, dy) in regard to (-dx, -dy)
+let pos = (dx, dy);
+let neg = (-dx, -dy);
+let (dx, dy) = if pos &lt; neg { pos } else { neg };
+
+groups.entry((dx, dy)).or_insert(vec![]).push(...);</code></pre>
+<p><a href="https://atcoder.jp/contests/abc418/submissions/68381296">ABC418E</a></p>
+<h2 id="count-of-trapezoidparallelogram"><a class="header" href="#count-of-trapezoidparallelogram">Count of Trapezoid/Parallelogram</a></h2>
+<p><a href="https://atcoder.jp/contests/abc418/submissions/68381296">ABC418E</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../topics/geometry.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../topics/functional_graph.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../topics/l1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../topics/greedy.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -300,11 +202,11 @@ fn greedy_matching_segs(mut segs: Vec&lt;(i64, i64)&gt;) -&gt; usize {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../topics/geometry.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../topics/functional_graph.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../topics/l1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../topics/greedy.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

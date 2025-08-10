@@ -48,6 +48,7 @@
     - [DP](./topics/dp.md)
     - [Floor and Ceiling](./topics/floor_ceil.md)
     - [Functional/Permutation Graph](./topics/functional_graph.md)
+    - [Geometry](./topics/geometry.md)
     - [Greedy](./topics/greedy.md)
     - [L1 Distance](./topics/l1.md)
     - [Longest Common Prefix](./topics/longest_common_prefix.md)

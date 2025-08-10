@@ -4,7 +4,7 @@
 
 > On a ring of length `n` where the ids are `0..n`, what is the distance between two position `u` and `v`.
 
-There will two 2 distance.
+There are two 2 distances.
 
 ```rust
 let (src, dst) = (u.min(v), u.max(v));

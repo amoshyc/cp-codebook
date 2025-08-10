@@ -46,13 +46,12 @@ sum(arr[l..=j]) = x
 Case1: For each `pref[j]`, find the number of `pref[j] - x`.
 Case2: `pref[x]`
 
-> 給定長度為 `N` 的序列 `A`，有多少個 pair `(l, r)` 滿足 `l <= r` 且 [{ "sum"(A[l..=r]) % k = 0 }]？ [ABC164D](https://atcoder.jp/contests/abc164/submissions/53505764), [ABC367D](https://atcoder.jp/contests/abc367/tasks/abc367_d)
+> 給定長度為 `N` 的序列 `A`，有多少個 pair `(l, r)` 滿足 `l <= r` 且 [{ "sum"(A[l..=r]) % k = 0 }]？ [ABC164D](https://atcoder.jp/contests/abc164/submissions/53505764), [ABC367D](https://atcoder.jp/contests/abc367/tasks/abc367_d), [ABC418D](https://atcoder.jp/contests/abc418/submissions/68381154)
 
 ```
-sum(A[l..r]) % k = 0 <-> Case 1 or Case 2
-    Case 1: sum(A[0..l]) = sum(A[0..r]) (mod k)
-    Case 2: sum(A[0..r]) = 0 (mod k)
-=> Count the number of each remainder r of all prefixes
+sum(A[l..=r]) % k = 0 <-> Case 1 or Case 2
+    Case 1: pref[r] - pref[l - 1] = 0 (mod k)
+    Case 2: pref[r] = 0 (mod k)
 ```
 
 > 給定長度為 `N` 的 binary string [{S}]，考慮所有的 `i <= j`，總共有多少個 pair `(l, r)` 滿足 `(i <= l <= r <= j)` 且 `S[l..=r]` 中 0 的個數 = 1 的個數？ [CF1996E](https://codeforces.com/contest/1996/submission/272930021)

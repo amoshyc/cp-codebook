@@ -207,12 +207,11 @@
 <p>Case1: For each <code>pref[j]</code>, find the number of <code>pref[j] - x</code>.
 Case2: <code>pref[x]</code></p>
 <blockquote>
-<p>給定長度為 <code>N</code> 的序列 <code>A</code>，有多少個 pair <code>(l, r)</code> 滿足 <code>l &lt;= r</code> 且 [{ "sum"(A[l..=r]) % k = 0 }]？ <a href="https://atcoder.jp/contests/abc164/submissions/53505764">ABC164D</a>, <a href="https://atcoder.jp/contests/abc367/tasks/abc367_d">ABC367D</a></p>
+<p>給定長度為 <code>N</code> 的序列 <code>A</code>，有多少個 pair <code>(l, r)</code> 滿足 <code>l &lt;= r</code> 且 [{ "sum"(A[l..=r]) % k = 0 }]？ <a href="https://atcoder.jp/contests/abc164/submissions/53505764">ABC164D</a>, <a href="https://atcoder.jp/contests/abc367/tasks/abc367_d">ABC367D</a>, <a href="https://atcoder.jp/contests/abc418/submissions/68381154">ABC418D</a></p>
 </blockquote>
-<pre><code>sum(A[l..r]) % k = 0 &lt;-&gt; Case 1 or Case 2
-    Case 1: sum(A[0..l]) = sum(A[0..r]) (mod k)
-    Case 2: sum(A[0..r]) = 0 (mod k)
-=&gt; Count the number of each remainder r of all prefixes
+<pre><code>sum(A[l..=r]) % k = 0 &lt;-&gt; Case 1 or Case 2
+    Case 1: pref[r] - pref[l - 1] = 0 (mod k)
+    Case 2: pref[r] = 0 (mod k)
 </code></pre>
 <blockquote>
 <p>給定長度為 <code>N</code> 的 binary string [{S}]，考慮所有的 <code>i &lt;= j</code>，總共有多少個 pair <code>(l, r)</code> 滿足 <code>(i &lt;= l &lt;= r &lt;= j)</code> 且 <code>S[l..=r]</code> 中 0 的個數 = 1 的個數？ <a href="https://codeforces.com/contest/1996/submission/272930021">CF1996E</a></p>
