@@ -51,3 +51,4 @@ impl DSU {
 
 * [ABC157D](https://atcoder.jp/contests/abc157/submissions/53570231)
 * [ABC372E](https://atcoder.jp/contests/abc372/submissions/57991122): With additional data
+* [ABC420E](https://atcoder.jp/contests/abc420/submissions/68780128): With addtiional data

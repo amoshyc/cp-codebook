@@ -17,6 +17,7 @@
 
 - [Algorithms](./algorithms/readme.md)
     - [2-SAT](./algorithms/2-sat.md)
+    - [Bellman Ford](./algorithms/bellman_ford.md)
     - [BFS](./algorithms/bfs.md)
     - [Binary Search](./algorithms/binary_search.md)
     - [CombTool](./algorithms/combtool.md)
@@ -33,7 +34,6 @@
     - [Rerooting](./algorithms/rerooting.md)
     - [Searching](./algorithms/searching.md)
     - [Sieve of Eratosthenes](./algorithms/sieve_of_eratosthenes.md)
-    - [SPFA](./algorithms/spfa.md)
     - [Tarjan SCC](./algorithms/tarjan_scc.md)
     - [Ternary Search](./algorithms/ternary_search.md)
     - [Topological Sort](./algorithms/topological_sort.md)
