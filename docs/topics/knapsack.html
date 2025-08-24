@@ -168,56 +168,55 @@
                     <main>
                         <h1 id="knapsack"><a class="header" href="#knapsack">Knapsack</a></h1>
 <h1 id="01-knapsack"><a class="header" href="#01-knapsack">01 Knapsack</a></h1>
+<p>pull dp</p>
 <pre><code>dp[i, j] = maximum total value with total cost j using items 0..=i
-dp[i, j] -&gt; dp[i + 1, j] // don't use item i
-dp[i, j] + value[i] -&gt; dp[i + 1, j + cost[i]] // use item i
+dp[i, j] = max(
+    dp[i - 1, j], // don't use item
+    dp[i - 1, j - w[i]] + v[i], // use item i
+)
 </code></pre>
-<pre><code class="language-rust">// dp[j] = maximum total value using total cost j
-fn knapsack_01(values: &amp;Vec&lt;i64&gt;, costs: &amp;Vec&lt;usize&gt;, max: usize) -&gt; Vec&lt;i64&gt; {
-    assert!(values.len() == costs.len());
-    let mut dp = vec![0; max + 1];
-    for (v, c) in values.iter().zip(costs.iter()) {
-        for j in (0..=max).rev() {
-            if j + c &lt;= max {
-                dp[j + c] = dp[j + c].max(dp[j] + v);
-            }
-        }
-    }
-    dp
-}</code></pre>
-<p><a href="https://atcoder.jp/contests/abc390/submissions/62105294">ABC390E</a></p>
+<p><a href="https://atcoder.jp/contests/dp/submissions/68727087">AtCoder DP D</a></p>
 <h1 id="unbounded-knapsack"><a class="header" href="#unbounded-knapsack">Unbounded Knapsack</a></h1>
-<pre><code class="language-rust">// dp[i, j] = minimum total cost of total value j using items 0..=i
-// if we use item i one time, dp[i, j] = dp[i, j - v[i]] + c[i]
-// if we don't use item i, dp[i, j] = dp[i - 1, j]
-fn unbounded_knapsack_by_value(v: Vec&lt;usize&gt;, c: Vec&lt;i64&gt;, p: usize, inf: i64) -&gt; Vec&lt;i64&gt; {
-    assert!(v.len() == c.len());
-    let mut dp = vec![inf; p + 1];
-    dp[0] = 0;
-    for i in 0..v.len() {
-        for j in v[i]..=p {
-            dp[j] = dp[j].min(dp[j - v[i]] + c[i]);
-        }
+<pre><code>dp[i, j] = maximum total value of total weight j using items 0..=i
+if we use item i one time, dp[i, j] = dp[i, j - w[i]] + v[i]
+if we don't use item i, dp[i, j] = dp[i - 1, j]
+</code></pre>
+<p>Easier to code if reusing the dp:</p>
+<pre><code class="language-rust">let mut dp = vec![inf; w + 1];
+dp[0] = 0;
+for i in 0..vs.len() {
+    for j in vs[i]..=p {
+        dp[j] = dp[j].min(dp[j - vs[i]] + ws[i]);
     }
-    dp
 }</code></pre>
 <p><a href="https://atcoder.jp/contests/sumitrust2019/submissions/63488310">AtCoder Sumitrust 2019 C</a></p>
-<pre><code class="language-rust">// dp[i, j] = maximum total value of total cost j using items 0..=i
-// if we use item i one time, dp[i, j] = dp[i, j - c[i]] + v[i]
-// if we don't use item i, dp[i, j] = dp[i - 1, j]
-fn unbounded_knapsack_by_cost(v: Vec&lt;i64&gt;, c: Vec&lt;usize&gt;, w: usize, inf: i64) -&gt; Vec&lt;i64&gt; {
-    assert!(v.len() == c.len());
-    let mut dp = vec![-inf; w + 1];
-    dp[0] = 0;
-    for i in 0..v.len() {
-        for j in c[i]..=w {
-            dp[j] = dp[j].max(dp[j - c[i]] + v[i]);
-        }
-    }
-    dp
-}</code></pre>
-<p><a href="https://atcoder.jp/contests/sumitrust2019/submissions/63564639">AtCoder Sumitrust 2019 C</a>
+<h1 id="bounded-knapsack"><a class="header" href="#bounded-knapsack">Bounded Knapsack</a></h1>
+<p>With deque optimization.</p>
+<h1 id="large-weight-with-small-value"><a class="header" href="#large-weight-with-small-value">Large Weight with Small Value</a></h1>
+<pre><code>dp[i, j] = minimum total weight of total value j using items 0..=i
+if we use item i one time, dp[i, j] = dp[i, j - v[i]] + c[i]
+if we don't use item i, dp[i, j] = dp[i - 1, j]
+answer is (0..=max_v).filer(|&amp;v| dp[n - 1][v] &lt;= w).max().unwrap().
+</code></pre>
+<p><a href="https://atcoder.jp/contests/dp/submissions/68790002">AtCoder DP E</a>
+<a href="https://atcoder.jp/contests/sumitrust2019/submissions/63564639">AtCoder Sumitrust 2019 C</a>
 <a href="https://atcoder.jp/contests/abc153/submissions/59552524">ABC153E</a></p>
+<h1 id="upperbound-clipping"><a class="header" href="#upperbound-clipping">Upperbound Clipping</a></h1>
+<blockquote>
+<p>Given N positive numbers, can we pick some of them such that the total is <em>at least</em> <code>K</code>?</p>
+</blockquote>
+<p>Easier to code if using push-dp instead of pull-dp.</p>
+<pre><code>dp[j + w] &lt;- dp[j] + v
+dp[(j + w).clip(x)] &lt;- dp[j] + v
+</code></pre>
+<h1 id="subset-sum"><a class="header" href="#subset-sum">Subset Sum</a></h1>
+<pre><code>dp[i, j] = is it possible to make total j using items 0..=i
+dp[i, j] = dp[i - 1, j] or dp[i - 1, j - arr[i]]
+</code></pre>
+<p><a href="https://leetcode.com/problems/partition-equal-subset-sum/submissions/1746756667/">Leetcode 416</a></p>
+<h1 id="tug-of-war"><a class="header" href="#tug-of-war">Tug of War</a></h1>
+<h1 id="with-prefix-sum"><a class="header" href="#with-prefix-sum">With Prefix Sum</a></h1>
+<p><a href="https://atcoder.jp/contests/dp/submissions/41207863">AtCoder DP M</a></p>
 
                     </main>
 
