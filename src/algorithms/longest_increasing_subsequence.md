@@ -5,7 +5,7 @@ While inspecting `arr` from left to right, maintain:
 ```
 aux[k] = the smallest last element of any increasing subsequence of length k
 dp[i] = the length of LIS ending at arr[i]
-      = the smallest j that aux[j] > arr[i] when inspecting arr[i]
+      = (the largest j such that aux[j] < arr[i]) + 1 when inspecting from left to right
 ```
 
 ```rust
@@ -20,7 +20,7 @@ where
     let mut aux = vec![inf; n + 1]; // Note the n + 1
     let mut dp = vec![0; n];
     for i in 0..n {
-        dp[i] = aux[1..].partition_point(|x| *x <= arr[i]) + 1;
+        dp[i] = aux[1..].partition_point(|x| *x < arr[i]) + 1;
         aux[dp[i]] = arr[i].clone();
     }
     dp
