@@ -2,6 +2,11 @@
     --mono-font: "Source Code Pro", "Fira Code", "Cascadia Code", Consolas, Menlo, "DejaVu Sans Mono", monospace;
 }
 
+.light {
+    --bg: #f0f0f0;
+    --sidebar-bg: #eaeaea;
+}
+
 code.hljs {
     overflow-x: auto;
 }
