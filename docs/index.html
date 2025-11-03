@@ -27,7 +27,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-56612340.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/custom-77abfd31.css">
+        <link rel="stylesheet" href="theme/custom-b95ee048.css">
 
         <!-- MathJax -->
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -48,7 +48,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "searchindex-058af727.js";
+            window.path_to_searchindex_js = "searchindex-23c481d2.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-8fc66345.js"></script>
@@ -84,7 +84,7 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            const default_theme = default_light_theme;
             let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -193,17 +193,19 @@
 <h2 id="this-book"><a class="header" href="#this-book">This Book</a></h2>
 <ul>
 <li>Created using <a href="https://github.com/rust-lang/mdBook">mdbook</a>.</li>
-<li>Syntax highlighting theme is <a href="https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css">Github</a> with modified background.</li>
+<li>Syntax highlighting in light theme is <a href="https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css">Github</a> with modified background.</li>
 <li>Rating badges are created in prior using this <a href="https://github.com/amoshyc/cp-codebook/blob/main/create_images.py">script</a>.</li>
 <li>Best viewed in Firefox. If you are using others, suggest to enable overlay-scrollbars.</li>
-<li>Add a <a href="https://github.com/amoshyc/cp-codebook/blob/main/theme/custom.css">custom.css</a> and modify <a href="https://github.com/amoshyc/cp-codebook/blob/main/theme/index.hbs">index.hbs</a>.
+<li>Add a <a href="https://github.com/amoshyc/cp-codebook/blob/main/theme/custom.css">custom.css</a>.
 <ul>
 <li>Apply <code>overflow-x: auto</code> to code block.</li>
 <li>Apply <code>white-space: pre-wrap</code> to <code>p</code> to allow easy line break.</li>
 <li>Customize the style of <code>blockquote</code>.</li>
+</ul>
+</li>
+<li>Modify <a href="https://github.com/amoshyc/cp-codebook/blob/main/theme/index.hbs">index.hbs</a>.
+<ul>
 <li>Include the mathjax that supports <a href="https://asciimath.org/">AsciiMath</a>.</li>
-<li>Force to use the <code>nav</code> at the bottom.</li>
-<li>Force to use light theme by default regardless the <code>prefers-color-scheme</code> css media.</li>
 </ul>
 </li>
 </ul>

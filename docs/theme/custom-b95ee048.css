@@ -4,7 +4,12 @@
 
 .light {
     --bg: #f0f0f0;
+    --sidebar-active: #20609f;
+    --sidebar-header-border-color: #cbcbcb;
     --sidebar-bg: #eaeaea;
+}
+.on-this-page {
+    border-inline-start: 0px solid var(--sidebar-header-border-color);
 }
 
 code.hljs {
