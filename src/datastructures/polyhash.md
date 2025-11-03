@@ -85,4 +85,4 @@ let hst = (hs * hasher.powr[s.len()] % p + ht) % p;
 
 Simple: [ABC353E](https://atcoder.jp/contests/abc353/submissions/68730388)
 Rev: [ABC284F](https://atcoder.jp/contests/abc284/submissions/68729879)
-Concatenate: [ABC312Ex](https://atcoder.jp/contests/abc312/submissions/44107852)
+Concatenate: [ABC430E](https://atcoder.jp/contests/abc430/submissions/70642126), [ABC312Ex](https://atcoder.jp/contests/abc312/submissions/44107852)

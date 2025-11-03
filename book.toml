@@ -1,8 +1,6 @@
 [book]
 authors = ["amoshyc"]
 language = "en"
-multilingual = false
-src = "src"
 title = "Codebook"
 
 [build]
