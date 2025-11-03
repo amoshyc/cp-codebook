@@ -1,5 +1,5 @@
+import lxml.etree
 import requests
-from lxml import etree
 from pybadges import badge
 from bisect import bisect_right
 from pathlib import Path
@@ -34,7 +34,7 @@ CODEFORCES_COLORS = [
 def get_atcoder_data(user_id: str):
     link = f"https://atcoder.jp/users/{user_id}"
     html = requests.get(link).content.decode()
-    tree = etree.HTML(html)
+    tree = lxml.etree.HTML(html)
     elem = tree.xpath("//table[@class='dl-table mt-2']/tr/td/span")[0]
     rating = int(elem.text)
     color = ATCODER_COLORS[bisect_right(ATCODER_PIVOTS, rating)]
@@ -44,7 +44,7 @@ def get_atcoder_data(user_id: str):
 def get_codeforces_data(user_id: str):
     link = f"https://codeforces.com/profile/{user_id}"
     html = requests.get(link).content
-    tree = etree.HTML(html)
+    tree = lxml.etree.HTML(html)
     elem = tree.xpath("//div[@class='info']/ul/li/span")[0]
     rating = int(elem.text)
     color = CODEFORCES_COLORS[bisect_right(CODEFORCES_PIVOTS, rating)]
