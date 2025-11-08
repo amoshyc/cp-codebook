@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Binary Search - Codebook</title>
+        <title>BFS-01 - Codebook</title>
 
 
         <!-- Custom HTML head -->
@@ -187,20 +187,54 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="binary-search"><a class="header" href="#binary-search">Binary Search</a></h1>
-<p>I had made a binary search tutorial <a href="https://docs.google.com/presentation/d/1m5mVHdYYGr4juw6walPvX9UpbtijlHt-AgowzAHFT5Q/edit?usp=sharing">here</a>.
-In this page I only list some tricky binary search problems for future reference.</p>
-<h2 id="zone2021c"><a class="header" href="#zone2021c"><a href="https://atcoder.jp/contests/zone2021/submissions/68098847">Zone2021C</a></a></h2>
+                        <h1 id="bfs-01"><a class="header" href="#bfs-01">BFS-01</a></h1>
+<pre><code class="language-rust">use std::collections::VecDeque;
+
+fn bfs01&lt;T&gt;(adj: &amp;Vec&lt;Vec&lt;(usize, T)&gt;&gt;, s: usize, inf: T) -&gt; (Vec&lt;T&gt;, Vec&lt;usize&gt;)
+where
+    T: std::ops::Add&lt;Output = T&gt; + Copy + Default + Eq + Ord,
+{
+    let n = adj.len();
+    let mut que = VecDeque::new();
+    let mut dis = vec![inf; n];
+    let mut par = vec![!0; n];
+
+    dis[s] = T::default();
+    par[s] = s;
+    que.push_back((s, dis[s]));
+
+    while let Some((u, d)) = que.pop_front() {
+        if d &gt; dis[u] {
+            continue;
+        }
+        for &amp;(v, w) in &amp;adj[u] {
+            let new_d = dis[u] + w;
+            if new_d &lt; dis[v] {
+                dis[v] = new_d;
+                par[v] = u;
+                if w == T::default() {
+                    que.push_front((v, dis[v]));
+                } else {
+                    que.push_back((v, dis[v]));
+                }
+            }
+        }
+    }
+
+    (dis, par)
+}</code></pre>
+<p><a href="https://atcoder.jp/contests/abc431/submissions/70805378">ABC431E</a>
+<a href="https://atcoder.jp/contests/abc400/submissions/64707621">ABC400D</a></p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../algorithms/bfs01.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../algorithms/bfs.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="../algorithms/combtool.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../algorithms/binary_search.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -210,11 +244,11 @@ In this page I only list some tricky binary search problems for future reference
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../algorithms/bfs01.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../algorithms/bfs.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="../algorithms/combtool.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../algorithms/binary_search.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

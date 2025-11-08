@@ -19,6 +19,7 @@
     - [2-SAT](./algorithms/2-sat.md)
     - [Bellman Ford](./algorithms/bellman_ford.md)
     - [BFS](./algorithms/bfs.md)
+    - [BFS-01](./algorithms/bfs01.md)
     - [Binary Search](./algorithms/binary_search.md)
     - [CombTool](./algorithms/combtool.md)
     - [Dijkstra](./algorithms/dijkstra.md)

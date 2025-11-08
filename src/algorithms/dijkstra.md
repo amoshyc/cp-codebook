@@ -74,7 +74,3 @@ for t_w in (x - 3)..=(x + 3) {
 
 [ABC204E](https://atcoder.jp/contests/abc204/submissions/58928159)
 
-## 01-BFS
-
-[ABC400D](https://atcoder.jp/contests/abc400/submissions/64707621)
-
