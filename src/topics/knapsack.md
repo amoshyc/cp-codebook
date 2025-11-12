@@ -59,13 +59,13 @@ answer is (0..=max_v).filer(|&v| dp[n - 1][v] <= w).max().unwrap().
 
 # Upperbound Clipping
 
-> Given N positive numbers, can we pick some of them such that the total is *at least* `K`?
+> Given N (< 1e2) items with positive values (V[i] < 1e5) and weights (W[i] < 1e5), what is the minimum total weight if the total values is at least K (K < 1e5) ?
 
 Easier to code if using push-dp instead of pull-dp.
 
 ```
-dp[j + w] <- dp[j] + v
-dp[(j + w).clip(x)] <- dp[j] + v
+dp[j + v] <- dp[j] + w
+dp[(j + v).clip(k)] <- dp[j] +w
 ```
 
 # Subset Sum

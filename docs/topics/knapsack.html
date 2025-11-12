@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-1a987c75.js";
+            window.path_to_searchindex_js = "../searchindex-91518201.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -224,11 +224,11 @@ answer is (0..=max_v).filer(|&amp;v| dp[n - 1][v] &lt;= w).max().unwrap().
 <a href="https://atcoder.jp/contests/abc153/submissions/59552524">ABC153E</a></p>
 <h1 id="upperbound-clipping"><a class="header" href="#upperbound-clipping">Upperbound Clipping</a></h1>
 <blockquote>
-<p>Given N positive numbers, can we pick some of them such that the total is <em>at least</em> <code>K</code>?</p>
+<p>Given N (&lt; 1e2) items with positive values (V[i] &lt; 1e5) and weights (W[i] &lt; 1e5), what is the minimum total weight if the total values is at least K (K &lt; 1e5) ?</p>
 </blockquote>
 <p>Easier to code if using push-dp instead of pull-dp.</p>
-<pre><code>dp[j + w] &lt;- dp[j] + v
-dp[(j + w).clip(x)] &lt;- dp[j] + v
+<pre><code>dp[j + v] &lt;- dp[j] + w
+dp[(j + v).clip(k)] &lt;- dp[j] +w
 </code></pre>
 <h1 id="subset-sum"><a class="header" href="#subset-sum">Subset Sum</a></h1>
 <pre><code>dp[i, j] = is it possible to make total j using items 0..=i
