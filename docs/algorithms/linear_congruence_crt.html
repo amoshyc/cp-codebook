@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-91518201.js";
+            window.path_to_searchindex_js = "../searchindex-56028d22.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -212,12 +212,12 @@ fn minv(a: i64, m: i64) -&gt; i64 {
 
 // ax = b (mod m) has solution
 //  x = (a/g)^(-1) * (b/g) (mod m/g)
-fn linear_congruence(a: i64, b: i64, m: i64) -&gt; Option&lt;i64&gt; {
+fn linear_congruence(a: i64, b: i64, m: i64) -&gt; Option&lt;(i64, i64)&gt; {
     let (inv, _, g) = extgcd(a, m);
     if b % g != 0 {
         None
     } else {
-        Some((inv * (b / g)).rem_euclid(m / g))
+        Some(((inv * (b / g)).rem_euclid(m / g), g))
     }
 }
 
@@ -243,6 +243,7 @@ fn crt(coef: &amp;Vec&lt;(i64, i64)&gt;) -&gt; Option&lt;(i64, i64)&gt; {
 <ul>
 <li><a href="https://atcoder.jp/contests/abc186/submissions/43184083">ABC186E</a></li>
 <li><a href="https://atcoder.jp/contests/abc193/submissions/43191810">ABC193E</a></li>
+<li><a href="https://atcoder.jp/contests/abc432/submissions/71032025">ABC432B</a></li>
 </ul>
 <h2 id="linear-congruence"><a class="header" href="#linear-congruence">Linear Congruence</a></h2>
 <p>給定 $ax \equiv b \pmod m$ 的 $a, b, m$，求解 $x$。</p>

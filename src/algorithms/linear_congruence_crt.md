@@ -25,12 +25,12 @@ fn minv(a: i64, m: i64) -> i64 {
 
 // ax = b (mod m) has solution
 //  x = (a/g)^(-1) * (b/g) (mod m/g)
-fn linear_congruence(a: i64, b: i64, m: i64) -> Option<i64> {
+fn linear_congruence(a: i64, b: i64, m: i64) -> Option<(i64, i64)> {
     let (inv, _, g) = extgcd(a, m);
     if b % g != 0 {
         None
     } else {
-        Some((inv * (b / g)).rem_euclid(m / g))
+        Some(((inv * (b / g)).rem_euclid(m / g), g))
     }
 }
 
@@ -57,6 +57,7 @@ fn crt(coef: &Vec<(i64, i64)>) -> Option<(i64, i64)> {
 
 * [ABC186E](https://atcoder.jp/contests/abc186/submissions/43184083)
 * [ABC193E](https://atcoder.jp/contests/abc193/submissions/43191810)
+* [ABC432B](https://atcoder.jp/contests/abc432/submissions/71032025)
 
 
 ## Linear Congruence
