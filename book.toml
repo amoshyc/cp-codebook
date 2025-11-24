@@ -12,6 +12,7 @@ mathjax-support = true
 additional-css = ["theme/custom.css"]
 preferred-dark-theme = "coal"
 git-repository-url = "https://github.com/amoshyc/cp-codebook"
+smart-punctuation = false
 
 [output.html.fold]
 enable = true # whether or not to enable section folding

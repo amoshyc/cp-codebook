@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-56028d22.js";
+            window.path_to_searchindex_js = "../searchindex-f3e0eb48.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -193,13 +193,13 @@
 <p>Given <code>n</code> points [{x}] on a line and a non-negative integer <code>s</code>,
 find an interval <code>p..=(p+s)</code> that minimize the total distance from every points to the interval.</p>
 </blockquote>
-<p>[{ p = “argmin”_p F(p) = “argmin”_p sum_i f(i; p) “ where “ }]
+<p>[{ p = "argmin"_p F(p) = "argmin"_p sum_i f(i; p) " where " }]
 [{ f(i; p) = {(p - x_i, if x_i &lt; p), (0, if p &lt;= x &lt;= p + s), (x_i - (p + s), if x_i &gt; p + s) :} }]</p>
 <p>Differentiate [{F(p)}]:
 [{ d/(dp) F(p) = sum_i d/(dp) f(p; i) = sum_i ({(+1, if x_i &lt; p), (0, if p &lt;= x &lt;= p + s), (-1, if x_i &gt; p + s) :}) }]</p>
-<p>[{ F’(p) = 0 }] occurs when the number of [{x_i &lt; p}] equals to the number of [{ x_i &gt; p + s }].
+<p>[{ F'(p) = 0 }] occurs when the number of [{x_i &lt; p}] equals to the number of [{ x_i &gt; p + s }].
 That is, the [{p}] that makes the number of [{p &gt; x_i}] equals to the number of [{ p &lt; x_i - s }].
-Which is [{ “median”([x_i] uu [x_i - s]) }].</p>
+Which is [{ "median"([x_i] uu [x_i - s]) }].</p>
 <p><a href="https://atcoder.jp/contests/abc330/submissions/47968987">ABC330F</a></p>
 <h2 id="total-distance-to-sorted-points"><a class="header" href="#total-distance-to-sorted-points">Total Distance to Sorted Points</a></h2>
 <blockquote>
@@ -253,7 +253,7 @@ Given P[0..M], find the minium total sum if for any adjacent element we must pic
 <p>We first find the maximum L1 distance from a specified point [{i}]:</p>
 <p>[{ max_(0 &lt;= j &lt; N) |x_i - x_j| + |y_i - y_j| }]
 [{ = max_j max {x_i - x_j, x_j - x_i} + max{y_i - y_j, y_j - y_i} }]
-[{ = max_j max { (x_i - x_j + y_i - y_j)“,” (x_i - x_j + y_j - y_i), (x_j - x_i + y_i - y_j), (x_j - x_i + y_j - y_i) } }]
+[{ = max_j max { (x_i - x_j + y_i - y_j)"," (x_i - x_j + y_j - y_i), (x_j - x_i + y_i - y_j), (x_j - x_i + y_j - y_i) } }]
 [{ = max_j max { u_i - u_j, v_i - v_j, v_j - v_i, u_j - u_i } }]
 [{ = max {max_j ( u_i - u_j), max_j (v_i - v_j), max_j(v_j - v_i), max_j( u_j - u_i ) } }]
 [{ = max {(max_j u_i - min_j  u_j) , (max_j v_i - min_j v_j) , (max_j v_j - min_j v_i) , (max_j u_j - min_j u_i) } }]

@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-56028d22.js";
+            window.path_to_searchindex_js = "../searchindex-f3e0eb48.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -210,7 +210,7 @@
    16 : 1 0 0 0 0
 </code></pre>
 <ul>
-<li>There are [{n + 1}] numbers from [{“0..=n”}].</li>
+<li>There are [{n + 1}] numbers from [{"0..=n"}].</li>
 <li>For the [{i}]-th bit:
 <ul>
 <li>period = [{2 ^ (i + 1)}]</li>
@@ -230,7 +230,7 @@
 </blockquote>
 <p>Note that in XOR, each bit is independent of each other.
 We can determine the i-th bit of [{x}] independently.
-For the i-th bit, we count “the number of 0” and “the number of 1” of all elements’ i-th bit.
+For the i-th bit, we count "the number of 0" and "the number of 1" of all elements' i-th bit.
 If the latter is larger, then the i-th bit of [{x}] should be 1.</p>
 <pre><code class="language-rust">let mut x = 0;
 for i in 0..32 {

@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-56028d22.js";
+            window.path_to_searchindex_js = "../searchindex-f3e0eb48.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -200,7 +200,7 @@
 <p>[{ sum_(i=0)^(N-1) sum_(j = i + 1)^(N-1) f(A_i, A_j) = sum_(j=0)^(N-1) sum_(i = 0)^(j-1) f(A_i, A_j) }]</p>
 <p>我們讓 [{j}] 從左掃到右，在計算 [{A_j}] 的答案時，同時維護 [{A[0..j]}] 的統計值。例如：</p>
 <ul>
-<li>[{ f(A_i, A_j) = A_i * 10^(“num_digit”(A_j)) + A_j }] : <a href="https://atcoder.jp/contests/abc353/submissions/53432676">ABC353D</a></li>
+<li>[{ f(A_i, A_j) = A_i * 10^("num_digit"(A_j)) + A_j }] : <a href="https://atcoder.jp/contests/abc353/submissions/53432676">ABC353D</a></li>
 <li>[{ f(A_i, A_j) = max(A_j - A_i, 0) }] : <a href="https://atcoder.jp/contests/abc351/submissions/52882061">ABC351F</a></li>
 <li>[{ f(A_i, A_j) = sum(A[i..=j]) % m }] : <a href="https://atcoder.jp/contests/abc378/submissions/59399376">ABC378E</a></li>
 </ul>
@@ -219,7 +219,7 @@
 </ul>
 <h2 id="prefix-sum"><a class="header" href="#prefix-sum">Prefix Sum</a></h2>
 <blockquote>
-<p>給定長度為 <code>N</code> 的序列 <code>A</code>，有多少個 pair <code>(l, r)</code> 滿足 <code>l &lt;= r</code> 且 [{ “sum”(A[l..=r]) = X }]？ <a href="https://cses.fi/problemset/result/10075967/">CSES 1661</a></p>
+<p>給定長度為 <code>N</code> 的序列 <code>A</code>，有多少個 pair <code>(l, r)</code> 滿足 <code>l &lt;= r</code> 且 [{ "sum"(A[l..=r]) = X }]？ <a href="https://cses.fi/problemset/result/10075967/">CSES 1661</a></p>
 </blockquote>
 <pre><code>sum(arr[l..=j]) = x 
 &lt;-&gt; pref[j] - (pref[l - 1] if l &gt;= 1 else 0) = x
@@ -228,7 +228,7 @@
 <p>Case1: For each <code>pref[j]</code>, find the number of <code>pref[j] - x</code>.
 Case2: <code>pref[x]</code></p>
 <blockquote>
-<p>給定長度為 <code>N</code> 的序列 <code>A</code>，有多少個 pair <code>(l, r)</code> 滿足 <code>l &lt;= r</code> 且 [{ “sum”(A[l..=r]) % k = 0 }]？ <a href="https://atcoder.jp/contests/abc164/submissions/53505764">ABC164D</a>, <a href="https://atcoder.jp/contests/abc367/tasks/abc367_d">ABC367D</a>, <a href="https://atcoder.jp/contests/abc418/submissions/68381154">ABC418D</a></p>
+<p>給定長度為 <code>N</code> 的序列 <code>A</code>，有多少個 pair <code>(l, r)</code> 滿足 <code>l &lt;= r</code> 且 [{ "sum"(A[l..=r]) % k = 0 }]？ <a href="https://atcoder.jp/contests/abc164/submissions/53505764">ABC164D</a>, <a href="https://atcoder.jp/contests/abc367/tasks/abc367_d">ABC367D</a>, <a href="https://atcoder.jp/contests/abc418/submissions/68381154">ABC418D</a></p>
 </blockquote>
 <pre><code>sum(A[l..=r]) % k = 0 &lt;-&gt; Case 1 or Case 2
     Case 1: pref[r] - pref[l - 1] = 0 (mod k)
@@ -252,7 +252,7 @@ for (_, v) in pos.iter() {
     // -&gt; contribute (n - 1 - y + 1) * (x + 2) to answer
 }</code></pre>
 <blockquote>
-<p>給定長度為 <code>N</code> 的序列 <code>A</code>，求出所有長度在 <code>a</code> 與 <code>b</code> 之間的 substring，最大的 sum，即 [{ max_(l &lt;= r, a &lt;= r - l + 1 &lt;= b) “sum”(A[l..=r]) }] <a href="https://cses.fi/problemset/result/10075694/">CSES1644</a></p>
+<p>給定長度為 <code>N</code> 的序列 <code>A</code>，求出所有長度在 <code>a</code> 與 <code>b</code> 之間的 substring，最大的 sum，即 [{ max_(l &lt;= r, a &lt;= r - l + 1 &lt;= b) "sum"(A[l..=r]) }] <a href="https://cses.fi/problemset/result/10075694/">CSES1644</a></p>
 </blockquote>
 <pre><code class="language-rust">max_(a &lt;= r - l + 1 &lt;= b) sum(A[l..=r])
 = max_(a &lt;= r - l + 1 &lt;= b) pref[r] - (pref[l - 1] if l &gt;= 1 else 0)
@@ -264,7 +264,7 @@ l = 2 -&gt; a + 1 &lt;= r &lt;= b + 1
 =&gt; finding maximum of pref[r] can be done using monotonic deque</code></pre>
 <h2 id="dp"><a class="header" href="#dp">DP</a></h2>
 <blockquote>
-<p>給定長度為 <code>N</code> 的序列 <code>A</code>，求出 [{ max_(l &lt;= r) “sum”(A[l..=r]) }]。<a href="https://cses.fi/problemset/result/5770681/">CSES1643</a></p>
+<p>給定長度為 <code>N</code> 的序列 <code>A</code>，求出 [{ max_(l &lt;= r) "sum"(A[l..=r]) }]。<a href="https://cses.fi/problemset/result/5770681/">CSES1643</a></p>
 </blockquote>
 <pre><code>dp[i] = the maximum sum of the substring ending at A[i].
 dp[0] = A[0]

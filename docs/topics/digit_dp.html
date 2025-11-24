@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-56028d22.js";
+            window.path_to_searchindex_js = "../searchindex-f3e0eb48.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -211,7 +211,7 @@ c_{i + 1} &amp;= \lfloor \frac{c_i + x_i + r_i}{m_i} \rfloor
 $$</p>
 <p>設 $dp[i, c]$ = number of valid ways to fill $r_{i - 1} \cdots r_1 r_0$ and $c_i = c$。題目所求即為 $dp[N, 0]$。枚舉 $r_i$ 所有可能的值，我們檢查 $r_i$ 與 $y_i$ 是不是滿足題目要求的 $r_i = 0 \lor y_i = 0$，我們得到遞推轉移：</p>
 <p>$$
-\text{if } r_i = 0 \lor y_i = 0 \text{ then } dp[i, c] \to dp[i + 1, c’]
+\text{if } r_i = 0 \lor y_i = 0 \text{ then } dp[i, c] \to dp[i + 1, c']
 $$</p>
 <pre><code class="language-python">for i in range(N):
     for c in range(2):
@@ -279,9 +279,9 @@ $(f = 1): x_{i-1} \cdots x_1 x_0 \gt k_{i-1} \cdots k_1 k_0$</li>
 <p>相較於前一題我們多了一個上界 $K$ 的限制，於是用一個狀態 $f$ 來記錄之。以 $K = 2345$ 為例，$dp[2, 0, 0]$ 代表二位數中有多少數小於或等於 45 且 digit sum $\bmod D = 0$；$dp[2, 0, 1]$ 代表二位數中有多少數大於 $45$ 且 digit sum $\bmod D = 0$；而 $(dp[2, 0, 0] + dp[2, 0, 1])$ 代表所有二位數中有多少個數的 digit sum $\bmod D = 0$。</p>
 <p>枚舉 $x_i$ 的所有可能的值 $d (0 \le d \le 9)$，我們有以下遞推：</p>
 <p>$$
-dp[i, s, f] \to dp[i + 1, (s + d) \bmod D, f’]
+dp[i, s, f] \to dp[i + 1, (s + d) \bmod D, f']
 $$</p>
-<p>其中 $f’$ 代表新的數字 $x_i x_{i-1} \cdots x_1 x_0$ 是不是大於 $k_i k_{i-1} \cdots k_1 k_0$。思考一下可以發現，只有當 $(d \gt k_i) \lor (d = k_i \land f = 1)$ 時 $f’$ 會是 1。題目所求為 $dp[N, 0, 0] - 1$。最後的 $-1$ 是因為 dp 會把 $X=0$ 也算是答案，但題目問得是 $1$ ~ $K$。</p>
+<p>其中 $f'$ 代表新的數字 $x_i x_{i-1} \cdots x_1 x_0$ 是不是大於 $k_i k_{i-1} \cdots k_1 k_0$。思考一下可以發現，只有當 $(d \gt k_i) \lor (d = k_i \land f = 1)$ 時 $f'$ 會是 1。題目所求為 $dp[N, 0, 0] - 1$。最後的 $-1$ 是因為 dp 會把 $X=0$ 也算是答案，但題目問得是 $1$ ~ $K$。</p>
 <pre><code class="language-python">K = [int(x) for x in reversed(input())]
 N = len(K)
 D = int(input())
@@ -335,9 +335,9 @@ $(f = 1): x_{i-1} \cdots x_1 x_0 \gt k_{i-1} \cdots k_1 k_0$</li>
 </ol>
 <p>僅當這些規則成立時，這才是一個有效的 $x_i$，此時才遞推轉移：</p>
 <p>$$
-\text{if } (1) \land (2) \land (3) \text{, then } dp[i, p, f] \to dp[i + 1, x_i, f’]
+\text{if } (1) \land (2) \land (3) \text{, then } dp[i, p, f] \to dp[i + 1, x_i, f']
 $$</p>
-<p>$f’$ 的計算跟之前稍為不同，$f’$ 代表的是 $x_i x_{i-1} \cdots x_1 x_0 \gt k_i k_{i-1} \cdots k_1 k_0$ 成立與否。如果 $x_i$ 填 $\bullet$ 的話，則式子必不成立，即 $f’ = 0$。因此 $f’ = 1$ 的情況是 $((x_i \gt k_i) \lor (x_i = k_i \land f = 1)) \land (x_i \ne \bullet)$。</p>
+<p>$f'$ 的計算跟之前稍為不同，$f'$ 代表的是 $x_i x_{i-1} \cdots x_1 x_0 \gt k_i k_{i-1} \cdots k_1 k_0$ 成立與否。如果 $x_i$ 填 $\bullet$ 的話，則式子必不成立，即 $f' = 0$。因此 $f' = 1$ 的情況是 $((x_i \gt k_i) \lor (x_i = k_i \land f = 1)) \land (x_i \ne \bullet)$。</p>
 <p>而 $f(K)$ 就是 $dp[N, \bullet, 0] + \sum_{p = 1}^9 dp[N, p, 0]$，注意到 $dp[N, 0, 0]$ 並不是答案一部份，因為現在數字不會以 0 開頭。實作上我將 $\bullet$ 用值 10 代替。</p>
 <pre><code class="language-cpp">for (int i = 1; i &lt; N; i++) {
     for (int p = 0; p &lt; 11; p++) { // x[i - 1]

@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-56028d22.js";
+            window.path_to_searchindex_js = "../searchindex-f3e0eb48.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -195,7 +195,7 @@
 If you have 2 ovens, what is the minimum time to cook all dishes?
 (<code>N &lt; 100, T[i] &lt; 1e3</code>)</p>
 </blockquote>
-<p>Since the order doesn’t matter, we want to split the dishes to 2 sets where the larger total sum is minimized. It is same as saying we want their total sums are as close as possible, reaching <code>S/2</code> at best where <code>S</code> is <code>sum(T)</code>. We can do it using</p>
+<p>Since the order doesn't matter, we want to split the dishes to 2 sets where the larger total sum is minimized. It is same as saying we want their total sums are as close as possible, reaching <code>S/2</code> at best where <code>S</code> is <code>sum(T)</code>. We can do it using</p>
 <pre><code>dp[i, j] = is it possible to pick a subset from T[0..=i] whose total sum is j.
 dp[0, 0] = true
 dp[0, t[i]] = true

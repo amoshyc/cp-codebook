@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-56028d22.js";
+            window.path_to_searchindex_js = "../searchindex-f3e0eb48.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -207,7 +207,7 @@ while i &lt; n {
 <blockquote>
 <p>Given <code>N</code> segments, what are the number of segments <code>l..=r (0 &lt;= l &lt;= r &lt; M)</code> that contains <strong>any</strong> of the given segments. <a href="https://atcoder.jp/contests/abc377/submissions/59177703">ABC377D</a></p>
 </blockquote>
-<p>Sweep line on the right border as <code>r</code> and maintain “the maximum left border of the segments at the left of <code>r</code>”. The contribution of this <code>r</code> to the answer is the maintained value <code>+1</code>.</p>
+<p>Sweep line on the right border as <code>r</code> and maintain "the maximum left border of the segments at the left of <code>r</code>". The contribution of this <code>r</code> to the answer is the maintained value <code>+1</code>.</p>
 <pre><code class="language-rust">for _ in 0..n {
     inv[segs[r]].push(segs[l]);
 }
@@ -227,7 +227,7 @@ for r in 0..m {
 let r: i64 = r1.min(r2);
 let w = (r1.min(r2) - l1.max(l2)).max(0);</code></pre>
 <p>When the segments do not overlap, the result segment is <strong>invalid</strong>.
-Don’t use unsigned types for such operation, use <code>i64</code>.</p>
+Don't use unsigned types for such operation, use <code>i64</code>.</p>
 <p>Cube: <a href="https://atcoder.jp/contests/abc361/submissions/55258977">ABC361B</a></p>
 <h2 id="number-of-overlapping-pairs"><a class="header" href="#number-of-overlapping-pairs">Number of Overlapping Pairs</a></h2>
 <p>Inspect intervals from <strong>left to right</strong>, via <strong>right endpoints</strong>. For <code>curr_l..=curr_r</code>, find how many previous intervals <code>prev_l..=prev_r</code> satisfies <code>prev_r &gt;= curr_l</code>. It can be implemented as binary search, two pointers, or BIT with coordinate compression.</p>

@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-56028d22.js";
+            window.path_to_searchindex_js = "../searchindex-f3e0eb48.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -192,9 +192,9 @@
 <p>Properties:</p>
 <ul>
 <li>Out degree of any vertex is 1.</li>
-<li>From any vertex, if we keep following the edge, we’ll end in a cycle (or a self-loop).</li>
+<li>From any vertex, if we keep following the edge, we'll end in a cycle (or a self-loop).</li>
 <li>Each connected component consists of multiple trees rooting on a circle (or a self-loop).</li>
-<li>The remainders of [{x, f(x), f(f(x)), …}] under [{m}] is a functional graph due to pigeonhole.</li>
+<li>The remainders of [{x, f(x), f(f(x)), ...}] under [{m}] is a functional graph due to pigeonhole.</li>
 </ul>
 <pre><code class="language-rust">fn walk_on_functional_graph(nxt: &amp;Vec&lt;usize&gt;, src: usize) -&gt; (Vec&lt;usize&gt;, Vec&lt;usize&gt;) {
     let mut idx = vec![!0; nxt.len()];
