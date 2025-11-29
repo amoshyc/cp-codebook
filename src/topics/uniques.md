@@ -73,7 +73,7 @@ Inspect the queries from left to right (via right boundry) and maintain the `f` 
 
 ## Longest Substring with <= K unique elements
 
-> Give na sequence `A[0..N]` consisting of `i32` integers.
+> Given a sequence `A[0..N]` consisting of `i32` integers.
 > Find the length of the longest substring with <= `K` unique elements.
 
 Use two pointers and HashMap to find ans[i] = length of the longest substring starting from i with <= K unique elements.

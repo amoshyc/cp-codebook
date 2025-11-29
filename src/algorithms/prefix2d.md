@@ -53,3 +53,4 @@ diff[r2 + 1][c2 + 1] += 1;
 The original array can be recovered using `build_2d(&diff)`.
 
 [Typical90-028](https://atcoder.jp/contests/typical90/submissions/54070660)
+[ABC434D](https://atcoder.jp/contests/abc434/submissions/71340689)
