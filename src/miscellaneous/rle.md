@@ -1,4 +1,4 @@
-# Running Length Encoding
+# Run Length Encoding
 
 ```rust
 fn rle<T: Copy + PartialEq>(arr: &Vec<T>) -> Vec<(T, usize, usize)> {
