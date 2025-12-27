@@ -81,14 +81,15 @@ fn find_cycles_in_permutation_graph(nxt: &Vec<usize>) -> Vec<Vec<usize>> {
                 path.push(u);
                 u = nxt[u];
             }
-            cycles.push(path[idx[r]..].to_vec());
+            cycles.push(path);
         }
     }
     cycles
 }
 ```
 
-[ABC377E](https://atcoder.jp/contests/abc377/submissions/59193453)
+[ABC436E](https://atcoder.jp/contests/abc436/submissions/71707266)
+[ABC377E](https://atcoder.jp/contests/abc377/submissions/71707185)
 
 
 ## Find the Vertex after K moves by Doubling

@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-591036d4.js";
+            window.path_to_searchindex_js = "../searchindex-41be5538.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-e7c346df.js"></script>
@@ -239,11 +239,9 @@ Since L1 distance is commutative, we can sort the sequence.</p>
 }</code></pre>
 <h2 id="prevent-d"><a class="header" href="#prevent-d">Prevent D</a></h2>
 <blockquote>
-<p>Given A[0..N], find the minimum number of element to remove to make A satisfy A[i] - A[j] ≠ D for all i ≠ j.</p>
+<p>Given <code>A[0..N]</code>, find the minimum number of element to remove to make <code>A</code> satisfy <code>A[i] - A[j] ≠ D</code> for all <code>i ≠ j.</code></p>
 </blockquote>
-<p>Observed that A[i] can only put constraints on A[i] - D and A[i] + D, we can split A into multiple chains.
-Each chain is an arithmetic sequence. For each chain, we can the following problems using dp:
-Given P[0..M], find the minium total sum if for any adjacent element we must pick at least one.
+<p>Observed that <code>A[i]</code> can only put constraints on <code>A[i] - D</code> and <code>A[i] + D</code>, so we can split <code>A</code> into multiple chains. Each chain is an arithmetic sequence. For each chain, we can solve the following problems using dp: Given <code>P[0..M]</code>, find the minium total sum if for any adjacent element we must pick at least one.
 <a href="https://atcoder.jp/contests/abc403/submissions/65297775">ABC403D</a></p>
 <h2 id="2d-points"><a class="header" href="#2d-points">2D Points</a></h2>
 <blockquote>
@@ -258,7 +256,8 @@ Given P[0..M], find the minium total sum if for any adjacent element we must pic
 [{ = max {max_j ( u_i - u_j), max_j (v_i - v_j), max_j(v_j - v_i), max_j( u_j - u_i ) } }]
 [{ = max {(max_j u_i - min_j  u_j) , (max_j v_i - min_j v_j) , (max_j v_j - min_j v_i) , (max_j u_j - min_j u_i) } }]
 [{ = max {u_i - u_min , v_i - v_min , v_max - v_i , u_max - u_i } }]</p>
-<p><a href="https://atcoder.jp/contests/typical90/submissions/54315752">Typical90-036</a></p>
+<p><a href="https://atcoder.jp/contests/abc437/submissions/71905553">ABC437F</a>
+<a href="https://atcoder.jp/contests/typical90/submissions/54315752">Typical90-036</a></p>
 <p>If we are finding pairwise maximum L1 distance, we simply find the maximum for all [{i}]:</p>
 <p>[{ max_(0 &lt;= i &lt; N) max {u_i - u_min , v_i - v_min , v_max - v_i , u_max - u_i } }]
 [{ = max {max_i (u_i - u_min) , max_i (v_i - v_min) , max_i (v_max - v_i) , max_i (u_max - u_i) } }]
