@@ -47,7 +47,7 @@
     - [DP](./topics/dp.md)
     - [Eccentricity](./topics/ecc.md)
     - [Floor and Ceiling](./topics/floor_ceil.md)
-    - [Functional/Permutation Graph](./topics/functional_graph.md)
+    - [Functional Graph](./topics/functional_graph.md)
     - [Geometry](./topics/geometry.md)
     - [Greedy](./topics/greedy.md)
     - [L1 Distance](./topics/l1.md)

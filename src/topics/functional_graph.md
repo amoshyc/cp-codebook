@@ -1,4 +1,4 @@
-# Functional/Permutation Graph
+# Functional Graph
 
 
 ## Functional Graph
@@ -20,9 +20,9 @@ fn walk_on_functional_graph(nxt: &Vec<usize>, src: usize) -> (Vec<usize>, Vec<us
         path.push(u);
         u = nxt[u];
     }
-    let prefix = path[..idx[u]].to_vec(); // will be empty in permutation graph
+    let prior = path[..idx[u]].to_vec(); // will be empty in permutation graph
     let cycle = path[idx[u]..].to_vec();
-    (prefix, cycle)
+    (prior, cycle)
 }
 ```
 
@@ -53,7 +53,7 @@ fn find_cycles_in_functional_graph(nxt: &Vec<usize>) -> Vec<Vec<usize>> {
 ```
 [ABC256E](https://atcoder.jp/contests/abc256/submissions/59194110)
 
-To find all the prefix that walks into a cycle, one can perform BFS on the **reversed** graph.
+To find all the prior that walks into a cycle, we can do BFS on the **reversed** graph.
 
 [ABC357E](https://atcoder.jp/contests/abc357/submissions/59194044)
 
@@ -104,17 +104,17 @@ for i in 1..m {
     }
 }
 
-let mut ind: Vec<usize> = (0..n).collect();
+let mut x = ...;
 for i in 0..m {
     if (k >> i) & 1 == 1 {
         for u in 0..n {
-            ind[u] = dp[i][ind[u]];
+            x = dp[i][u];
         }
     }
 }
-
-let ans = mapv(&ind, |&i| arr[i]);
 ```
+
+[ABC438E](https://atcoder.jp/contests/abc438/submissions/72035719)
 [ABC367E](https://atcoder.jp/contests/abc367/submissions/56834920)
 
 
