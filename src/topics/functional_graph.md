@@ -3,6 +3,8 @@
 
 ## Functional Graph
 
+Functional Graph can be seen as a lots of trees rooted on cycles.
+
 Properties: 
 * Out degree of any vertex is 1. 
 * From any vertex, if we keep following the edge, we'll end in a cycle (or a self-loop).
@@ -53,7 +55,7 @@ fn find_cycles_in_functional_graph(nxt: &Vec<usize>) -> Vec<Vec<usize>> {
 ```
 [ABC256E](https://atcoder.jp/contests/abc256/submissions/59194110)
 
-To find all the prior that walks into a cycle, we can do BFS on the **reversed** graph.
+To find all the trees that walks into a cycle, we can do BFS on the **reversed** graph.
 
 [ABC357E](https://atcoder.jp/contests/abc357/submissions/59194044)
 
@@ -114,7 +116,7 @@ for i in 0..m {
 }
 ```
 
-[ABC438E](https://atcoder.jp/contests/abc438/submissions/72035719)
+[ABC438E](https://atcoder.jp/contests/abc438/submissions/72051632)
 [ABC367E](https://atcoder.jp/contests/abc367/submissions/56834920)
 
 
