@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-c559d183.js";
+            window.path_to_searchindex_js = "../searchindex-3c87acd7.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b75e3d16.js"></script>
@@ -193,24 +193,37 @@
 <p>Given <code>N</code> points on 2D plane, what is the length of the longest chain such that <code>x[i] &lt; x[j]</code> and <code>y[i] &lt; y[j]</code>? <a href="https://atcoder.jp/contests/abc439/submissions/72221181">ABC439E</a>, <a href="https://atcoder.jp/contests/abc369/submissions/58176075">ABC369F</a></p>
 </blockquote>
 <p>We want to find the lenght lonegst chain from bottom left to top right.
-The problem can be converted to <a href="../algorithms/longest_increasing_subsequence.html">LIS</a>:</p>
-<pre><code class="language-rust">// (i &lt; j) = (x[i] &lt; x[j] &amp;&amp; y[i] &lt; y[j])
-xy.sort_by_key(|&amp;(x, y)| (x, Reverse(y)));
+The problem can be converted to <a href="../algorithms/longest_increasing_subsequence.html">LIS (Longest Increasing Subsequence)</a>:</p>
+<pre><code class="language-rust">xy.sort_by_key(|&amp;(x, y)| (x, Reverse(y)));
 let ys = xs.iter().map(|&amp;(x, y)| y).collect();
 let dp = longest_increasing_subsequence(&amp;bs, !0);
 let ans = dp.iter().max.unwrap();</code></pre>
 <hr>
 <p>From the geometry viewpoint, we are inspecting these 2D points from left to right while finding the chains that are increasing in the y-axis, that is, the longest increasing subsequence of the <code>y</code>.</p>
-<p>The problem ask for <code>&lt;</code> instead of <code>&lt;=</code>, so we choose only one point when there are multiple points in the same vertical line. The easiest way to do it is to inspect those points from top to bottom. This leads to the <code>(x, Reverse(y))</code> in the aforementioned code.</p>
-<hr>
-<p>Left: The longest chain of <code>x[i] &lt; x[j]</code> and <code>y[i] &lt; y[j]</code>.
-Right: The longest chain of <code>x[i] &lt;= x[j]</code> and <code>y[i] &lt;= y[j]</code>.
-Note the order we inspect the points is labeled as alphabet.
-Left is sorted by <code>(x, Reverse(y))</code> while right is by <code>(x, y)</code>.</p>
+<p>if the problem ask for <code>x[i] &lt; x[j]</code> instead of <code>x[i] &lt;= x[j]</code>, then we choose only one point when there are multiple points in the same vertical line. The easiest way to do it is to inspect those points from top to bottom. This leads to the <code>(x, Reverse(y))</code> in the aforementioned code. Contrarily, if we can choose multiple points in the same vertical line, we should sort the points via <code>(x, y)</code>.</p>
+<p>If the problem ask for <code>y[i] &lt;= y[j]</code> instead of <code>y[i] &lt; y[j]</code>, then we can choose same y-value points. This can be implemented as finding <strong>LWIS</strong> (Longest Weakly Increasing Subsequence) instead of LIS.</p>
+<p>Note the order we inspect the points is labeled as alphabet in figures.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Image</th><th>Condition</th><th>Sort</th><th>DP</th></tr>
+</thead>
+<tbody>
+<tr><td>Figure 1</td><td><code>(x[i] &lt; x[j]) &amp;&amp; (y[i] &lt; y[j])</code></td><td><code>(x, Reverse(y))</code></td><td>LIS</td></tr>
+<tr><td>Figure 2</td><td><code>(x[i] &lt; x[j]) &amp;&amp; (y[i] &lt;= y[j])</code></td><td><code>(x, Reverse(y))</code></td><td>LWIS</td></tr>
+<tr><td>Figure 3</td><td><code>(x[i] &lt;= x[j]) &amp;&amp; (y[i] &lt; y[j])</code></td><td><code>(x, y)</code></td><td>LIS</td></tr>
+<tr><td>Figure 4</td><td><code>(x[i] &lt;= x[j]) &amp;&amp; (y[i] &lt;= y[j])</code></td><td><code>(x, y)</code></td><td>LWIS</td></tr>
+</tbody>
+</table>
+</div>
+<p>Figure 1 / Figure 2:</p>
 <img src="../assets/2d_poset_1.png" width="350" />
-  
+ 
 <img src="../assets/2d_poset_2.png" width="350" />
-<p>Sometimes the problem is not straightforward. <a href="https://atcoder.jp/contests/abc439/submissions/72221181">ABC439E</a> asks the maximum number of line segments that are not overlapping with each other.</p>
+<p>Figure 3 / Figure 4:</p>
+<img src="../assets/2d_poset_3.png" width="350" />
+ 
+<img src="../assets/2d_poset_4.png" width="350" />
 <h2 id="number-of-pairs"><a class="header" href="#number-of-pairs">Number of Pairs</a></h2>
 <blockquote>
 <p>Given <code>N (N &lt; 2e5)</code> points on a plane, how many pair <code>(i, j)</code> satisfies <code>X[i] &lt; X[j]</code> and <code>Y[i] &gt; Y[j]</code>.</p>

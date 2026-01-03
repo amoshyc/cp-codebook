@@ -46,6 +46,7 @@ fn construct_lis<T: Clone>(dp: &Vec<usize>, arr: &Vec<T>) -> Vec<T> {
 
 * [LibraryChecker](https://judge.yosupo.jp/submission/238437)
 * [ABC369F](https://atcoder.jp/contests/abc369/submissions/58176075)
+* [ABC439E](https://atcoder.jp/contests/abc439/submissions/72221181)
 
 
 ## Included in LIS
