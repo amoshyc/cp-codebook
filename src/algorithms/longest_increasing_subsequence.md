@@ -27,6 +27,8 @@ where
 }
 ```
 
+The length of the LIS is `dp.iter().max().unwrap()`.
+
 ```rust
 fn construct_lis<T: Clone>(dp: &Vec<usize>, arr: &Vec<T>) -> Vec<T> {
     let mut len = *dp.iter().max().unwrap();

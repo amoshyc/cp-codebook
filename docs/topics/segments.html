@@ -27,7 +27,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-56612340.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-b95ee048.css">
+        <link rel="stylesheet" href="../theme/custom-1d263c81.css">
 
         <!-- MathJax -->
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-dec7ec29.js";
+            window.path_to_searchindex_js = "../searchindex-c559d183.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b75e3d16.js"></script>
@@ -189,25 +189,59 @@
                     <main>
                         <h1 id="segments"><a class="header" href="#segments">Segments</a></h1>
 <blockquote>
-<p>Given <code>N</code> half-open segments, represent their union as the minimum number of segments. <a href="https://atcoder.jp/contests/abc256/submissions/59194213">ABC256D</a></p>
+<p>The overlapping segment of segment <code>l1..=r1</code> and segment <code>l2..=r2</code> is</p>
 </blockquote>
-<pre><code class="language-rust">segs.sort();
-let mut ans = vec![];
-let mut i = 0;
-let mut j = 1;
-while i &lt; n {
-    let mut t = segs[i].1;
-    while j &lt; n &amp;&amp; segs[j].0 &lt;= t {
-        t = t.max(segs[j].1);
-        j += 1;
+<pre><code class="language-rust">let l: i64 = l1.max(l2);
+let r: i64 = r1.min(r2);
+let w = (r1.min(r2) - l1.max(l2)).max(0);</code></pre>
+<p>When the segments do not overlap, the result segment is <strong>invalid</strong>.
+Don't use unsigned types for such operation, use <code>i64</code>.</p>
+<p>Cube: <a href="https://atcoder.jp/contests/abc361/submissions/55258977">ABC361B</a></p>
+<h2 id="total-length-of-union--union-as-minimum-number-of-segments"><a class="header" href="#total-length-of-union--union-as-minimum-number-of-segments">Total Length of Union / Union as Minimum Number of Segments</a></h2>
+<blockquote>
+<p>Given <code>N</code> segments (<code>l[i]..=r[i]</code>), what is the total length of the union when each segments are given? <a href="https://atcoder.jp/contests/abc435/submissions/72163429">ABC435E</a></p>
+</blockquote>
+<blockquote>
+<p>Given <code>N</code> segments, represent their union as the minimum number of segments. <a href="https://atcoder.jp/contests/abc256/submissions/72163798">ABC256D</a></p>
+</blockquote>
+<p>Manage the segments in a set via right endpoints. When there's a new segment <code>l[i]..=r[i]</code>, merge it with all the overlapping segments in the set. The overlapping segments can be found by binary searching the <code>l</code> and checking the right border.</p>
+<pre><code class="language-rust">let mut segs = BTreeSet::new(); // l..=r
+let mut total = 0; // total length of the union
+
+for (l, r) in lr {
+    let mut new_l = l;
+    let mut new_r = r;
+    while let Some(&amp;(b, a)) = segs.range((new_l, 0)..).next() {
+        if new_r &lt; a {
+            break;
+        }
+        segs.remove(&amp;(b, a));
+        total -= b - a + 1;
+        new_l = new_l.min(a);
+        new_r = new_r.max(b);
     }
-    ans.push(format!("{} {}", segs[i].0, t));
-    i = j;
+
+    segs.insert((new_r, new_l));
+    total += new_r - new_l + 1;
+}</code></pre>
+<h2 id="number-of-overlapping-pairs"><a class="header" href="#number-of-overlapping-pairs">Number of Overlapping Pairs</a></h2>
+<blockquote>
+<p>Given <code>N</code> segments, what the number of pairs that overlaps? <a href="https://atcoder.jp/contests/abc355/submissions/53915036">ABC355D</a></p>
+</blockquote>
+<p>Inspect intervals from <strong>left to right</strong>, via <strong>right endpoints</strong>. For <code>curr_l..=curr_r</code>, find how many previous intervals <code>prev_l..=prev_r</code> satisfies <code>prev_r &gt;= curr_l</code>. It can be implemented as binary search, two pointers, or BIT with coordinate compression.</p>
+<pre><code class="language-rust">let mut ans = 0;
+segs.sort_by_key(|&amp;(l, r)| (r, l));
+for i in 0..n {
+    let (curr_l, curr_r) = segs[i];
+    let p = segs.partition_point(|&amp;(prev_l, prev_r)| prev_r &lt; curr_l);
+    if p &lt; i {
+        ans += (i - p) as i64;
+    }
 }</code></pre>
 <blockquote>
-<p>Given <code>N</code> segments, what are the number of segments <code>l..=r (0 &lt;= l &lt;= r &lt; M)</code> that contains <strong>any</strong> of the given segments. <a href="https://atcoder.jp/contests/abc377/submissions/59177703">ABC377D</a></p>
+<p>Given <code>N</code> segments, what are the number of segments <code>l..=r (0 &lt;= l &lt;= r &lt; M)</code> that contains the query segment. <a href="https://atcoder.jp/contests/abc377/submissions/59177703">ABC377D</a></p>
 </blockquote>
-<p>Sweep line on the right border as <code>r</code> and maintain "the maximum left border of the segments at the left of <code>r</code>". The contribution of this <code>r</code> to the answer is the maintained value <code>+1</code>.</p>
+<p>Inspect the query segments via right endpoints <code>r</code> while maintaining "the maximum left border of the segments at the left of <code>r</code>". The contribution of this <code>r</code> to the answer is the maintained value <code>+1</code>.</p>
 <pre><code class="language-rust">for _ in 0..n {
     inv[segs[r]].push(segs[l]);
 }
@@ -220,29 +254,8 @@ for r in 0..m {
     }
     cnt += max_l + 1;
 }</code></pre>
-<blockquote>
-<p>The overlapping segment of segment <code>l1..=r1</code> and segment <code>l2..=r2</code> is</p>
-</blockquote>
-<pre><code class="language-rust">let l: i64 = l1.max(l2);
-let r: i64 = r1.min(r2);
-let w = (r1.min(r2) - l1.max(l2)).max(0);</code></pre>
-<p>When the segments do not overlap, the result segment is <strong>invalid</strong>.
-Don't use unsigned types for such operation, use <code>i64</code>.</p>
-<p>Cube: <a href="https://atcoder.jp/contests/abc361/submissions/55258977">ABC361B</a></p>
-<h2 id="number-of-overlapping-pairs"><a class="header" href="#number-of-overlapping-pairs">Number of Overlapping Pairs</a></h2>
-<p>Inspect intervals from <strong>left to right</strong>, via <strong>right endpoints</strong>. For <code>curr_l..=curr_r</code>, find how many previous intervals <code>prev_l..=prev_r</code> satisfies <code>prev_r &gt;= curr_l</code>. It can be implemented as binary search, two pointers, or BIT with coordinate compression.</p>
-<pre><code class="language-rust">let mut ans = 0;
-segs.sort_by_key(|&amp;(l, r)| (r, l));
-for i in 0..n {
-    let (curr_l, curr_r) = segs[i];
-    let p = segs.partition_point(|&amp;(prev_l, prev_r)| prev_r &lt; curr_l);
-    if p &lt; i {
-        ans += (i - p) as i64;
-    }
-}</code></pre>
-<p><a href="https://atcoder.jp/contests/abc355/submissions/53915036">ABC355D</a></p>
 <h2 id="number-of-non-overlapping-pairs"><a class="header" href="#number-of-non-overlapping-pairs">Number of Non-overlapping Pairs</a></h2>
-<p>Inspect intervals from <strong>left to right</strong>, via <strong>right endpoints</strong>. For <code>curr_l..=curr_r</code>, find how many previous intervals <code>prev_l..=prev_r</code> satisfies <code>prev_r &lt; curr_l</code>. It can be implemented as binary search, two pointers, or BIT with coordinate compression.</p>
+<p>Inspect intervals from <strong>left to right</strong> via <strong>right endpoints</strong>. For <code>curr_l..=curr_r</code>, find how many previous intervals <code>prev_l..=prev_r</code> satisfies <code>prev_r &lt; curr_l</code>. It can be implemented as binary search, two pointers, or BIT with coordinate compression.</p>
 <p><a href="https://atcoder.jp/contests/abc355/submissions/53915566">ABC355D</a></p>
 
                     </main>
