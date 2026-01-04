@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-3c87acd7.js";
+            window.path_to_searchindex_js = "../searchindex-706ee158.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b75e3d16.js"></script>
@@ -209,7 +209,6 @@ where
     }
     dp
 }</code></pre>
-<p>The length of the LIS is <code>dp.iter().max().unwrap()</code>.</p>
 <pre><code class="language-rust">fn construct_lis&lt;T: Clone&gt;(dp: &amp;Vec&lt;usize&gt;, arr: &amp;Vec&lt;T&gt;) -&gt; Vec&lt;T&gt; {
     let mut len = *dp.iter().max().unwrap();
     let mut lis = vec![];

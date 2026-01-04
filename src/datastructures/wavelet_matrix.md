@@ -1,5 +1,9 @@
 # Wavelet Matrix
 
+<img src="../assets/wavelet_matrix_1.png" width="500"/>
+
+Like Radix Sort, but sort via the binary digit and from MSB to LSB.
+
 
 ```rust
 struct WaveletMatrix {
@@ -13,7 +17,7 @@ impl WaveletMatrix {
         let n = arr.len();
         let mx = *arr.iter().max().unwrap();
         let lg = mx.next_power_of_two().trailing_zeros() as usize + 1;
-        let mut bvs = vec![vec![]; lg];
+        let mut bvs = vec![vec![]; lg]; // bit vectors
         for i in (0..lg).rev() {
             bvs[i] = arr.iter().map(|x| (x >> i) & 1).collect();
             let mut nxt = vec![];
@@ -43,8 +47,8 @@ impl WaveletMatrix {
         r - l
     }
 
-    // k-smallest (1-based) value in A[l..r]
-    fn k_smallest(&self, mut l: usize, mut r: usize, mut k: usize) -> usize {
+    // kth-smallest (1-based) value in A[l..r]
+    fn kth_smallest(&self, mut l: usize, mut r: usize, mut k: usize) -> usize {
         let mut res = 0;
         for i in (0..self.lg).rev() {
             let cnt0 = (r - l) - query(&self.pref[i], l, r);
@@ -62,6 +66,7 @@ impl WaveletMatrix {
         res
     }
 }
+
 
 fn build<T>(arr: &[T]) -> Vec<T>
 where
@@ -94,4 +99,4 @@ where
 
 Reference:
 * <https://judge.yosupo.jp/submission/220429>
-* <https://www.acwing.com/solution/content/154344/>
+* <https://zhuanlan.zhihu.com/p/590974585>

@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-3c87acd7.js";
+            window.path_to_searchindex_js = "../searchindex-706ee158.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b75e3d16.js"></script>
@@ -188,6 +188,8 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="wavelet-matrix"><a class="header" href="#wavelet-matrix">Wavelet Matrix</a></h1>
+<img src="../assets/wavelet_matrix_1.png" width="500" />
+<p>Like Radix Sort, but sort via the binary digit and from MSB to LSB.</p>
 <pre><code class="language-rust">struct WaveletMatrix {
     n: usize,
     lg: usize,
@@ -199,7 +201,7 @@ impl WaveletMatrix {
         let n = arr.len();
         let mx = *arr.iter().max().unwrap();
         let lg = mx.next_power_of_two().trailing_zeros() as usize + 1;
-        let mut bvs = vec![vec![]; lg];
+        let mut bvs = vec![vec![]; lg]; // bit vectors
         for i in (0..lg).rev() {
             bvs[i] = arr.iter().map(|x| (x &gt;&gt; i) &amp; 1).collect();
             let mut nxt = vec![];
@@ -229,8 +231,8 @@ impl WaveletMatrix {
         r - l
     }
 
-    // k-smallest (1-based) value in A[l..r]
-    fn k_smallest(&amp;self, mut l: usize, mut r: usize, mut k: usize) -&gt; usize {
+    // kth-smallest (1-based) value in A[l..r]
+    fn kth_smallest(&amp;self, mut l: usize, mut r: usize, mut k: usize) -&gt; usize {
         let mut res = 0;
         for i in (0..self.lg).rev() {
             let cnt0 = (r - l) - query(&amp;self.pref[i], l, r);
@@ -248,6 +250,7 @@ impl WaveletMatrix {
         res
     }
 }
+
 
 fn build&lt;T&gt;(arr: &amp;[T]) -&gt; Vec&lt;T&gt;
 where
@@ -278,7 +281,7 @@ where
 <p>Reference:</p>
 <ul>
 <li><a href="https://judge.yosupo.jp/submission/220429">https://judge.yosupo.jp/submission/220429</a></li>
-<li><a href="https://www.acwing.com/solution/content/154344/">https://www.acwing.com/solution/content/154344/</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/590974585">https://zhuanlan.zhihu.com/p/590974585</a></li>
 </ul>
 
                     </main>
