@@ -4,7 +4,7 @@
 
 > Given `N` points on 2D plane, what is the length of the longest chain such that `x[i] < x[j]` and `y[i] < y[j]`? [ABC439E](https://atcoder.jp/contests/abc439/submissions/72225104), [ABC369F](https://atcoder.jp/contests/abc369/submissions/58176075)
 
-We want to find the lenght lonegst chain from bottom left to top right. 
+We want to find the length of the lonegst chain that extends from bottom left to top right. 
 The problem can be converted to [LIS (Longest Increasing Subsequence)](../algorithms/longest_increasing_subsequence.md):
 
 ```rust

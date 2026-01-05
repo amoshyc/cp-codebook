@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-706ee158.js";
+            window.path_to_searchindex_js = "../searchindex-3afd4b44.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b75e3d16.js"></script>
@@ -192,7 +192,7 @@
 <blockquote>
 <p>Given <code>N</code> points on 2D plane, what is the length of the longest chain such that <code>x[i] &lt; x[j]</code> and <code>y[i] &lt; y[j]</code>? <a href="https://atcoder.jp/contests/abc439/submissions/72225104">ABC439E</a>, <a href="https://atcoder.jp/contests/abc369/submissions/58176075">ABC369F</a></p>
 </blockquote>
-<p>We want to find the lenght lonegst chain from bottom left to top right.
+<p>We want to find the length of the lonegst chain that extends from bottom left to top right.
 The problem can be converted to <a href="../algorithms/longest_increasing_subsequence.html">LIS (Longest Increasing Subsequence)</a>:</p>
 <pre><code class="language-rust">xy.sort_by_key(|&amp;(x, y)| (x, Reverse(y)));
 let ys = xs.iter().map(|&amp;(x, y)| y).collect();
