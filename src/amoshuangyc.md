@@ -8,7 +8,7 @@ I reread the problem, drew many lines on paper, pondered for a moment, and scann
 
 * Created using [mdbook](https://github.com/rust-lang/mdBook).
 * Syntax highlighting in light theme is [Github](https://github.com/highlightjs/highlight.js/blob/main/src/styles/github.css) with modified background.
-* Rating badges are created in prior using this [script](https://github.com/amoshyc/cp-codebook/blob/main/create_images.py).
+* Rating badges are created in prior using this [script](https://github.com/amoshyc/cp-codebook/blob/main/create_badges.py).
 * Best viewed in Firefox. If you are using others, suggest to enable overlay-scrollbars.
 * Add a [custom.css](https://github.com/amoshyc/cp-codebook/blob/main/theme/custom.css).
     - Apply `overflow-x: auto` to code block.
