@@ -109,7 +109,7 @@ dp[i, j] = dp[i - 1][j ^ A[i]] + (1 if A[i] == j else 0)
 
 ## Two Pointers
 
-> 給定長度為 `N` 的列列 `A`，問有多少個 substring `A[i..=j], (i <= j)` unique elements 的數量 <= `k`。[CSES2428](https://cses.fi/problemset/result/10076634/)
+> 給定長度為 `N` 的序列 `A`，問有多少個 substring `A[i..=j], (i <= j)` unique elements 的數量 <= `k`。[CSES2428](https://cses.fi/problemset/result/10076634/)
 
 對於每個左端點 `i`，找到最小的右端點 `j` 滿足 `A[i..=j]` 有 `> k` 個 unique elements.
 
@@ -137,6 +137,40 @@ while i < n {
         uni -= 1;
     }
     i += 1;
+}
+```
+
+> 給定 `A[0..N]` 與整數 `D`，問有多少 substring `A[i..=j], (i <= j)` 滿足「該區間內任兩數的差都 >= D」。[ABC444E](https://atcoder.jp/contests/abc444/submissions/73085581)
+
+若一個區間滿足題意，則其子區間也滿足題意，即區間有 monotonic 的性質，我們可以使用 two pointers。使用 `BTreeSet` 來管理區間的數，當嘗試將 `q` 加入區間時，可以檢查 set 中上下方向最接近 `q` 的數與 `q` 之間的差。
+
+```rust
+let check = |q: i64, s: &BTreeSet<(i64, usize)>| -> bool {
+    if let Some((x, _)) = s.range((q, 0)..).next() {
+        if x - q < d {
+            return false;
+        }
+    }
+    if let Some((x, _)) = s.range(..(q, !0)).last() {
+        if q - x < d {
+            return false;
+        }
+    }
+    true
+};
+
+let mut ans = 0;
+let mut j = 0;
+let mut set = BTreeSet::new();
+for i in 0..n {
+    while j < n && check(arr[j], &set) {
+        set.insert((arr[j], j));
+        j += 1;
+    }
+
+    ans += (j - i) as i64;
+
+    set.remove(&(arr[i], i));
 }
 ```
 

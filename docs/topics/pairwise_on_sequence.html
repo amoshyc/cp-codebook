@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-acb7aaf6.js";
+            window.path_to_searchindex_js = "../searchindex-12eeb5b3.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b75e3d16.js"></script>
@@ -280,7 +280,7 @@ dp[0][arr[0]] = 1
 dp[i, j] = dp[i - 1][j ^ A[i]] + (1 if A[i] == j else 0)</code></pre>
 <h2 id="two-pointers"><a class="header" href="#two-pointers">Two Pointers</a></h2>
 <blockquote>
-<p>給定長度為 <code>N</code> 的列列 <code>A</code>，問有多少個 substring <code>A[i..=j], (i &lt;= j)</code> unique elements 的數量 &lt;= <code>k</code>。<a href="https://cses.fi/problemset/result/10076634/">CSES2428</a></p>
+<p>給定長度為 <code>N</code> 的序列 <code>A</code>，問有多少個 substring <code>A[i..=j], (i &lt;= j)</code> unique elements 的數量 &lt;= <code>k</code>。<a href="https://cses.fi/problemset/result/10076634/">CSES2428</a></p>
 </blockquote>
 <p>對於每個左端點 <code>i</code>，找到最小的右端點 <code>j</code> 滿足 <code>A[i..=j]</code> 有 <code>&gt; k</code> 個 unique elements.</p>
 <pre><code class="language-rust">let mut cnt = HashMap::new();
@@ -306,6 +306,37 @@ while i &lt; n {
         uni -= 1;
     }
     i += 1;
+}</code></pre>
+<blockquote>
+<p>給定 <code>A[0..N]</code> 與整數 <code>D</code>，問有多少 substring <code>A[i..=j], (i &lt;= j)</code> 滿足「該區間內任兩數的差都 &gt;= D」。<a href="https://atcoder.jp/contests/abc444/submissions/73085581">ABC444E</a></p>
+</blockquote>
+<p>若一個區間滿足題意，則其子區間也滿足題意，即區間有 monotonic 的性質，我們可以使用 two pointers。使用 <code>BTreeSet</code> 來管理區間的數，當嘗試將 <code>q</code> 加入區間時，可以檢查 set 中上下方向最接近 <code>q</code> 的數與 <code>q</code> 之間的差。</p>
+<pre><code class="language-rust">let check = |q: i64, s: &amp;BTreeSet&lt;(i64, usize)&gt;| -&gt; bool {
+    if let Some((x, _)) = s.range((q, 0)..).next() {
+        if x - q &lt; d {
+            return false;
+        }
+    }
+    if let Some((x, _)) = s.range(..(q, !0)).last() {
+        if q - x &lt; d {
+            return false;
+        }
+    }
+    true
+};
+
+let mut ans = 0;
+let mut j = 0;
+let mut set = BTreeSet::new();
+for i in 0..n {
+    while j &lt; n &amp;&amp; check(arr[j], &amp;set) {
+        set.insert((arr[j], j));
+        j += 1;
+    }
+
+    ans += (j - i) as i64;
+
+    set.remove(&amp;(arr[i], i));
 }</code></pre>
 <h2 id="exploit-the-property"><a class="header" href="#exploit-the-property">Exploit the Property</a></h2>
 <blockquote>
