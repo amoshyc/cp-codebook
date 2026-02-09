@@ -65,19 +65,23 @@ for i in 0..n {
 [ABC124D](https://atcoder.jp/contests/abc124/submissions/71992144)
 
 
-## Argmax in Sliding Window
+## Argmax/Argmin in Sliding Window
 
 ```rust
-fn sliding_argmax<T>(arr: &[T], k: usize) -> Vec<usize>
+// pop_cond(i, p): do we pop p when inserting i?
+// sliding_argmax: |i, p| h[i] >= h[p]
+// sliding_argmin: |i, p| h[i] <= h[p]
+// res[i] = p <-> arr[p] is the minimum/maximum of res[i - k + 1..=i]
+fn sliding_arg<F>(n: usize, k: usize, pop_cond: F) -> Vec<usize>
 where
-    T: std::cmp::PartialOrd,
+    F: Fn(usize, usize) -> bool,
 {
-    let mut deq = VecDeque::new();
-    let mut res = vec![usize::MAX; arr.len()];
-    for i in 0..arr.len() {
+    let mut deq = VecDeque::<usize>::new();
+    let mut res = vec![usize::MAX; n];
+    for i in 0..n {
         // insert arr[i]
-        while let Some(x) = deq.back() {
-            if arr[i] >= arr[*x] {
+        while let Some(&p) = deq.back() {
+            if pop_cond(i, p) {
                 deq.pop_back();
             } else {
                 break;
@@ -95,4 +99,5 @@ where
 }
 ```
 
+[AWC0001E](https://atcoder.jp/contests/awc0001/submissions/73168666)
 [CSES1644](https://cses.fi/paste/059ba456b69c8897f03854/)

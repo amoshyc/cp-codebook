@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-12eeb5b3.js";
+            window.path_to_searchindex_js = "../searchindex-8921d134.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b75e3d16.js"></script>
@@ -239,17 +239,21 @@ for i in 0..n {
 }
 </code></pre>
 <p><a href="https://atcoder.jp/contests/abc124/submissions/71992144">ABC124D</a></p>
-<h2 id="argmax-in-sliding-window"><a class="header" href="#argmax-in-sliding-window">Argmax in Sliding Window</a></h2>
-<pre><code class="language-rust">fn sliding_argmax&lt;T&gt;(arr: &amp;[T], k: usize) -&gt; Vec&lt;usize&gt;
+<h2 id="argmaxargmin-in-sliding-window"><a class="header" href="#argmaxargmin-in-sliding-window">Argmax/Argmin in Sliding Window</a></h2>
+<pre><code class="language-rust">// pop_cond(i, p): do we pop p when inserting i?
+// sliding_argmax: |i, p| h[i] &gt;= h[p]
+// sliding_argmin: |i, p| h[i] &lt;= h[p]
+// res[i] = p &lt;-&gt; arr[p] is the minimum/maximum of res[i - k + 1..=i]
+fn sliding_arg&lt;F&gt;(n: usize, k: usize, pop_cond: F) -&gt; Vec&lt;usize&gt;
 where
-    T: std::cmp::PartialOrd,
+    F: Fn(usize, usize) -&gt; bool,
 {
-    let mut deq = VecDeque::new();
-    let mut res = vec![usize::MAX; arr.len()];
-    for i in 0..arr.len() {
+    let mut deq = VecDeque::&lt;usize&gt;::new();
+    let mut res = vec![usize::MAX; n];
+    for i in 0..n {
         // insert arr[i]
-        while let Some(x) = deq.back() {
-            if arr[i] &gt;= arr[*x] {
+        while let Some(&amp;p) = deq.back() {
+            if pop_cond(i, p) {
                 deq.pop_back();
             } else {
                 break;
@@ -265,7 +269,8 @@ where
     }
     res
 }</code></pre>
-<p><a href="https://cses.fi/paste/059ba456b69c8897f03854/">CSES1644</a></p>
+<p><a href="https://atcoder.jp/contests/awc0001/submissions/73168666">AWC0001E</a>
+<a href="https://cses.fi/paste/059ba456b69c8897f03854/">CSES1644</a></p>
 
                     </main>
 
