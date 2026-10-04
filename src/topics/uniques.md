@@ -35,10 +35,10 @@ For each kind of value, find how many segments will count them:
 
 ```
 index: 0 1 2 3 4 5 6 7 8 9 
-value: o o k o k o o o k o
+value: a b k o k o a o k o
 ```
 
-We solve it by the complement, i.e., among the `N * (N + 1)` segments, how many of them do not contain `k`. By finding the positions of `k` in prior, it can be computed efficiently:
+We solve it by the complement, i.e., for a specific value `k`, among the `N * (N + 1) / 2` segments, how many of them do not contain `k`. By finding the positions of each value in prior, it can be computed efficiently:
 
 ```rust
 for (k, mut ps) in pos {

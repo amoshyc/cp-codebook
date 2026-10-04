@@ -70,7 +70,7 @@ impl TarjanSCC {
 ```
 
 * The order of the scc is the **reversed** topological sort. 
-* Tarjan SCC can be used to find **directed cycles**.
+* Tarjan SCC can be used to find **directed cycles** in functional graph.
 
 ```rust
 let (num_scc, belong) = TarjanSCC::from_adj(&adj);
@@ -81,8 +81,8 @@ for u in 0..n {
     sccs[belong[u]].push(u);
 }
 
-// Inspect the scc topologically
-for scc in scc.iter().rev() {
+// Inspect the scc topologically, note the .rev()
+for scc in sccs.iter().rev() {
     // ...
 }
 
@@ -91,7 +91,7 @@ if belong[u] > belong[v] {
     // ...
 }
 
-// Find all directed cycle
+// Find all directed cycle in functional graph
 for i in 0..num_scc {
     if sccs[i].len() >= 2 || (sccs[i].len() == 1 && adj[sccs[i][0]][0] == sccs[i][0]) {
         // sccs[i] is a cycle or self loop
@@ -100,4 +100,5 @@ for i in 0..num_scc {
 ```
 
 SCC: [Practice2-G](https://atcoder.jp/contests/practice2/submissions/69190437)
+Sort: [ABC478E](https://atcoder.jp/contests/abc478/submissions/79759654)
 Cycle: [ABC357E](https://atcoder.jp/contests/abc357/submissions/54387589)

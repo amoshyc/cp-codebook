@@ -48,7 +48,7 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "coal";
-            window.path_to_searchindex_js = "../searchindex-8921d134.js";
+            window.path_to_searchindex_js = "../searchindex-2aa69a46.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-b75e3d16.js"></script>
@@ -219,9 +219,9 @@ for c in 0..26 {
 </blockquote>
 <p>For each kind of value, find how many segments will count them:</p>
 <pre><code>index: 0 1 2 3 4 5 6 7 8 9 
-value: o o k o k o o o k o
+value: a b k o k o a o k o
 </code></pre>
-<p>We solve it by the complement, i.e., among the <code>N * (N + 1)</code> segments, how many of them do not contain <code>k</code>. By finding the positions of <code>k</code> in prior, it can be computed efficiently:</p>
+<p>We solve it by the complement, i.e., for a specific value <code>k</code>, among the <code>N * (N + 1) / 2</code> segments, how many of them do not contain <code>k</code>. By finding the positions of each value in prior, it can be computed efficiently:</p>
 <pre><code class="language-rust">for (k, mut ps) in pos {
     let mut cnt = (n * (n + 1) / 2) as i64;
     ps.insert(0, -1);
