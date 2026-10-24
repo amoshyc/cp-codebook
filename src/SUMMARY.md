@@ -28,6 +28,7 @@
     - [LCA](./algorithms/lca.md)
     - [Linear Congruence](./algorithms/linear_congruence_crt.md)
     - [Longest Increasing Subsequence](./algorithms/longest_increasing_subsequence.md)
+    - [Polar Sort](./algorithms/polar_sort.md)
     - [Powmod](./algorithms/powmod.md)
     - [Prefix2D](./algorithms/prefix2d.md)
     - [Prefix3D](./algorithms/prefix3d.md)
